@@ -19,6 +19,7 @@ const useApi = (): [boolean, ApiPromise | undefined] => {
 };
 
 function App() {
+  const walletUrl = import.meta.env.VITE_COONG_WALLET_URL;
   const [ready, setReady] = useState<boolean>(false);
   const [accounts, setAccounts] = useState<any[]>([]);
   const [injector, setInjector] = useState<any>();
@@ -26,7 +27,7 @@ function App() {
 
   useAsync(async () => {
     try {
-      await CoongSdk.instance().initialize('http://localhost:3030');
+      await CoongSdk.instance().initialize(walletUrl);
     } catch (e) {
       console.log(e);
     }
