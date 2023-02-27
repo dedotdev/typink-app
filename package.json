@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@coong/sdk": "^0.0.11",
+    "@coong/sdk": "^0.0.16",
     "@polkadot/api": "^9.13.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

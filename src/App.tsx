@@ -19,7 +19,7 @@ const useApi = (): [boolean, ApiPromise | undefined] => {
 };
 
 function App() {
-  const walletUrl = import.meta.env.VITE_COONG_WALLET_URL;
+  const walletUrl = import.meta.env.VITE_COONG_WALLET_URL || 'http://localhost:3030';
   const [ready, setReady] = useState<boolean>(false);
   const [accounts, setAccounts] = useState<any[]>([]);
   const [injector, setInjector] = useState<any>();
