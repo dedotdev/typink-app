@@ -36,7 +36,7 @@ function App() {
 
   const enableCoong = async () => {
     // @ts-ignore
-    const CoongAPI = window['injectedWeb3']['coong'];
+    const CoongAPI = window['injectedWeb3']['coongwallet'];
     const response = await CoongAPI.enable('Sample Dapp');
     const approvedAccounts = await response.accounts.get();
     console.log(response);

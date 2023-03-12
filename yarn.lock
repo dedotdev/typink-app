@@ -291,17 +291,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@coong/base@npm:^0.0.18":
-  version: 0.0.18
-  resolution: "@coong/base@npm:0.0.18"
+"@coong/base@npm:^0.0.19":
+  version: 0.0.19
+  resolution: "@coong/base@npm:0.0.19"
   dependencies:
-    "@coong/keyring": ^0.0.18
-    "@coong/utils": ^0.0.18
+    "@coong/keyring": ^0.0.19
+    "@coong/utils": ^0.0.19
     "@polkadot/networks": ^10.4.1
     "@polkadot/types": ^9.14.1
     "@polkadot/util-crypto": ^10.4.1
     rxjs: ^7.8.0
-  checksum: 09b232e38d3d0c7069619a4b45d76284dedd10638f382dacfe53d46881ac1e76c380a8b2e9d72e3b1df965923695bc7bb4b8ac1b7786ec785fb62bf1a7ef08da
+  checksum: 2f13a18816d9a05e99f9add2474352e276d10495e16fe707cc707b7bf8e2457f603a90fe797edff73e4246e6cc55ecc15e457dfe54f14ea566d8124ecc0260a7
   languageName: node
   linkType: hard
 
@@ -309,7 +309,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@coong/dapp@workspace:."
   dependencies:
-    "@coong/sdk": latest
+    "@coong/sdk": ^0.0.19
     "@polkadot/api": ^9.13.5
     "@types/react": ^18.0.26
     "@types/react-dom": ^18.0.9
@@ -323,32 +323,32 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coong/keyring@npm:^0.0.18":
-  version: 0.0.18
-  resolution: "@coong/keyring@npm:0.0.18"
+"@coong/keyring@npm:^0.0.19":
+  version: 0.0.19
+  resolution: "@coong/keyring@npm:0.0.19"
   dependencies:
-    "@coong/utils": ^0.0.18
+    "@coong/utils": ^0.0.19
     "@polkadot/ui-keyring": ^2.11.2
     crypto-js: ^4.1.1
-  checksum: c12b51a3999759ffc1c05dab01fdbf48952f974dfbc883f8066a5ffff7bff76b6482641e9916a9052441b5426026a7d533a9de8eaa2d49fdb120185d0310e764
+  checksum: 34e1c4ba5e7ff86eb6e64f430d4d3e7021b487bdd393d1d8a77d79dd05ab1f030b5009d11421afd9cb14d8ab21bc471a1e5fb87919d5552cbaa28282fead676f
   languageName: node
   linkType: hard
 
-"@coong/sdk@npm:latest":
-  version: 0.0.18
-  resolution: "@coong/sdk@npm:0.0.18"
+"@coong/sdk@npm:^0.0.19":
+  version: 0.0.19
+  resolution: "@coong/sdk@npm:0.0.19"
   dependencies:
-    "@coong/base": ^0.0.18
-    "@coong/utils": ^0.0.18
+    "@coong/base": ^0.0.19
+    "@coong/utils": ^0.0.19
     "@polkadot/extension-inject": ^0.44.7
-  checksum: 4223480244048cac680ecf26375e4149373e78ea196b6f5da4667dee53748838cac20ffa2017c31d23e8c3779c7c5faec153437e4866c61c3460cfb34ee1cb74
+  checksum: 837d44197d1228848f700f34092d7901224332a572c47e4d1417c4d896400a772856142d58d638f95702d1579e2c830dff69a7bafa42e453caca1299debb4f42
   languageName: node
   linkType: hard
 
-"@coong/utils@npm:^0.0.18":
-  version: 0.0.18
-  resolution: "@coong/utils@npm:0.0.18"
-  checksum: decd41e943821a05070689a34089df63e5380160e7762526c6ab81bd93da42feb14309b86a5bae9a9926fb23d51beb83aee7591083cc1d281e2f5b063ba490f1
+"@coong/utils@npm:^0.0.19":
+  version: 0.0.19
+  resolution: "@coong/utils@npm:0.0.19"
+  checksum: aae1f8fd20dcb097090d677f0ff096880a21bfd81e60aa5ffd8596250e318ff66656a2580141cf3c812b0d964c8baefccfb7ceca0ad1ed6606b265d2f002e850
   languageName: node
   linkType: hard
 
