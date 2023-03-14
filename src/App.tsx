@@ -44,7 +44,7 @@ function App() {
     setInjector(response);
     setAccounts(approvedAccounts);
 
-    toast.success(`${approvedAccounts.length} accounts connected`);
+    toast.success(`${approvedAccounts.length} account(s) connected`);
   };
 
   const transferToken = async (from: string) => {
