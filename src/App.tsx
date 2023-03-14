@@ -64,7 +64,7 @@ function App() {
 
   return (
     <div className='App'>
-      <h1>Sample Dapp</h1>
+      <h1>Example Dapp</h1>
       <div className='card'>
         {accounts.length === 0 ? (
           <button onClick={enableCoong} disabled={!ready}>
