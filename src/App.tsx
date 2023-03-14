@@ -3,6 +3,8 @@ import { useAsync } from 'react-use';
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import CoongSdk from '@coong/sdk';
 import './App.css';
+import {toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const useApi = (): [boolean, ApiPromise | undefined] => {
   const [ready, setReady] = useState<boolean>(false);
@@ -39,10 +41,10 @@ function App() {
     const CoongAPI = window['injectedWeb3']['coongwallet'];
     const response = await CoongAPI.enable('Sample Dapp');
     const approvedAccounts = await response.accounts.get();
-    console.log(response);
-    console.log(approvedAccounts);
     setInjector(response);
     setAccounts(approvedAccounts);
+
+    toast.success(`${approvedAccounts.length} accounts connected`);
   };
 
   const transferToken = async (from: string) => {
@@ -50,11 +52,14 @@ function App() {
       return;
     }
 
-    api.tx.balances
-      .transfer('5C5555yEXUcmEJ5kkcCMvdZjUo7NGJiQJMS7vZXEeoMhj3VQ', 123456)
-      .signAndSend(from, { signer: injector.signer }, (status) => {
-        console.log(status);
-      });
+    try {
+      const hash = await api.tx.balances
+        .transfer('5C5555yEXUcmEJ5kkcCMvdZjUo7NGJiQJMS7vZXEeoMhj3VQ', 123456)
+        .signAndSend(from, { signer: injector.signer });
+      toast.success(`Transaction successful: ${hash}`);
+    } catch (e: any) {
+      toast.error(e.toString());
+    }
   };
 
   return (
@@ -83,6 +88,15 @@ function App() {
           </div>
         )}
       </div>
+      <ToastContainer
+        position='top-center'
+        closeOnClick
+        pauseOnHover
+        theme='colored'
+        autoClose={5_000}
+        hideProgressBar
+        limit={2}
+      />
     </div>
   );
 }
