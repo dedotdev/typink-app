@@ -82,7 +82,7 @@ function App() {
   }
 
   return (
-    <div className='App'>
+    <div className='App max-w-[800px] mx-auto'>
       <h1 className='text-center text-3xl md:text-5xl'>Example Dapp</h1>
       <div className='card'>
         {accounts.length === 0 ? (
