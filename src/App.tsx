@@ -62,6 +62,20 @@ function App() {
     }
   };
 
+  const signDummy = async (from: string) => {
+    if (!api) {
+      return;
+    }
+
+    try {
+      const result = await injector.signer.signRaw({ address: from, type: 'bytes', data: 'This is a raw message to sign'});
+
+      toast.success(`Signing successful: ${result.signature}`);
+    } catch (e: any) {
+      toast.error(e.toString());
+    }
+  }
+
   return (
     <div className='App'>
       <h1>Example Dapp</h1>
@@ -81,6 +95,9 @@ function App() {
                   </span>
                   <button disabled={!apiReady} onClick={() => transferToken(one.address)}>
                     Transfer
+                  </button>
+                  <button disabled={!apiReady} onClick={() => signDummy(one.address)}>
+                    Sign Raw
                   </button>
                 </li>
               ))}
