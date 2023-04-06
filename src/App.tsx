@@ -83,30 +83,35 @@ function App() {
 
   return (
     <div className='App'>
-      <h1>Example Dapp</h1>
+      <h1 className='text-center text-3xl md:text-5xl'>Example Dapp</h1>
       <div className='card'>
         {accounts.length === 0 ? (
-          <button onClick={enableCoong} disabled={!ready}>
-            Connect Wallet
-          </button>
+          <div className='text-center'>
+            <button onClick={enableCoong} disabled={!ready}>
+              Connect Wallet
+            </button>
+          </div>
         ) : (
           <div>
-            <p>{accounts.length} accounts connected</p>
-            <ul>
-              {accounts.map((one) => (
-                <li key={one.address}>
-                  <span>
-                    {one.name} - {one.address}
-                  </span>
+            <p><strong>{accounts.length}</strong> accounts connected</p>
+            {accounts.map((one) => (
+              <div key={one.address} className='my-4 border border-solid border-gray-400/50 p-4'>
+                <div className='mb-2'>
+                  Name: <strong>{one.name}</strong>
+                </div>
+                <div className='mb-2 break-words'>
+                  Address: <strong>{one.address}</strong>
+                </div>
+                <div className='flex gap-4 mt-4'>
                   <button disabled={!apiReady} onClick={() => transferToken(one.address)}>
                     Transfer
                   </button>
                   <button disabled={!apiReady} onClick={() => signDummy(one.address)}>
                     Sign Raw
                   </button>
-                </li>
-              ))}
-            </ul>
+                </div>
+              </div>
+            ))}
           </div>
         )}
       </div>
