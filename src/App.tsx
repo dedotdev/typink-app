@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import MainHeader from '@/components/shared/MainHeader';
 import { useApiContext } from '@/providers/ApiProvider';
 import { useWalletContext } from '@/providers/WalletProvider';
 
@@ -54,25 +55,39 @@ function App() {
     }
   };
 
+  const signOut = () => {
+    setInjector(undefined);
+    setAccounts([]);
+  };
+
   return (
-    <Box mt={8} maxWidth={800} mx='auto'>
-      <Heading as='h1' mb={4} textAlign='center'>
-        Example Dapp
-      </Heading>
-      <div>
+    <div>
+      <MainHeader />
+      <Box maxWidth={600} mx='auto' mt={8}>
         {accounts.length === 0 ? (
           <Box textAlign='center'>
-            <Button onClick={enableCoong} isLoading={!ready}>
+            <Heading as='h1' fontSize='3xl' mb={6} mt={16}>
+              <small>Welcome to</small> <br /> Coong Dapp Playground
+            </Heading>
+            <Text mb={4} fontSize='lg'>
+              Connect to your wallet to getting started
+            </Text>
+            <Button size='lg' colorScheme='primary' variant='solid' onClick={enableCoong} isLoading={!ready}>
               Connect Wallet
             </Button>
           </Box>
         ) : (
           <Box>
-            <Text mb={2}>
-              <strong>{accounts.length}</strong> accounts connected
-            </Text>
+            <Flex justify='space-between' align='center' mb={4}>
+              <Text fontSize='lg'>
+                <strong>{accounts.length}</strong> accounts connected
+              </Text>
+              <Button onClick={signOut} size='sm' colorScheme='red' variant='outline'>
+                Sign out
+              </Button>
+            </Flex>
             {accounts.map((one) => (
-              <div key={one.address}>
+              <Box key={one.address} border={1} borderStyle='solid' borderColor='gray.200' p={4} rounded={2}>
                 <div className='mb-2'>
                   Name: <strong>{one.name}</strong>
                 </div>
@@ -87,12 +102,12 @@ function App() {
                     Sign Raw
                   </Button>
                 </Flex>
-              </div>
+              </Box>
             ))}
           </Box>
         )}
-      </div>
-    </Box>
+      </Box>
+    </div>
   );
 }
 

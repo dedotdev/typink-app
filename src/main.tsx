@@ -6,10 +6,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import App from '@/App';
 import ApiProvider from '@/providers/ApiProvider';
 import WalletProvider from '@/providers/WalletProvider';
+import { theme } from '@/theme';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-  <ChakraProvider>
+  <ChakraProvider theme={theme}>
     <WalletProvider>
       <ApiProvider>
         <App />
