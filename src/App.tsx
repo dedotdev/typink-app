@@ -1,30 +1,14 @@
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { useAsync } from 'react-use';
-import CoongSdk from '@coong/sdk';
 import { useApiContext } from '@/providers/ApiProvider';
-
-const getCustomizedWalletUrl = () => {
-  const params = new URLSearchParams(window.location.search);
-  return params.get('wallet-url');
-};
+import { useWalletContext } from '@/providers/WalletProvider';
 
 function App() {
-  const walletUrl = getCustomizedWalletUrl() || import.meta.env.VITE_COONG_WALLET_URL || 'http://localhost:3030';
-  const [ready, setReady] = useState<boolean>(false);
+  const { apiReady, api } = useApiContext();
+  const { ready } = useWalletContext();
   const [accounts, setAccounts] = useState<any[]>([]);
   const [injector, setInjector] = useState<any>();
-  const { apiReady, api } = useApiContext();
-
-  useAsync(async () => {
-    try {
-      await CoongSdk.instance().initialize(walletUrl);
-    } catch (e) {
-      console.log(e);
-    }
-    setReady(true);
-  });
 
   const enableCoong = async () => {
     // @ts-ignore
