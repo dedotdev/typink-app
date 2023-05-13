@@ -9,11 +9,13 @@
     "prettify": "npx prettier --write \"src/{**/*,*}.{js,ts,jsx,tsx,json}\""
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/react": "^2.6.1",
     "@coong/sdk": "^0.0.20",
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
-    "@polkadot/api": "^9.13.5",
+    "@polkadot/api": "^10.6.1",
+    "@polkadot/api-augment": "^10.6.1",
     "@polkadot/react-identicon": "^3.3.1",
     "framer-motion": "^10.12.8",
     "react": "^18.2.0",
