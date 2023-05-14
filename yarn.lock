@@ -1642,7 +1642,7 @@ __metadata:
   dependencies:
     "@chakra-ui/icons": ^2.0.19
     "@chakra-ui/react": ^2.6.1
-    "@coong/sdk": ^0.0.20
+    "@coong/sdk": "file:../coong-wallet/packages/sdk"
     "@emotion/react": ^11.10.8
     "@emotion/styled": ^11.10.8
     "@polkadot/api": ^10.6.1
@@ -1678,14 +1678,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@coong/sdk@npm:^0.0.20":
+"@coong/sdk@file:../coong-wallet/packages/sdk::locator=%40coong%2Fdapp%40workspace%3A.":
   version: 0.0.20
-  resolution: "@coong/sdk@npm:0.0.20"
+  resolution: "@coong/sdk@file:../coong-wallet/packages/sdk#../coong-wallet/packages/sdk::hash=65f3f8&locator=%40coong%2Fdapp%40workspace%3A."
   dependencies:
     "@coong/base": ^0.0.20
     "@coong/utils": ^0.0.20
     "@polkadot/extension-inject": ^0.44.7
-  checksum: 72a32d4178e662cdacd5446b72aa106d717def91346bd62fcbe0ad09cd4dcce8556d62bc36786425e8414a85ee8dc5c3d9d446d5c0ed7e527b1fc68dd1660eb0
+  checksum: 24ca9f458907a9e29870ab9c5f313923b9f251fd586821ef19aef762cad45e83f7e9b39c7cb40fdc98b58a3f18bf12fcd25cdcb9196b774dc8927524821cc1db
   languageName: node
   linkType: hard
 

@@ -10,12 +10,12 @@ import { ChevronDownIcon } from '@chakra-ui/icons';
 
 export default function AccountSelection() {
   const { apiReady, api } = useApiContext();
-  const { injectedApi, connected, accounts } = useWalletContext();
+  const { injectedApi, accounts } = useWalletContext();
   const [selectedAccount, setSelectedAccount] = useState<InjectedAccount>();
   const activeItemRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
-    if (selectedAccount) {
+    if (selectedAccount && accounts.includes(selectedAccount)) {
       return;
     }
 
@@ -29,7 +29,7 @@ export default function AccountSelection() {
   const { name, address } = selectedAccount;
 
   const transferToken = async () => {
-    if (!api || !connected) {
+    if (!api || !injectedApi) {
       return;
     }
 
@@ -44,7 +44,7 @@ export default function AccountSelection() {
   };
 
   const signDummy = async () => {
-    if (!api || !connected) {
+    if (!api || !injectedApi) {
       return;
     }
 

@@ -47,7 +47,7 @@ export default function AccountBalances({ address }: AccountBalancesProps) {
       {values.map(({ label, amount }) => (
         <Flex key={label} gap={2}>
           <Text>{label}:</Text>
-          <Skeleton h={6} w={10} isLoaded={!loading}>
+          <Skeleton h={6} minW={10} isLoaded={!loading}>
             {amount}
           </Skeleton>
         </Flex>
