@@ -145,7 +145,7 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
           </ModalBody>
           <ModalFooter gap={4}>
             <Button onClick={onClose}>Cancel</Button>
-            <Button colorScheme='primary' isDisabled={!!destValidation} onClick={makeTransfer}>
+            <Button colorScheme='primary' isDisabled={!!destValidation || !!amountValidation} onClick={makeTransfer}>
               Make Transfer
             </Button>
           </ModalFooter>
