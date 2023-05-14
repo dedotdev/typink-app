@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { InjectedAccount } from '@polkadot/extension-inject/types';
 import AccountBalances from '@/components/AccountBalances';
+import TransferBalanceButton from '@/components/TransferBalanceButton';
 import { useApiContext } from '@/providers/ApiProvider';
 import { useWalletContext } from '@/providers/WalletProvider';
 import { ChevronDownIcon } from '@chakra-ui/icons';
@@ -27,21 +28,6 @@ export default function AccountSelection() {
   }
 
   const { name, address } = selectedAccount;
-
-  const transferToken = async () => {
-    if (!api || !injectedApi) {
-      return;
-    }
-
-    try {
-      const hash = await api.tx.balances
-        .transfer('5C5555yEXUcmEJ5kkcCMvdZjUo7NGJiQJMS7vZXEeoMhj3VQ', 123456)
-        .signAndSend(address, { signer: injectedApi?.signer });
-      toast.success(`Transaction successful: ${hash}`);
-    } catch (e: any) {
-      toast.error(e.toString());
-    }
-  };
 
   const signDummy = async () => {
     if (!api || !injectedApi) {
@@ -101,9 +87,7 @@ export default function AccountSelection() {
 
       <AccountBalances address={address} />
       <Flex m={4} mt={8} gap={4}>
-        <Button isLoading={!apiReady} onClick={transferToken}>
-          Transfer
-        </Button>
+        <TransferBalanceButton fromAccount={selectedAccount} />
         <Button isLoading={!apiReady} onClick={signDummy}>
           Sign Raw
         </Button>
