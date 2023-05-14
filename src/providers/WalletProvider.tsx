@@ -87,9 +87,9 @@ const WALLETS: WalletInfo[] = [
   },
 ];
 
-export const getWalletApi = (walletId: string): WalletApi => {
+export const getWalletApi = (walletId: string): WalletApi | undefined => {
   // @ts-ignore
-  return window.injectedWeb3[walletId] as WalletApi;
+  return window.injectedWeb3 && window.injectedWeb3[walletId];
 };
 
 export const isWalletReady = (walletId: string) => {
