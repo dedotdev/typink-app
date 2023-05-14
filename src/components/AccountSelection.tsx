@@ -1,17 +1,15 @@
-import { Box, Button, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
+import { Box, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
 import { Identicon } from '@polkadot/react-identicon';
 import { useEffect, useRef, useState } from 'react';
-import { toast } from 'react-toastify';
 import { InjectedAccount } from '@polkadot/extension-inject/types';
 import AccountBalances from '@/components/AccountBalances';
+import SignRawMessageButton from '@/components/SignRawMessageButton';
 import TransferBalanceButton from '@/components/TransferBalanceButton';
-import { useApiContext } from '@/providers/ApiProvider';
 import { useWalletContext } from '@/providers/WalletProvider';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 
 export default function AccountSelection() {
-  const { apiReady, api } = useApiContext();
-  const { injectedApi, accounts } = useWalletContext();
+  const { accounts } = useWalletContext();
   const [selectedAccount, setSelectedAccount] = useState<InjectedAccount>();
   const activeItemRef = useRef<HTMLButtonElement | null>(null);
 
@@ -28,25 +26,6 @@ export default function AccountSelection() {
   }
 
   const { name, address } = selectedAccount;
-
-  const signDummy = async () => {
-    if (!api || !injectedApi) {
-      return;
-    }
-
-    try {
-      // @ts-ignore
-      const result = await injectedApi!.signer.signRaw({
-        address,
-        type: 'bytes',
-        data: 'This is a raw message to sign',
-      });
-
-      toast.success(`Signing successful: ${result.signature}`);
-    } catch (e: any) {
-      toast.error(e.toString());
-    }
-  };
 
   return (
     <Box>
@@ -88,9 +67,7 @@ export default function AccountSelection() {
       <AccountBalances address={address} />
       <Flex m={4} mt={8} gap={4}>
         <TransferBalanceButton fromAccount={selectedAccount} />
-        <Button isLoading={!apiReady} onClick={signDummy}>
-          Sign Raw
-        </Button>
+        <SignRawMessageButton fromAccount={selectedAccount} />
       </Flex>
     </Box>
   );
