@@ -1,23 +1,23 @@
 import { createContext, useContext, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useAsync, useBoolean } from 'react-use';
-import { Injected, InjectedAccount } from '@polkadot/extension-inject/types';
-import CoongSdk from '@coong/sdk';
-import { Props, WalletApi, WalletInfo, WalletType } from '@/types';
-import { trimTrailingSlash } from '@/utils/string';
+import { useAsync, useLocalStorage } from 'react-use';
+import { InjectedAccount } from '@polkadot/extension-inject/types';
+import { UpdatableInjected } from '@coong/sdk/types';
+import useWallets from '@/hooks/useWallets';
+import { Props } from '@/types';
+import Wallet from '@/wallets/Wallet';
 
 interface WalletContextProps {
-  walletUrl: string;
   accounts: InjectedAccount[];
-  injectedApi?: Injected;
+  injectedApi?: UpdatableInjected;
   enableWallet: (id: string) => void;
   signOut: () => void;
-  availableWallets: WalletInfo[];
-  connectedWallet?: WalletInfo;
+  availableWallets: Wallet[];
+  connectedWalletId?: string;
+  connectedWallet?: Wallet;
 }
 
 export const WalletContext = createContext<WalletContextProps>({
-  walletUrl: '',
   accounts: [],
   enableWallet: () => {},
   signOut: () => {},
@@ -28,121 +28,81 @@ export const useWalletContext = () => {
   return useContext(WalletContext);
 };
 
-const DEFAULT_WALLET_URL = 'https://app.coongwallet.io';
-
-const getCustomWalletUrlFromParams = (): string => {
-  const params = new URLSearchParams(window.location.search);
-
-  return params.get('walletUrl') || '';
-};
-
-const useCoongWalletInitialization = () => {
-  const [ready, setReady] = useBoolean(false);
-  const { walletUrl } = useWalletContext();
-
-  useAsync(async () => {
-    setReady(false);
-
-    try {
-      if (!CoongSdk.instance().isInitializedWithUrl(walletUrl)) {
-        await CoongSdk.instance().destroy();
-        await CoongSdk.instance().initialize(walletUrl);
-      }
-
-      setReady(true);
-    } catch (e) {
-      // TODO handle if CoongSdk initialization goes wrong
-      console.log(e);
-    }
-  }, [walletUrl]);
-
-  return ready;
-};
-
-const WALLETS: WalletInfo[] = [
-  {
-    type: WalletType.WEBSITE,
-    name: 'Coong Wallet',
-    id: 'coongwallet',
-    logo: 'https://app.coongwallet.io/coong-lined-logo.svg',
-    useInitialization: useCoongWalletInitialization,
-  },
-  {
-    type: WalletType.EXTENSION,
-    name: 'SubWallet',
-    id: 'subwallet-js',
-    logo: '/subwallet-logo.svg',
-  },
-  {
-    type: WalletType.EXTENSION,
-    name: 'Polkadot{.js}',
-    id: 'polkadot-js',
-    logo: '/polkadot-js-logo.svg',
-  },
-  {
-    type: WalletType.EXTENSION,
-    name: 'Talisman',
-    id: 'talisman',
-    logo: '/talisman-logo.svg',
-  },
-];
-
-export const getWalletApi = (walletId: string): WalletApi | undefined => {
-  // @ts-ignore
-  return window.injectedWeb3 && window.injectedWeb3[walletId];
-};
-
-export const isWalletReady = (walletId: string) => {
-  // @ts-ignore
-  return !!getWalletApi(walletId);
-};
-
 export default function WalletProvider({ children }: Props) {
+  const availableWallets = useWallets();
   const [accounts, setAccounts] = useState<InjectedAccount[]>([]);
-  const [injectedApi, setInjectedApi] = useState<Injected>();
-  const [connectedWallet, setConnectedWallet] = useState<WalletInfo>();
+  const [injectedApi, setInjectedApi] = useState<UpdatableInjected>();
+  const [connectedWalletId, setConnectedWalletId, removeConnectedWalletId] =
+    useLocalStorage<string>('CONNECTED_WALLET');
+  const [connectedWallet, setConnectedWallet] = useState<Wallet>();
 
-  const walletUrl = trimTrailingSlash(
-    getCustomWalletUrlFromParams() || import.meta.env.VITE_COONG_WALLET_URL || DEFAULT_WALLET_URL,
-  );
-
-  const enableWallet = async (walletId: string) => {
-    const targetWallet = WALLETS.find((one) => one.id === walletId);
+  const getWallet = (id: string): Wallet => {
+    const targetWallet: Wallet = availableWallets.find((one) => one.id === id)!;
     if (!targetWallet) {
       throw new Error('Invalid Wallet ID');
     }
 
-    const walletApi = getWalletApi(walletId);
-    if (!walletApi) {
-      throw new Error('Wallet is not existed!');
+    return targetWallet;
+  };
+
+  useAsync(async () => {
+    if (!connectedWalletId) {
+      setConnectedWallet(undefined);
+      return;
     }
 
-    const response = await walletApi.enable('Sample Dapp');
-    const approvedAccounts = await response.accounts.get();
+    let unsub: () => void;
+    try {
+      const targetWallet: Wallet = getWallet(connectedWalletId);
+      setConnectedWallet(targetWallet);
 
-    setConnectedWallet(targetWallet);
-    setInjectedApi(response);
-    setAccounts(approvedAccounts);
+      await targetWallet.waitUntilReady();
 
-    toast.dismiss();
-    toast.success(`${approvedAccounts.length} account(s) connected via ${targetWallet.name}`);
+      const injectedProvider = targetWallet.injectedProvider;
+      if (!injectedProvider?.enable) {
+        throw new Error('Wallet is not existed!');
+      }
+
+      const injectedApi = await injectedProvider.enable('Sample Dapp');
+
+      unsub = injectedApi.accounts.subscribe(setAccounts);
+
+      setInjectedApi(injectedApi);
+    } catch (e: any) {
+      toast.error(e.message);
+      setConnectedWallet(undefined);
+      removeConnectedWalletId();
+    }
+
+    return () => unsub && unsub();
+  }, [connectedWalletId]);
+
+  const enableWallet = async (walletId: string) => {
+    setConnectedWalletId(walletId);
   };
 
   const signOut = () => {
-    setConnectedWallet(undefined);
+    if (connectedWallet) {
+      const walletApi = connectedWallet.injectedProvider;
+
+      if (walletApi?.disable) {
+        walletApi.disable();
+      }
+    }
+
+    removeConnectedWalletId();
     setInjectedApi(undefined);
-    setAccounts([]);
   };
 
   return (
     <WalletContext.Provider
       value={{
-        walletUrl,
         accounts,
         enableWallet,
         injectedApi,
         signOut,
-        availableWallets: WALLETS,
+        availableWallets,
+        connectedWalletId,
         connectedWallet,
       }}>
       {children}

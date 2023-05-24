@@ -10,20 +10,17 @@ import {
   Stack,
   useDisclosure,
 } from '@chakra-ui/react';
-import { isWalletReady, useWalletContext } from '@/providers/WalletProvider';
-import { WalletInfo, WalletType } from '@/types';
+import { useWalletContext } from '@/providers/WalletProvider';
+import Wallet from '@/wallets/Wallet';
 import { ThemingProps } from '@chakra-ui/system';
 
-const useDefaultInitialization = () => true;
-
 interface WalletButtonProps {
-  walletInfo: WalletInfo;
+  walletInfo: Wallet;
   afterSelectWallet?: () => void;
 }
-const WalletButton = ({ walletInfo, afterSelectWallet }: WalletButtonProps) => {
-  const { name, id, useInitialization, logo, type } = walletInfo;
-  const initialized = useInitialization!();
 
+const WalletButton = ({ walletInfo, afterSelectWallet }: WalletButtonProps) => {
+  const { name, id, logo, ready, installed } = walletInfo;
   const { enableWallet } = useWalletContext();
 
   const connectWallet = () => {
@@ -32,13 +29,11 @@ const WalletButton = ({ walletInfo, afterSelectWallet }: WalletButtonProps) => {
     afterSelectWallet && afterSelectWallet();
   };
 
-  const ready = type === WalletType.WEBSITE || isWalletReady(id);
-
   return (
     <Button
       onClick={connectWallet}
-      isLoading={!initialized}
-      isDisabled={!ready}
+      isLoading={installed && !ready}
+      isDisabled={!installed}
       loadingText={name}
       size='lg'
       width='full'
@@ -65,7 +60,7 @@ export default function WalletSelection({ buttonLabel = 'Connect Wallet', button
       <Button size='lg' colorScheme='primary' variant='solid' onClick={onOpen} {...buttonProps}>
         {buttonLabel}
       </Button>
-      <Modal onClose={onClose} size='xs' isOpen={isOpen}>
+      <Modal onClose={onClose} size='sm' isOpen={isOpen}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Select Wallet to Connect</ModalHeader>
@@ -73,11 +68,7 @@ export default function WalletSelection({ buttonLabel = 'Connect Wallet', button
           <ModalBody mb={4}>
             <Stack>
               {availableWallets.map((one) => (
-                <WalletButton
-                  key={one.id}
-                  walletInfo={{ useInitialization: useDefaultInitialization, ...one }}
-                  afterSelectWallet={onClose}
-                />
+                <WalletButton key={one.id} walletInfo={one} afterSelectWallet={onClose} />
               ))}
             </Stack>
           </ModalBody>
