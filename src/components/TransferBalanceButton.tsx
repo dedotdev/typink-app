@@ -24,6 +24,7 @@ import { validateAddress } from '@polkadot/util-crypto';
 import { useApiContext } from '@/providers/ApiProvider';
 import { useWalletContext } from '@/providers/WalletProvider';
 import { shortenAddress } from '@/utils/string';
+import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 interface TransferBalanceButtonProps {
   fromAccount: InjectedAccount;
@@ -85,7 +86,7 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
 
   return (
     <>
-      <Button isLoading={!apiReady} onClick={onOpen}>
+      <Button isLoading={!apiReady} onClick={onOpen} leftIcon={<ExternalLinkIcon />}>
         Transfer
       </Button>
       <Modal onClose={onClose} size='lg' isOpen={isOpen}>

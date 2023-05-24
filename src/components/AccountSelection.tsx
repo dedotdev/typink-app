@@ -1,20 +1,21 @@
 import { Box, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
 import { Identicon } from '@polkadot/react-identicon';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { InjectedAccount } from '@polkadot/extension-inject/types';
 import AccountBalances from '@/components/AccountBalances';
 import SignRawMessageButton from '@/components/SignRawMessageButton';
 import TransferBalanceButton from '@/components/TransferBalanceButton';
 import { useWalletContext } from '@/providers/WalletProvider';
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon, PlusSquareIcon } from '@chakra-ui/icons';
 
 export default function AccountSelection() {
-  const { accounts } = useWalletContext();
+  const { accounts, injectedApi } = useWalletContext();
   const [selectedAccount, setSelectedAccount] = useState<InjectedAccount>();
   const activeItemRef = useRef<HTMLButtonElement | null>(null);
+  const accountsUpdateAvailable = useMemo(() => !!injectedApi?.accounts?.update, [injectedApi]);
 
   useEffect(() => {
-    if (selectedAccount && accounts.includes(selectedAccount)) {
+    if (selectedAccount && accounts.map((one) => one.address).includes(selectedAccount.address)) {
       return;
     }
 
@@ -24,6 +25,15 @@ export default function AccountSelection() {
   if (!selectedAccount) {
     return <></>;
   }
+
+  const updateAccounts = async () => {
+    if (!accountsUpdateAvailable) {
+      return;
+    }
+
+    // @ts-ignore
+    await injectedApi.accounts.update();
+  };
 
   const { name, address } = selectedAccount;
 
@@ -61,11 +71,17 @@ export default function AccountSelection() {
               <span>{one.name}</span>
             </MenuItem>
           ))}
+          {accountsUpdateAvailable && (
+            <MenuItem gap={2} onClick={updateAccounts}>
+              <PlusSquareIcon fontSize={24} />
+              <span>Add/Remove Accounts</span>
+            </MenuItem>
+          )}
         </MenuList>
       </Menu>
 
       <AccountBalances address={address} />
-      <Flex m={4} mt={8} gap={4}>
+      <Flex my={4} gap={4}>
         <TransferBalanceButton fromAccount={selectedAccount} />
         <SignRawMessageButton fromAccount={selectedAccount} />
       </Flex>

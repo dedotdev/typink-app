@@ -29,15 +29,15 @@ export default function AccountBalances({ address }: AccountBalancesProps) {
 
   const values = [
     {
-      label: 'Free',
+      label: 'Free Balance',
       amount: balance?.data?.free?.toHuman() || 0,
     },
     {
-      label: 'Reserved',
+      label: 'Reserved Balance',
       amount: balance?.data?.reserved?.toHuman() || 0,
     },
     {
-      label: 'Frozen',
+      label: 'Frozen Balance',
       amount: balance?.data?.frozen?.toHuman() || 0,
     },
   ];
@@ -48,7 +48,7 @@ export default function AccountBalances({ address }: AccountBalancesProps) {
         <Flex key={label} gap={2}>
           <Text>{label}:</Text>
           <Skeleton h={6} minW={10} isLoaded={!loading}>
-            {amount}
+            <strong>{amount}</strong>
           </Skeleton>
         </Flex>
       ))}

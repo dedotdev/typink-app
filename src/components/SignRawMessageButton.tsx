@@ -23,6 +23,7 @@ import { validateAddress } from '@polkadot/util-crypto';
 import { useApiContext } from '@/providers/ApiProvider';
 import { useWalletContext } from '@/providers/WalletProvider';
 import { shortenAddress } from '@/utils/string';
+import { EditIcon } from '@chakra-ui/icons';
 
 interface SignRawMessageButtonProps {
   fromAccount: InjectedAccount;
@@ -63,7 +64,7 @@ export default function SignRawMessageButton({ fromAccount }: SignRawMessageButt
 
   return (
     <>
-      <Button isLoading={!apiReady} onClick={onOpen}>
+      <Button isLoading={!apiReady} onClick={onOpen} leftIcon={<EditIcon />}>
         Sign Message
       </Button>
       <Modal onClose={onClose} size='lg' isOpen={isOpen}>
