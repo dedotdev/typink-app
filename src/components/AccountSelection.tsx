@@ -1,6 +1,6 @@
 import { Box, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
 import { Identicon } from '@polkadot/react-identicon';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { InjectedAccount } from '@polkadot/extension-inject/types';
 import AccountBalances from '@/components/AccountBalances';
 import SignRawMessageButton from '@/components/SignRawMessageButton';
@@ -11,7 +11,6 @@ import { ChevronDownIcon, PlusSquareIcon } from '@chakra-ui/icons';
 export default function AccountSelection() {
   const { accounts, injectedApi } = useWalletContext();
   const [selectedAccount, setSelectedAccount] = useState<InjectedAccount>();
-  const activeItemRef = useRef<HTMLButtonElement | null>(null);
   const accountsUpdateAvailable = useMemo(() => !!injectedApi?.accounts?.update, [injectedApi]);
 
   useEffect(() => {
@@ -39,7 +38,7 @@ export default function AccountSelection() {
 
   return (
     <Box>
-      <Menu initialFocusRef={activeItemRef}>
+      <Menu>
         <MenuButton
           width='full'
           _hover={{ backgroundColor: 'gray.100' }}
@@ -63,7 +62,7 @@ export default function AccountSelection() {
         <MenuList>
           {accounts.map((one) => (
             <MenuItem
-              ref={one.address === address ? activeItemRef : null}
+              backgroundColor={one.address === address ? 'gray.200' : ''}
               gap={2}
               key={one.address}
               onClick={() => setSelectedAccount(one)}>
