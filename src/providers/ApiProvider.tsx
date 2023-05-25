@@ -1,23 +1,36 @@
 import { createContext, useContext } from 'react';
+import { useLocalStorage } from 'react-use';
 import { ApiPromise } from '@polkadot/api';
 import useApi from '@/hooks/useApi';
-import { Props } from '@/types';
+import { NetworkInfo, Props } from '@/types';
+import { SUPPORTED_NETWORKS } from '@/utils/networks';
 
 interface ApiContextProps {
   api?: ApiPromise;
   apiReady: boolean;
+  network: NetworkInfo;
+  setNetwork: (one: NetworkInfo) => void;
 }
 
-export const ApiContext = createContext<ApiContextProps>({ apiReady: false });
+const DEFAULT_NETWORK = SUPPORTED_NETWORKS['polkadot'];
 
-const DEFAULT_NETWORK_ENDPOINT = 'wss://rpc.polkadot.io';
+export const ApiContext = createContext<ApiContextProps>({
+  apiReady: false,
+  network: DEFAULT_NETWORK,
+  setNetwork: () => {},
+});
 
 export const useApiContext = () => {
   return useContext(ApiContext);
 };
 
 export default function ApiProvider({ children }: Props) {
-  const { ready, api } = useApi(DEFAULT_NETWORK_ENDPOINT);
+  const [network, setNetwork] = useLocalStorage<NetworkInfo>('SELECTED_NETWORK', DEFAULT_NETWORK);
+  const { ready, api } = useApi(network?.provider);
 
-  return <ApiContext.Provider value={{ api, apiReady: ready }}>{children}</ApiContext.Provider>;
+  return (
+    <ApiContext.Provider value={{ api, apiReady: ready, network: network!, setNetwork }}>
+      {children}
+    </ApiContext.Provider>
+  );
 }

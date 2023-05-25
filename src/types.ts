@@ -6,3 +6,13 @@ export interface Props {
 
   [prop: string]: any;
 }
+
+export interface NetworkInfo {
+  id: string;
+  name: string;
+  logo: string;
+  provider: string;
+  prefix: number;
+  symbol: string;
+  decimals: number;
+}
