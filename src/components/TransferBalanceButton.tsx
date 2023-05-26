@@ -39,7 +39,7 @@ const checkAddress = (addressToCheck: string) => {
 };
 
 export default function TransferBalanceButton({ fromAccount }: TransferBalanceButtonProps) {
-  const { apiReady, api } = useApiContext();
+  const { apiReady, api, network } = useApiContext();
   const { injectedApi } = useWalletContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [destinationAddress, setDestinationAddress] = useState<string>('');
@@ -139,7 +139,7 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
                   value={amountToSend}
                   onChange={(e) => setAmountToSend(parseInt(e.target.value))}
                 />
-                <InputRightAddon>DOT</InputRightAddon>
+                <InputRightAddon>{network.symbol}</InputRightAddon>
               </InputGroup>
               <FormErrorMessage>{amountValidation}</FormErrorMessage>
             </FormControl>
