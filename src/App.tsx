@@ -11,11 +11,11 @@ function App() {
   return (
     <div>
       <MainHeader />
-      <Box maxWidth={600} mx='auto' mt={8}>
+      <Box maxWidth={632} mx='auto' mt={4} px={4}>
         {!!injectedApi ? (
           <Box>
-            <Flex justify='space-between' align='center' gap={4}>
-              <Flex align='center' gap={3}>
+            <Flex justify='space-between' align='center' gap={4} direction={{ base: 'column', sm: 'row' }}>
+              <Flex align='center' gap={3} flex={1}>
                 <img src={connectedWallet?.logo} alt={connectedWallet?.name} width={32} />
                 <Flex direction='column'>
                   <Text fontWeight='600'>{connectedWallet?.name}</Text>

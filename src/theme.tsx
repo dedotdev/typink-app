@@ -15,4 +15,11 @@ export const theme = extendTheme({
       900: '#000f1e',
     },
   },
+  styles: {
+    global: {
+      '*, *::before, *::after': {
+        boxSizing: 'border-box',
+      },
+    },
+  },
 });

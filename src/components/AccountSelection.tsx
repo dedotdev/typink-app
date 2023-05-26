@@ -3,8 +3,10 @@ import { Identicon } from '@polkadot/react-identicon';
 import { useEffect, useMemo, useState } from 'react';
 import { InjectedAccount } from '@polkadot/extension-inject/types';
 import AccountBalances from '@/components/AccountBalances';
+import CopyAddressButton from '@/components/CopyAddressButton';
 import SignRawMessageButton from '@/components/SignRawMessageButton';
 import TransferBalanceButton from '@/components/TransferBalanceButton';
+import useDisplayAddress from '@/hooks/useDisplayAddress';
 import { useWalletContext } from '@/providers/WalletProvider';
 import { ChevronDownIcon, PlusSquareIcon } from '@chakra-ui/icons';
 
@@ -12,6 +14,7 @@ export default function AccountSelection() {
   const { accounts, injectedApi } = useWalletContext();
   const [selectedAccount, setSelectedAccount] = useState<InjectedAccount>();
   const accountsUpdateAvailable = useMemo(() => !!injectedApi?.accounts?.update, [injectedApi]);
+  const displayAddress = useDisplayAddress(selectedAccount?.address);
 
   useEffect(() => {
     if (selectedAccount && accounts.map((one) => one.address).includes(selectedAccount.address)) {
@@ -53,7 +56,7 @@ export default function AccountSelection() {
                 <Text fontWeight='bold' fontSize='lg'>
                   {name}
                 </Text>
-                <Text>{address}</Text>
+                <Text>{displayAddress}</Text>
               </Flex>
             </Flex>
             <ChevronDownIcon fontSize='4xl' />
@@ -80,9 +83,10 @@ export default function AccountSelection() {
       </Menu>
 
       <AccountBalances address={address} />
-      <Flex my={4} gap={4}>
+      <Flex my={4} gap={4} wrap='wrap'>
         <TransferBalanceButton fromAccount={selectedAccount} />
         <SignRawMessageButton fromAccount={selectedAccount} />
+        <CopyAddressButton address={address} />
       </Flex>
     </Box>
   );

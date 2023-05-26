@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Menu, MenuButton, MenuItem, MenuList, Spinner } from '@chakra-ui/react';
+import { Box, Button, Flex, Menu, MenuButton, MenuItem, MenuList, Spinner, useMediaQuery } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { useApiContext } from '@/providers/ApiProvider';
 import { SUPPORTED_NETWORKS } from '@/utils/networks';
@@ -16,13 +16,14 @@ function NetworkStatusIndicator() {
 export default function NetworkSelection() {
   const { network, setNetwork } = useApiContext();
   const activeItemRef = useRef<HTMLButtonElement | null>(null);
+  const [smallest] = useMediaQuery('(max-width: 325px)');
 
   return (
     <Menu initialFocusRef={activeItemRef}>
       <MenuButton as={Button}>
         <Flex direction='row' align='center' gap={2}>
           <img src={network.logo} alt={network.name} width={22} />
-          <span>{network.name}</span>
+          {!smallest && <span>{network.name}</span>}
 
           <Box ml={2}>
             <NetworkStatusIndicator />
