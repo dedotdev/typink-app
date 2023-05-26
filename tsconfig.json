@@ -4,13 +4,12 @@
     "baseUrl": ".",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "jsx": "react-jsx",
+    "noEmit": true,
     "paths": {
       "@/*": ["./src/*"]
     },
     "types": ["vitest/globals"]
   },
   "include": ["src"],
-  "references": [
-    { "path": "./tsconfig.node.json" },
-  ]
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
