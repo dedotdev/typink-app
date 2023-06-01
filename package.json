@@ -11,7 +11,7 @@
   "dependencies": {
     "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/react": "^2.6.1",
-    "@coong/sdk": "0.0.21-alpha.0",
+    "@coong/sdk": "0.0.21-alpha.6",
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
     "@polkadot/api": "^10.6.1",

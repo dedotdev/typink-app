@@ -40,4 +40,8 @@ export default class WebsiteWallet extends Wallet<WebsiteWalletOptions> {
   get installed() {
     return true;
   }
+
+  get sdk() {
+    return this.#sdk;
+  }
 }

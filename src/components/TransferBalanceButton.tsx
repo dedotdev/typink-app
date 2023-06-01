@@ -24,6 +24,7 @@ import { validateAddress } from '@polkadot/util-crypto';
 import { useApiContext } from '@/providers/ApiProvider';
 import { useWalletContext } from '@/providers/WalletProvider';
 import { shortenAddress } from '@/utils/string';
+import WebsiteWallet from '@/wallets/WebsiteWallet';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 interface TransferBalanceButtonProps {
@@ -40,7 +41,7 @@ const checkAddress = (addressToCheck: string) => {
 
 export default function TransferBalanceButton({ fromAccount }: TransferBalanceButtonProps) {
   const { apiReady, api, network } = useApiContext();
-  const { injectedApi } = useWalletContext();
+  const { injectedApi, connectedWallet } = useWalletContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [destinationAddress, setDestinationAddress] = useState<string>('');
   const [destValidation, setDestValidation] = useState<string>('');
@@ -74,6 +75,10 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
     }
 
     try {
+      if (connectedWallet instanceof WebsiteWallet) {
+        await connectedWallet.sdk?.launchNewWalletInstance('/request');
+      }
+
       const hash = await api.tx.balances
         .transfer(destinationAddress, amountToSend * 1e10)
         .signAndSend(fromAccount.address, { signer: injectedApi?.signer });
