@@ -80,7 +80,7 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
       }
 
       const hash = await api.tx.balances
-        .transfer(destinationAddress, amountToSend * 1e10)
+        .transfer(destinationAddress, amountToSend * Math.pow(10, network.decimals))
         .signAndSend(fromAccount.address, { signer: injectedApi?.signer });
 
       toast.success(`Transaction approved: ${hash}`);
