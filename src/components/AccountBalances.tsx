@@ -53,6 +53,7 @@ export default function AccountBalances({ address }: AccountBalancesProps) {
               {formatBalance(amount, {
                 decimals: network.decimals,
                 withUnit: false,
+                forceUnit: network.symbol,
               })}
               &nbsp;
               {network.symbol}

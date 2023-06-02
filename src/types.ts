@@ -15,4 +15,5 @@ export interface NetworkInfo {
   prefix: number;
   symbol: string;
   decimals: number;
+  subscanUrl: string;
 }

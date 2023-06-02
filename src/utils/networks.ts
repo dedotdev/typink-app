@@ -12,6 +12,7 @@ export const SUPPORTED_NETWORKS: Record<string, NetworkInfo> = {
     prefix: 0,
     symbol: 'DOT',
     decimals: 10,
+    subscanUrl: 'https://polkadot.subscan.io',
   },
   kusama: {
     id: 'kusama',
@@ -21,6 +22,7 @@ export const SUPPORTED_NETWORKS: Record<string, NetworkInfo> = {
     prefix: 2,
     symbol: 'KSM',
     decimals: 12,
+    subscanUrl: 'https://kusama.subscan.io',
   },
   rococo: {
     id: 'rococo',
@@ -30,6 +32,7 @@ export const SUPPORTED_NETWORKS: Record<string, NetworkInfo> = {
     prefix: 42,
     symbol: 'ROC',
     decimals: 12,
+    subscanUrl: 'https://rococo.subscan.io',
   },
   westend: {
     id: 'westend',
@@ -39,5 +42,16 @@ export const SUPPORTED_NETWORKS: Record<string, NetworkInfo> = {
     prefix: 42,
     symbol: 'WND',
     decimals: 12,
+    subscanUrl: 'https://westend.subscan.io',
+  },
+  astar: {
+    id: 'astar',
+    name: 'Astar',
+    logo: `${LOGO_FOLDER}/astar-network.png`,
+    provider: 'wss://rpc.astar.network',
+    prefix: 5,
+    symbol: 'ASTR',
+    decimals: 18,
+    subscanUrl: 'https://astar.subscan.io',
   },
 };

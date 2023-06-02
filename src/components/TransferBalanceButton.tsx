@@ -19,7 +19,9 @@ import {
 import { Identicon } from '@polkadot/react-identicon';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { useBoolean } from 'react-use';
 import { InjectedAccount } from '@polkadot/extension-inject/types';
+import { BN } from '@polkadot/util';
 import { validateAddress } from '@polkadot/util-crypto';
 import { useApiContext } from '@/providers/ApiProvider';
 import { useWalletContext } from '@/providers/WalletProvider';
@@ -46,8 +48,18 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
   const [destinationAddress, setDestinationAddress] = useState<string>('');
   const [destValidation, setDestValidation] = useState<string>('');
 
-  const [amountToSend, setAmountToSend] = useState<number>(1);
+  const [amountToSend, setAmountToSend] = useState<string>('1');
   const [amountValidation, setAmountValidation] = useState<string>('');
+
+  const [loading, setLoading] = useBoolean(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setDestinationAddress('');
+      setLoading(false);
+      setAmountToSend('1');
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (destinationAddress && destinationAddress.length !== 48 && !checkAddress(destinationAddress)) {
@@ -58,8 +70,9 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
   }, [destinationAddress]);
 
   useEffect(() => {
-    if (!Number.isFinite(amountToSend) || amountToSend <= 0) {
-      setAmountValidation('Amount should be a positive integer');
+    const numberToSend = parseFloat(amountToSend);
+    if (!Number.isFinite(numberToSend) || numberToSend <= 0) {
+      setAmountValidation('Amount should be a positive number');
     } else {
       setAmountValidation('');
     }
@@ -75,17 +88,28 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
     }
 
     try {
+      setLoading(true);
+
       if (connectedWallet instanceof WebsiteWallet) {
         await connectedWallet.sdk?.launchNewWalletInstance('/request');
       }
 
       const hash = await api.tx.balances
-        .transfer(destinationAddress, amountToSend * Math.pow(10, network.decimals))
+        .transferKeepAlive(destinationAddress, new BN(`${parseFloat(amountToSend) * Math.pow(10, network.decimals)}`))
         .signAndSend(fromAccount.address, { signer: injectedApi?.signer });
 
-      toast.success(`Transaction approved: ${hash}`);
+      toast.success(
+        <p>
+          Transaction approved:{' '}
+          <a style={{ textDecoration: 'underline' }} href={`${network.subscanUrl}/extrinsic/${hash}`} target='_blank'>
+            {hash}
+          </a>
+        </p>,
+      );
     } catch (e: any) {
       toast.error(e.toString());
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -140,9 +164,10 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
                 <Input
                   id='amountToTransferInput'
                   type='number'
+                  step='0.01'
                   placeholder='Amount To Transfer'
                   value={amountToSend}
-                  onChange={(e) => setAmountToSend(parseInt(e.target.value))}
+                  onChange={(e) => setAmountToSend(e.target.value)}
                 />
                 <InputRightAddon>{network.symbol}</InputRightAddon>
               </InputGroup>
@@ -151,7 +176,11 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
           </ModalBody>
           <ModalFooter gap={4}>
             <Button onClick={onClose}>Cancel</Button>
-            <Button colorScheme='primary' isDisabled={!!destValidation || !!amountValidation} onClick={makeTransfer}>
+            <Button
+              colorScheme='primary'
+              isDisabled={!!destValidation || !!amountValidation}
+              isLoading={loading}
+              onClick={makeTransfer}>
               Make Transfer
             </Button>
           </ModalFooter>
