@@ -41,7 +41,7 @@ export default function AccountSelection() {
 
   return (
     <Box>
-      <Menu>
+      <Menu autoSelect={false}>
         <MenuButton
           width='full'
           _hover={{ backgroundColor: 'gray.100' }}
