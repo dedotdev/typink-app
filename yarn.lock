@@ -1622,18 +1622,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@coong/base@npm:^0.0.21-alpha.6+8b76262":
-  version: 0.0.21-alpha.6
-  resolution: "@coong/base@npm:0.0.21-alpha.6"
+"@coong/base@npm:^0.0.21":
+  version: 0.0.21
+  resolution: "@coong/base@npm:0.0.21"
   dependencies:
-    "@coong/keyring": ^0.0.21-alpha.6+8b76262
-    "@coong/utils": ^0.0.21-alpha.6+8b76262
+    "@coong/keyring": ^0.0.21
+    "@coong/utils": ^0.0.21
     "@polkadot/networks": ^10.4.1
     "@polkadot/types": ^9.14.1
     "@polkadot/util": ^10.4.1
     "@polkadot/util-crypto": ^10.4.1
     rxjs: ^7.8.0
-  checksum: 7c80a783d1fccab35ea12ac151c30c534303cb875d662823cf3fdf6974bf029480fdbcee1ce3cf9bab995b908533e21cab6d94b1e8a16318c42dd8acb780da4b
+  checksum: d2b47738da649258bc9f7c9c722787285a2daf41f81e5fffd998ae2c2522cfbba5aa3aede3ca2522c5713636b21618551a46778f65724f2fc5d2a84df7c47747
   languageName: node
   linkType: hard
 
@@ -1643,7 +1643,7 @@ __metadata:
   dependencies:
     "@chakra-ui/icons": ^2.0.19
     "@chakra-ui/react": ^2.6.1
-    "@coong/sdk": 0.0.21-alpha.6
+    "@coong/sdk": ^0.0.21
     "@emotion/react": ^11.10.8
     "@emotion/styled": ^11.10.8
     "@polkadot/api": ^10.6.1
@@ -1669,33 +1669,33 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coong/keyring@npm:^0.0.21-alpha.6+8b76262":
-  version: 0.0.21-alpha.6
-  resolution: "@coong/keyring@npm:0.0.21-alpha.6"
+"@coong/keyring@npm:^0.0.21":
+  version: 0.0.21
+  resolution: "@coong/keyring@npm:0.0.21"
   dependencies:
-    "@coong/utils": ^0.0.21-alpha.6+8b76262
+    "@coong/utils": ^0.0.21
     "@polkadot/ui-keyring": ^2.11.2
     crypto-js: ^4.1.1
-  checksum: 91f52b185db069e26b3b4196f7a5c8b5a7a3fb485927a5728b79874dd1965179abd1d886a535b7c875089606caecdd51511e321bab9c8d5211db7709277c79de
+  checksum: 44d831068ee27a0ff7d12e0664a11bccc0de6c2e40577685ff5b9973b5d6c57ead3a080b7187f8bdb9af307fee37bfd7319b7e63fe313e12b1781600026ded52
   languageName: node
   linkType: hard
 
-"@coong/sdk@npm:0.0.21-alpha.6":
-  version: 0.0.21-alpha.6
-  resolution: "@coong/sdk@npm:0.0.21-alpha.6"
+"@coong/sdk@npm:^0.0.21":
+  version: 0.0.21
+  resolution: "@coong/sdk@npm:0.0.21"
   dependencies:
-    "@coong/base": ^0.0.21-alpha.6+8b76262
-    "@coong/utils": ^0.0.21-alpha.6+8b76262
+    "@coong/base": ^0.0.21
+    "@coong/utils": ^0.0.21
     "@polkadot/extension-inject": ^0.44.7
     rxjs: ^7.8.0
-  checksum: d1d5297a43e468c8479bb5df6091115bb18f4e96c04bd23e6f12ecc5717c86dc493632b3ddc6b87e2ff5d461d42916cb95e8b54eebfe8eed7069e88de7ac7906
+  checksum: d1b673f4fd3ec571b59e038b420a8bb764a4dae88dad4347a8a580cb1e304feb6e21bf228572d2ae5bcae6204b5a9981f4a2f84fe6084fa0220c8e0a74649cd5
   languageName: node
   linkType: hard
 
-"@coong/utils@npm:^0.0.21-alpha.6+8b76262":
-  version: 0.0.21-alpha.6
-  resolution: "@coong/utils@npm:0.0.21-alpha.6"
-  checksum: 9706e5d845ccf0f37fe3cc70b8d491cbf7e449eb80fcdeb6cf544ff2518b2f3ba557e928f8d44adec9d2c37f90112fb09cb7061aae2f41dba6344b4fdab1de6e
+"@coong/utils@npm:^0.0.21":
+  version: 0.0.21
+  resolution: "@coong/utils@npm:0.0.21"
+  checksum: 4daf81a7ebeea446c7249cf50a631c3321a1dc851b186ca153aa4a48af37802d4ae9f2c16ac12653b1ed0ed5ef608a8b592f03acaa071c5ee169d2f224919a88
   languageName: node
   linkType: hard
 
