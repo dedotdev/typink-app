@@ -36,6 +36,10 @@ abstract class Wallet<Options extends WalletOptions = WalletOptions> {
   get injectedWeb3() {
     const injectedWindow = window as Window & InjectedWindow;
 
+    if (!injectedWindow.injectedWeb3) {
+      injectedWindow.injectedWeb3 = {};
+    }
+
     return injectedWindow.injectedWeb3;
   }
 
