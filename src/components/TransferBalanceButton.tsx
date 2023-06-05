@@ -178,7 +178,7 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
             <Button onClick={onClose}>Cancel</Button>
             <Button
               colorScheme='primary'
-              isDisabled={!!destValidation || !!amountValidation}
+              isDisabled={!!destValidation || !!amountValidation || !destinationAddress}
               isLoading={loading}
               onClick={makeTransfer}>
               Make Transfer
