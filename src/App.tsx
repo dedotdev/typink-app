@@ -2,6 +2,7 @@ import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import AccountSelection from '@/components/AccountSelection';
 import WelcomeBoard from '@/components/WelcomeBoard';
 import WalletSelection from '@/components/dialog/WalletSelection';
+import MainFooter from '@/components/shared/MainFooter';
 import MainHeader from '@/components/shared/MainHeader';
 import { useWalletContext } from '@/providers/WalletProvider';
 
@@ -9,9 +10,9 @@ function App() {
   const { accounts, signOut, injectedApi, connectedWallet } = useWalletContext();
 
   return (
-    <div>
+    <Flex direction='column' minHeight='100vh'>
       <MainHeader />
-      <Box maxWidth={632} mx='auto' mt={4} px={4}>
+      <Box maxWidth='container.md' mx='auto' my={4} px={4} flex={1}>
         {!!injectedApi ? (
           <Box>
             <Flex justify='space-between' align='center' gap={4} direction={{ base: 'column', sm: 'row' }}>
@@ -42,7 +43,8 @@ function App() {
           <WelcomeBoard />
         )}
       </Box>
-    </div>
+      <MainFooter />
+    </Flex>
   );
 }
 
