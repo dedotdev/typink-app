@@ -12,7 +12,7 @@ function App() {
   return (
     <Flex direction='column' minHeight='100vh'>
       <MainHeader />
-      <Box maxWidth='container.md' mx='auto' my={4} px={4} flex={1}>
+      <Box maxWidth='container.md' mx='auto' my={4} px={4} flex={1} w='full'>
         {!!injectedApi ? (
           <Box>
             <Flex justify='space-between' align='center' gap={4} direction={{ base: 'column', sm: 'row' }}>
