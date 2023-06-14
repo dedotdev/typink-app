@@ -91,7 +91,7 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
       setLoading(true);
 
       if (connectedWallet instanceof WebsiteWallet) {
-        await connectedWallet.sdk?.launchNewWalletInstance('/request');
+        await connectedWallet.sdk?.newWaitingWalletInstance();
       }
 
       const hash = await api.tx.balances
