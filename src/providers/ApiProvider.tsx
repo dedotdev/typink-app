@@ -1,12 +1,12 @@
 import { createContext, useContext } from 'react';
 import { useLocalStorage } from 'react-use';
-import { ApiPromise } from '@polkadot/api';
 import useApi from '@/hooks/useApi';
 import { NetworkInfo, Props } from '@/types';
 import { SUPPORTED_NETWORKS } from '@/utils/networks';
+import { DelightfulApi } from 'delightfuldot';
 
 interface ApiContextProps {
-  api?: ApiPromise;
+  api?: DelightfulApi;
   apiReady: boolean;
   network: NetworkInfo;
   setNetwork: (one: NetworkInfo) => void;

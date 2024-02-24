@@ -1,9 +1,9 @@
 import { Flex, Skeleton, Stack, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useAsync, useBoolean } from 'react-use';
-import { FrameSystemAccountInfo } from '@polkadot/types/lookup';
 import { formatBalance } from '@polkadot/util';
 import { useApiContext } from '@/providers/ApiProvider';
+import { FrameSystemAccountInfo } from '@delightfuldot/chaintypes/substrate';
 
 interface AccountBalancesProps {
   address: string;
@@ -20,7 +20,7 @@ export default function AccountBalances({ address }: AccountBalancesProps) {
     }
 
     setLoading(true);
-    const unsubscribe = await api.query.system.account(address, (resp: FrameSystemAccountInfo) => {
+    const unsubscribe = await api.query.system.account(address, (resp) => {
       setBalance(resp);
       setLoading(false);
     });
@@ -31,15 +31,15 @@ export default function AccountBalances({ address }: AccountBalancesProps) {
   const values = [
     {
       label: 'Free Balance',
-      amount: balance?.data?.free || 0,
+      amount: balance?.data?.free || 0n,
     },
     {
       label: 'Reserved Balance',
-      amount: balance?.data?.reserved || 0,
+      amount: balance?.data?.reserved || 0n,
     },
     {
       label: 'Frozen Balance',
-      amount: balance?.data?.frozen || 0,
+      amount: balance?.data?.frozen || 0n,
     },
   ];
 

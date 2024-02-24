@@ -21,7 +21,6 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useBoolean } from 'react-use';
 import { InjectedAccount } from '@polkadot/extension-inject/types';
-import { BN } from '@polkadot/util';
 import { validateAddress } from '@polkadot/util-crypto';
 import { useApiContext } from '@/providers/ApiProvider';
 import { useWalletContext } from '@/providers/WalletProvider';
@@ -95,7 +94,7 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
       }
 
       const hash = await api.tx.balances
-        .transferKeepAlive(destinationAddress, new BN(`${parseFloat(amountToSend) * Math.pow(10, network.decimals)}`))
+        .transferKeepAlive(destinationAddress, BigInt(`${parseFloat(amountToSend) * Math.pow(10, network.decimals)}`))
         .signAndSend(fromAccount.address, { signer: injectedApi?.signer });
 
       toast.success(
