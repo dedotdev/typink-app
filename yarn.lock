@@ -1644,7 +1644,7 @@ __metadata:
     "@chakra-ui/icons": ^2.0.19
     "@chakra-ui/react": ^2.6.1
     "@coong/sdk": ^0.0.22
-    "@delightfuldot/chaintypes": ^0.0.1-alpha.19
+    "@delightfuldot/chaintypes": ^0.0.1-alpha.20
     "@emotion/react": ^11.10.8
     "@emotion/styled": ^11.10.8
     "@fortawesome/fontawesome-svg-core": ^6.3.0
@@ -1658,7 +1658,7 @@ __metadata:
     "@types/react": ^18.0.26
     "@types/react-dom": ^18.0.9
     "@vitejs/plugin-react": ^3.0.0
-    delightfuldot: ^0.0.1-alpha.19
+    delightfuldot: ^0.0.1-alpha.20
     framer-motion: ^10.12.8
     prettier: ^2.8.8
     prettier-plugin-organize-imports: ^3.2.2
@@ -1703,72 +1703,72 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@delightfuldot/chaintypes@npm:0.0.1-alpha.19, @delightfuldot/chaintypes@npm:^0.0.1-alpha.19":
-  version: 0.0.1-alpha.19
-  resolution: "@delightfuldot/chaintypes@npm:0.0.1-alpha.19"
+"@delightfuldot/chaintypes@npm:0.0.1-alpha.20, @delightfuldot/chaintypes@npm:^0.0.1-alpha.20":
+  version: 0.0.1-alpha.20
+  resolution: "@delightfuldot/chaintypes@npm:0.0.1-alpha.20"
   dependencies:
-    "@delightfuldot/codecs": 0.0.1-alpha.19
-    "@delightfuldot/shape": 0.0.1-alpha.19
-    "@delightfuldot/types": 0.0.1-alpha.19
-    "@delightfuldot/utils": 0.0.1-alpha.19
+    "@delightfuldot/codecs": 0.0.1-alpha.20
+    "@delightfuldot/shape": 0.0.1-alpha.20
+    "@delightfuldot/types": 0.0.1-alpha.20
+    "@delightfuldot/utils": 0.0.1-alpha.20
     "@polkadot/util": ^12.6.2
-  checksum: 9d21cba23005dea9b39e3d9a184f5a49594eb136d8ab8ef57b205794a0cccb17e9b2eeeef96f0d05dec6807bbef33863a8785adbf84b223bf5755a02b1436d02
+  checksum: 8805ff0433df370a3aaf4472a47625c9f3e2f4f95f7bbe544b9a8e3cb49a65f8e96fab92720a9d0dfd1168c0549ca31cb1457398ecd7ebce4205314143fe0650
   languageName: node
   linkType: hard
 
-"@delightfuldot/codecs@npm:0.0.1-alpha.19":
-  version: 0.0.1-alpha.19
-  resolution: "@delightfuldot/codecs@npm:0.0.1-alpha.19"
+"@delightfuldot/codecs@npm:0.0.1-alpha.20":
+  version: 0.0.1-alpha.20
+  resolution: "@delightfuldot/codecs@npm:0.0.1-alpha.20"
   dependencies:
-    "@delightfuldot/shape": 0.0.1-alpha.19
-    "@delightfuldot/utils": 0.0.1-alpha.19
+    "@delightfuldot/shape": 0.0.1-alpha.20
+    "@delightfuldot/utils": 0.0.1-alpha.20
     "@polkadot/util": ^12.6.2
     "@polkadot/util-crypto": ^12.6.2
     lodash.clonedeep: ^4.5.0
-  checksum: 80e8836f65ea3a9f22a00e67263e1b3c9143d7390ce044420946a532f6bec67e0d8ba62ed58ac71373210d4a6fa0d812571ea84e6d82071a7c33493f54ceae17
+  checksum: 6b7578836aa332093253d3cbca619e37bdc3a559d9a6a8f63f67e3fed8d69127f9556404cc61e2264642be614fffc2b95d4f5f67e32f68541e4ae4854e726388
   languageName: node
   linkType: hard
 
-"@delightfuldot/shape@npm:0.0.1-alpha.19":
-  version: 0.0.1-alpha.19
-  resolution: "@delightfuldot/shape@npm:0.0.1-alpha.19"
+"@delightfuldot/shape@npm:0.0.1-alpha.20":
+  version: 0.0.1-alpha.20
+  resolution: "@delightfuldot/shape@npm:0.0.1-alpha.20"
   dependencies:
-    "@delightfuldot/utils": 0.0.1-alpha.19
+    "@delightfuldot/utils": 0.0.1-alpha.20
     "@polkadot/util": ^12.6.2
     "@polkadot/util-crypto": ^12.6.2
     lodash.clonedeep: ^4.5.0
     subshape: ^0.14.0
-  checksum: 80a88c432ed9fde65950b81e27422e375d69c11ace78132a77e11f93b2b6fb5e6996a7a773397eada81244ffb2a69684ecc8943f88ba2df311191672a7fad2d0
+  checksum: 2ec370d3da44dcbac45df82355b01a05136462279ae5c7ce239c3bd0a9bc3a54163c6f81cad20308f9d896730af2762661a817afb98b0bf146439d1b959d9a68
   languageName: node
   linkType: hard
 
-"@delightfuldot/specs@npm:0.0.1-alpha.19":
-  version: 0.0.1-alpha.19
-  resolution: "@delightfuldot/specs@npm:0.0.1-alpha.19"
+"@delightfuldot/specs@npm:0.0.1-alpha.20":
+  version: 0.0.1-alpha.20
+  resolution: "@delightfuldot/specs@npm:0.0.1-alpha.20"
   dependencies:
-    "@delightfuldot/types": 0.0.1-alpha.19
-  checksum: d39e1e0d928ed144271b0bb26a469921c390412ed20f9ca50ace17216b6fcffd4984bad61ee5d9ea3f17dbe90899b70ccbed7df2ba7541a350c5fdc12e549b2c
+    "@delightfuldot/types": 0.0.1-alpha.20
+  checksum: c7aa8418576fd929068ace80063e4f9d22ef01b0e2c415ccab7e76585047957a21075cea25442f454bcb19824acfd504d878e602df34e602b778738313910131
   languageName: node
   linkType: hard
 
-"@delightfuldot/types@npm:0.0.1-alpha.19":
-  version: 0.0.1-alpha.19
-  resolution: "@delightfuldot/types@npm:0.0.1-alpha.19"
+"@delightfuldot/types@npm:0.0.1-alpha.20":
+  version: 0.0.1-alpha.20
+  resolution: "@delightfuldot/types@npm:0.0.1-alpha.20"
   dependencies:
-    "@delightfuldot/codecs": 0.0.1-alpha.19
-    "@delightfuldot/shape": 0.0.1-alpha.19
-    "@delightfuldot/utils": 0.0.1-alpha.19
+    "@delightfuldot/codecs": 0.0.1-alpha.20
+    "@delightfuldot/shape": 0.0.1-alpha.20
+    "@delightfuldot/utils": 0.0.1-alpha.20
     "@polkadot/util": ^12.6.2
-  checksum: c2f194e5efa5df6696cecc0e34ed67c9e14b76fe489aa8962548bdf378a62b5f105d35714ee8df225fd5f7c6be6a647986b8d023208e5e3d46dbd89d53c1f32c
+  checksum: a4fe442d4c437648e905e19270228b957af9ffb06eef6bc3af0395ca502e0a2682603f67b0641013b4c6e1d9fb0f08f8a63fde5adb22dafa7bb46ea35ce30068
   languageName: node
   linkType: hard
 
-"@delightfuldot/utils@npm:0.0.1-alpha.19":
-  version: 0.0.1-alpha.19
-  resolution: "@delightfuldot/utils@npm:0.0.1-alpha.19"
+"@delightfuldot/utils@npm:0.0.1-alpha.20":
+  version: 0.0.1-alpha.20
+  resolution: "@delightfuldot/utils@npm:0.0.1-alpha.20"
   dependencies:
     "@polkadot/util": ^12.6.2
-  checksum: 11181d87686994561fdcf5390323cb878a8af36aa1b6559db8482e14fd1f4b71d856c75c958b742425d9b217bb2a117e749f68cee88067e316e7e30ac8dbc854
+  checksum: f68fb294677f1d85498f0f7efd3693c62715a4aa33a45ccd7ab59564d2e00168807439c2a127ffa1cc7bf213099e2092320577bba2f55013d93a88b2c9cd9bdb
   languageName: node
   linkType: hard
 
@@ -4361,20 +4361,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"delightfuldot@npm:^0.0.1-alpha.19":
-  version: 0.0.1-alpha.19
-  resolution: "delightfuldot@npm:0.0.1-alpha.19"
+"delightfuldot@npm:^0.0.1-alpha.20":
+  version: 0.0.1-alpha.20
+  resolution: "delightfuldot@npm:0.0.1-alpha.20"
   dependencies:
-    "@delightfuldot/chaintypes": 0.0.1-alpha.19
-    "@delightfuldot/codecs": 0.0.1-alpha.19
-    "@delightfuldot/shape": 0.0.1-alpha.19
-    "@delightfuldot/specs": 0.0.1-alpha.19
-    "@delightfuldot/utils": 0.0.1-alpha.19
+    "@delightfuldot/chaintypes": 0.0.1-alpha.20
+    "@delightfuldot/codecs": 0.0.1-alpha.20
+    "@delightfuldot/shape": 0.0.1-alpha.20
+    "@delightfuldot/specs": 0.0.1-alpha.20
+    "@delightfuldot/utils": 0.0.1-alpha.20
     "@polkadot/rpc-provider": ^10.11.2
     "@polkadot/util": ^12.6.2
     "@polkadot/util-crypto": ^12.6.2
     localforage: ^1.10.0
-  checksum: 186459b61eae3c6e666b8871bfb0b0f3774de4c8a1341d4e8ee0fd3e5e165a8b3c50bd773ea1c9baa06d3a928450d82b8310cf058ae2a4846cedfb69760a71ab
+  checksum: 481f6625059cca02d0141a680467c4cc50ed230e6b9d18dc453a096c152b30b9732dedd16f33b6b5598c34f659df9452373151e6adb17e940787da4777949ef5
   languageName: node
   linkType: hard
 

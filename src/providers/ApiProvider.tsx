@@ -12,7 +12,7 @@ interface ApiContextProps {
   setNetwork: (one: NetworkInfo) => void;
 }
 
-const DEFAULT_NETWORK = SUPPORTED_NETWORKS['polkadot'];
+const DEFAULT_NETWORK = SUPPORTED_NETWORKS['rococo'];
 
 export const ApiContext = createContext<ApiContextProps>({
   apiReady: false,
