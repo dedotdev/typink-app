@@ -1,4 +1,4 @@
-import { Box, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
+import { Box, Flex, Link, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
 import { Identicon } from '@polkadot/react-identicon';
 import { useEffect, useMemo, useState } from 'react';
 import { InjectedAccount } from '@polkadot/extension-inject/types';
@@ -8,7 +8,7 @@ import SignRawMessageButton from '@/components/SignRawMessageButton';
 import TransferBalanceButton from '@/components/TransferBalanceButton';
 import useDisplayAddress from '@/hooks/useDisplayAddress';
 import { useWalletContext } from '@/providers/WalletProvider';
-import { ChevronDownIcon, PlusSquareIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon, ExternalLinkIcon, PlusSquareIcon } from '@chakra-ui/icons';
 
 export default function AccountSelection() {
   const { accounts, injectedApi } = useWalletContext();
@@ -88,6 +88,11 @@ export default function AccountSelection() {
         <SignRawMessageButton fromAccount={selectedAccount} />
         <CopyAddressButton address={address} />
       </Flex>
+      <Box>
+        <Link textColor='primary.500' href='https://paritytech.github.io/polkadot-testnet-faucet/' isExternal>
+          Polkadot Testnet Faucet <ExternalLinkIcon mx='2px' />
+        </Link>
+      </Box>
     </Box>
   );
 }
