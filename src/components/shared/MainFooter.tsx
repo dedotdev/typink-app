@@ -18,16 +18,16 @@ const MainFooter: FC<Props> = () => {
         gap={4}
         py={4}>
         <span>
-          Copyright &copy; 2023{' '}
+          Copyright &copy; 2024{' '}
           <Link href='https://coongwallet.io' isExternal>
-            Coong Wallet
+            dedot.dev
           </Link>
         </span>
         <Flex gap={6}>
-          <a href='https://twitter.com/CoongWallet' target='_blank'>
+          <a href='https://twitter.com/realsinzii' target='_blank'>
             <FontAwesomeIcon icon={faTwitter} size='xl' className='text-gray-600 hover:text-gray-800' />
           </a>
-          <a href='https://github.com/CoongCrafts/playground-dapp' target='_blank'>
+          <a href='https://github.com/dedotdev/trydedot' target='_blank'>
             <FontAwesomeIcon icon={faGithub} size='xl' className='text-gray-600 hover:text-gray-800' />
           </a>
         </Flex>
