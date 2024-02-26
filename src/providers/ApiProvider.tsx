@@ -3,16 +3,16 @@ import { useLocalStorage } from 'react-use';
 import useApi from '@/hooks/useApi';
 import { NetworkInfo, Props } from '@/types';
 import { SUPPORTED_NETWORKS } from '@/utils/networks';
-import { DelightfulApi } from 'delightfuldot';
+import { Dedot } from 'dedot';
 
 interface ApiContextProps {
-  api?: DelightfulApi;
+  api?: Dedot;
   apiReady: boolean;
   network: NetworkInfo;
   setNetwork: (one: NetworkInfo) => void;
 }
 
-const DEFAULT_NETWORK = SUPPORTED_NETWORKS['rococo'];
+const DEFAULT_NETWORK = SUPPORTED_NETWORKS['polkadot'];
 
 export const ApiContext = createContext<ApiContextProps>({
   apiReady: false,

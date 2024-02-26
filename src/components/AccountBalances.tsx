@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useAsync, useBoolean } from 'react-use';
 import { formatBalance } from '@polkadot/util';
 import { useApiContext } from '@/providers/ApiProvider';
-import { FrameSystemAccountInfo } from '@delightfuldot/chaintypes/substrate';
+import { FrameSystemAccountInfo } from '@dedot/chaintypes/substrate';
 
 interface AccountBalancesProps {
   address: string;
