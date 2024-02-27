@@ -1,6 +1,6 @@
 import { Flex, Skeleton, Stack, Text } from '@chakra-ui/react';
-import { useState } from 'react';
-import { useAsync, useBoolean } from 'react-use';
+import { useEffect, useState } from 'react';
+import { useBoolean } from 'react-use';
 import { formatBalance } from '@polkadot/util';
 import { useApiContext } from '@/providers/ApiProvider';
 import { FrameSystemAccountInfo } from '@dedot/chaintypes/substrate';
@@ -14,18 +14,25 @@ export default function AccountBalances({ address }: AccountBalancesProps) {
   const [loading, setLoading] = useBoolean(true);
   const [balance, setBalance] = useState<FrameSystemAccountInfo>();
 
-  useAsync(async () => {
-    if (!api) {
-      return;
-    }
+  useEffect(() => {
+    let unsubscribe: any;
+    (async () => {
+      if (!api) {
+        return;
+      }
 
-    setLoading(true);
-    const unsubscribe = await api.query.system.account(address, (resp) => {
-      setBalance(resp);
-      setLoading(false);
-    });
+      setLoading(true);
+      unsubscribe = await api.query.system.account(address, (resp) => {
+        setBalance(resp);
+        setLoading(false);
+      });
 
-    return () => unsubscribe();
+
+    })();
+
+    return () => {
+      unsubscribe && unsubscribe();
+    };
   }, [api, address]);
 
   const values = [
