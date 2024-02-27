@@ -93,21 +93,21 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
         await connectedWallet.sdk?.newWaitingWalletInstance();
       }
 
-      const hash = await api.tx.balances
+      const unsub = await api.tx.balances
         .transferKeepAlive(destinationAddress, BigInt(`${parseFloat(amountToSend) * Math.pow(10, network.decimals)}`))
-        .signAndSend(fromAccount.address, { signer: injectedApi?.signer });
-
-      toast.success(
-        <p>
-          Transaction approved:{' '}
-          <a style={{ textDecoration: 'underline' }} href={`${network.subscanUrl}/extrinsic/${hash}`} target='_blank'>
-            {hash}
-          </a>
-        </p>,
-      );
+        .signAndSend(fromAccount.address, { signer: injectedApi?.signer }, async (result) => {
+          if (result.status.tag === 'InBlock') {
+            toast.dismiss();
+            toast.success(<p>Transaction completed, status: {result.status.tag}</p>);
+            setLoading(false);
+            onClose();
+            await unsub();
+          } else {
+            toast.success(<p>Transaction status: {result.status.tag}</p>);
+          }
+        });
     } catch (e: any) {
       toast.error(e.toString());
-    } finally {
       setLoading(false);
     }
   };
