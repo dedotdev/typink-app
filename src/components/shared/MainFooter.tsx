@@ -19,7 +19,7 @@ const MainFooter: FC<Props> = () => {
         py={4}>
         <span>
           Copyright &copy; 2024{' '}
-          <Link href='https://coongwallet.io' isExternal>
+          <Link href='https://dedot.dev' isExternal>
             dedot.dev
           </Link>
         </span>
