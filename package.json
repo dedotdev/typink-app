@@ -12,6 +12,8 @@
     "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/react": "^2.6.1",
     "@coong/sdk": "^0.0.22",
+    "@dedot/cli": "next",
+    "@dedot/codecs": "next",
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
@@ -28,7 +30,7 @@
     "react-use": "^17.4.0"
   },
   "devDependencies": {
-    "@dedot/chaintypes": "^0.0.1-alpha.22",
+    "@dedot/chaintypes": "next",
     "@polkadot/extension-inject": "^0.46.2",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/react": "^18.0.26",
