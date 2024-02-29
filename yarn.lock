@@ -1565,6 +1565,7 @@ __metadata:
     react-dom: ^18.2.0
     react-toastify: ^9.1.1
     react-use: ^17.4.0
+    rollup-plugin-analyzer: ^4.0.0
     typescript: ^4.9.3
     vite: ^4.0.0
     vite-tsconfig-paths: ^4.0.3
@@ -1602,7 +1603,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dedot/chaintypes@npm:0.0.1-next.625ee3d6.2+625ee3d, @dedot/chaintypes@npm:next":
+"@dedot/chaintypes@npm:0.0.1-next.5f51c464.3+5f51c46":
+  version: 0.0.1-next.5f51c464.3
+  resolution: "@dedot/chaintypes@npm:0.0.1-next.5f51c464.3"
+  dependencies:
+    "@dedot/codecs": 0.0.1-next.5f51c464.3+5f51c46
+    "@dedot/shape": 0.0.1-next.5f51c464.3+5f51c46
+    "@dedot/types": 0.0.1-next.5f51c464.3+5f51c46
+    "@dedot/utils": 0.0.1-next.5f51c464.3+5f51c46
+    "@polkadot/util": ^12.6.2
+  checksum: b92beee84db7690f1784c3619889308e34f8ee70fd409cbdcc336497fb7c88f5f32a92a04482f2c1b3b145e48b186ea0d74acb00060832ffe584b5cc598c4865
+  languageName: node
+  linkType: hard
+
+"@dedot/chaintypes@npm:next":
   version: 0.0.1-next.625ee3d6.2
   resolution: "@dedot/chaintypes@npm:0.0.1-next.625ee3d6.2"
   dependencies:
@@ -1612,6 +1626,19 @@ __metadata:
     "@dedot/utils": 0.0.1-next.625ee3d6.2+625ee3d
     "@polkadot/util": ^12.6.2
   checksum: 9c9adfffc58a88f4a7198b3efdfe2ca1639a6c1e32b9acac3d5bb81dd12f85d6e695cead727a0ec41dd06e58110cc32a057340b566c3f6f85b0a401abf09a701
+  languageName: node
+  linkType: hard
+
+"@dedot/codecs@npm:0.0.1-next.5f51c464.3+5f51c46":
+  version: 0.0.1-next.5f51c464.3
+  resolution: "@dedot/codecs@npm:0.0.1-next.5f51c464.3"
+  dependencies:
+    "@dedot/shape": 0.0.1-next.5f51c464.3+5f51c46
+    "@dedot/utils": 0.0.1-next.5f51c464.3+5f51c46
+    "@polkadot/util": ^12.6.2
+    "@polkadot/util-crypto": ^12.6.2
+    lodash.clonedeep: ^4.5.0
+  checksum: eb88dd8b3a6a46af96bab7bcf777551e00f7208af3fb40aa787d725cf8b226606b6e32a6236c7e4c81d5113a2eb680c50f662f242773121e8f32b908c2abaa13
   languageName: node
   linkType: hard
 
@@ -1628,6 +1655,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@dedot/shape@npm:0.0.1-next.5f51c464.3+5f51c46":
+  version: 0.0.1-next.5f51c464.3
+  resolution: "@dedot/shape@npm:0.0.1-next.5f51c464.3"
+  dependencies:
+    "@dedot/utils": 0.0.1-next.5f51c464.3+5f51c46
+    "@polkadot/util": ^12.6.2
+    "@polkadot/util-crypto": ^12.6.2
+    lodash.clonedeep: ^4.5.0
+    subshape: ^0.14.0
+  checksum: d2b230c0ef35e10ae4a5b2ff6302ced03facfe77a707cd932b1f110ad8a92baa8a6b305ce7eee86f1e3775c80f36085ea2f0a0169cfef472d299253d78f7b998
+  languageName: node
+  linkType: hard
+
 "@dedot/shape@npm:0.0.1-next.625ee3d6.2+625ee3d":
   version: 0.0.1-next.625ee3d6.2
   resolution: "@dedot/shape@npm:0.0.1-next.625ee3d6.2"
@@ -1641,12 +1681,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dedot/specs@npm:0.0.1-next.625ee3d6.2+625ee3d":
-  version: 0.0.1-next.625ee3d6.2
-  resolution: "@dedot/specs@npm:0.0.1-next.625ee3d6.2"
+"@dedot/specs@npm:0.0.1-next.5f51c464.3+5f51c46":
+  version: 0.0.1-next.5f51c464.3
+  resolution: "@dedot/specs@npm:0.0.1-next.5f51c464.3"
   dependencies:
-    "@dedot/types": 0.0.1-next.625ee3d6.2+625ee3d
-  checksum: 37608af52f6bf8674efcd3149a4e313f65ef7a061e87265fbdbb4932b33fd504494ddafae5de10672b97b2b0c2da6f974c4634553f38982f220baed5270e17c9
+    "@dedot/types": 0.0.1-next.5f51c464.3+5f51c46
+  checksum: b20cae35a129d4bdb84149351f999c9796e089d2099661ca285ba46ae13e6a929ccb22535ac10867158de6c8f81c55bc77db868afcad7fc5ebdc06dae20b21dd
+  languageName: node
+  linkType: hard
+
+"@dedot/types@npm:0.0.1-next.5f51c464.3+5f51c46":
+  version: 0.0.1-next.5f51c464.3
+  resolution: "@dedot/types@npm:0.0.1-next.5f51c464.3"
+  dependencies:
+    "@dedot/codecs": 0.0.1-next.5f51c464.3+5f51c46
+    "@dedot/shape": 0.0.1-next.5f51c464.3+5f51c46
+    "@dedot/utils": 0.0.1-next.5f51c464.3+5f51c46
+    "@polkadot/util": ^12.6.2
+  checksum: fd2845bae456b99337f9fdd06b779bf8c83c054d73a21f8efa1df5bfaf3d20702e90b72fc2c4ebce4b838436365aae205743c2d589a37a400627f382bc7c7824
   languageName: node
   linkType: hard
 
@@ -1659,6 +1711,15 @@ __metadata:
     "@dedot/utils": 0.0.1-next.625ee3d6.2+625ee3d
     "@polkadot/util": ^12.6.2
   checksum: 46669b87bc0327d5933ff6129c23514a2b3666fb7e1bfb4bea6ea65d6f4b3400516f1e1d732d2450394036925a203bf1baee697e1a3c3307fa17d5d5e9cb3ca9
+  languageName: node
+  linkType: hard
+
+"@dedot/utils@npm:0.0.1-next.5f51c464.3+5f51c46":
+  version: 0.0.1-next.5f51c464.3
+  resolution: "@dedot/utils@npm:0.0.1-next.5f51c464.3"
+  dependencies:
+    "@polkadot/util": ^12.6.2
+  checksum: 94c150037b50a684621db3304f0490f4e8debff7d30af453a7d5d332b41343c3870ad7f1f5306a76e2e6e60afc0ac487263b2edc9512c9af7dfc2a0442e1d28c
   languageName: node
   linkType: hard
 
@@ -3814,19 +3875,19 @@ __metadata:
   linkType: hard
 
 "dedot@npm:next":
-  version: 0.0.1-next.625ee3d6.2
-  resolution: "dedot@npm:0.0.1-next.625ee3d6.2"
+  version: 0.0.1-next.5f51c464.3
+  resolution: "dedot@npm:0.0.1-next.5f51c464.3"
   dependencies:
-    "@dedot/chaintypes": 0.0.1-next.625ee3d6.2+625ee3d
-    "@dedot/codecs": 0.0.1-next.625ee3d6.2+625ee3d
-    "@dedot/shape": 0.0.1-next.625ee3d6.2+625ee3d
-    "@dedot/specs": 0.0.1-next.625ee3d6.2+625ee3d
-    "@dedot/utils": 0.0.1-next.625ee3d6.2+625ee3d
+    "@dedot/chaintypes": 0.0.1-next.5f51c464.3+5f51c46
+    "@dedot/codecs": 0.0.1-next.5f51c464.3+5f51c46
+    "@dedot/shape": 0.0.1-next.5f51c464.3+5f51c46
+    "@dedot/specs": 0.0.1-next.5f51c464.3+5f51c46
+    "@dedot/utils": 0.0.1-next.5f51c464.3+5f51c46
     "@polkadot/rpc-provider": ^10.11.2
     "@polkadot/util": ^12.6.2
     "@polkadot/util-crypto": ^12.6.2
     localforage: ^1.10.0
-  checksum: 452c5eb98670e2b4fbf88a09e75b36bbdbc1cb939bea4fba8c5e01d0d7055334d87708e8a43e9c131a5d7896569e87d44d2a72d1ee2f1fe162e1b6e61900cc2a
+  checksum: 38a3db5ba817f9fa6a02f2c7d0f5271e2b52d8b346d6c736952a23762b35898bd28fa9d1c96636a47db50905f77d757e185d4a85b4aa72b5ce393e124174ca96
   languageName: node
   linkType: hard
 
@@ -5526,6 +5587,13 @@ __metadata:
   version: 0.12.0
   resolution: "retry@npm:0.12.0"
   checksum: 623bd7d2e5119467ba66202d733ec3c2e2e26568074923bc0585b6b99db14f357e79bdedb63cab56cec47491c4a0da7e6021a7465ca6dc4f481d3898fdd3158c
+  languageName: node
+  linkType: hard
+
+"rollup-plugin-analyzer@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "rollup-plugin-analyzer@npm:4.0.0"
+  checksum: 72f794f79efe4f620674a48949be9f64dc3cbf601c52ff90ae7cbeaacb604b86bb34321695d0f8f320e5c0b47880022849d92c51d231e1b32c6757a2c627be5e
   languageName: node
   linkType: hard
 
