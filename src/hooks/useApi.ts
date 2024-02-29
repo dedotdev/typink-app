@@ -2,7 +2,12 @@ import { useState } from 'react';
 import { useAsync, useToggle } from 'react-use';
 import { Dedot } from 'dedot';
 
-export default function useApi(networkEndpoint?: string) {
+type UseApi = {
+  ready: boolean,
+  api?: Dedot
+}
+
+export default function useApi(networkEndpoint?: string): UseApi {
   const [ready, setReady] = useToggle(false);
   const [api, setApi] = useState<Dedot>();
 
