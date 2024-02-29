@@ -1559,7 +1559,7 @@ __metadata:
     "@types/react": ^18.0.26
     "@types/react-dom": ^18.0.9
     "@vitejs/plugin-react": ^3.0.0
-    dedot: ^0.0.1-alpha.22
+    dedot: next
     framer-motion: ^10.12.8
     prettier: ^2.8.8
     prettier-plugin-organize-imports: ^3.2.2
@@ -1604,19 +1604,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dedot/chaintypes@npm:0.0.1-alpha.22":
-  version: 0.0.1-alpha.22
-  resolution: "@dedot/chaintypes@npm:0.0.1-alpha.22"
-  dependencies:
-    "@dedot/codecs": 0.0.1-alpha.22
-    "@dedot/shape": 0.0.1-alpha.22
-    "@dedot/types": 0.0.1-alpha.22
-    "@dedot/utils": 0.0.1-alpha.22
-    "@polkadot/util": ^12.6.2
-  checksum: 99abfe75511e0f30b8248da244e9a25ab97af682d95e26b5c10014b0275a3010f7e44bca6ef8af815e89e24ac561150380fd5a0b58a5a0722bff712ad630216e
-  languageName: node
-  linkType: hard
-
 "@dedot/chaintypes@npm:0.0.1-next.3+b7d0d04, @dedot/chaintypes@npm:next":
   version: 0.0.1-next.3
   resolution: "@dedot/chaintypes@npm:0.0.1-next.3"
@@ -1627,6 +1614,19 @@ __metadata:
     "@dedot/utils": 0.0.1-next.3+b7d0d04
     "@polkadot/util": ^12.6.2
   checksum: 112d7a5bb1c0f50195ce797287b71690ed00a9b2ef661a84bcac123b48653ff0e6a53d750331e1cac9e0e7d848fe6549a245e216d9eea23b082c19e11832a1fd
+  languageName: node
+  linkType: hard
+
+"@dedot/chaintypes@npm:0.0.1-next.9dacef43.1+9dacef4":
+  version: 0.0.1-next.9dacef43.1
+  resolution: "@dedot/chaintypes@npm:0.0.1-next.9dacef43.1"
+  dependencies:
+    "@dedot/codecs": 0.0.1-next.9dacef43.1+9dacef4
+    "@dedot/shape": 0.0.1-next.9dacef43.1+9dacef4
+    "@dedot/types": 0.0.1-next.9dacef43.1+9dacef4
+    "@dedot/utils": 0.0.1-next.9dacef43.1+9dacef4
+    "@polkadot/util": ^12.6.2
+  checksum: 2a0c3643179f35cf47b821ee1bcbcf03a3f8274af6cef3268600592711bedfad65f02d1ec1d6ba8b2e933e28be795c325574ab5d18d8615512646542429ced73
   languageName: node
   linkType: hard
 
@@ -1643,19 +1643,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dedot/codecs@npm:0.0.1-alpha.22":
-  version: 0.0.1-alpha.22
-  resolution: "@dedot/codecs@npm:0.0.1-alpha.22"
-  dependencies:
-    "@dedot/shape": 0.0.1-alpha.22
-    "@dedot/utils": 0.0.1-alpha.22
-    "@polkadot/util": ^12.6.2
-    "@polkadot/util-crypto": ^12.6.2
-    lodash.clonedeep: ^4.5.0
-  checksum: 6cd0b4b79a1f68c07f7b9eaf5c54aefa2078d3264fd616fb22a4f786245f21ad8e35144ff5a7cd422ca78d52e9b6770dacfa74147ad3990523022c34d377199d
-  languageName: node
-  linkType: hard
-
 "@dedot/codecs@npm:0.0.1-next.3+b7d0d04, @dedot/codecs@npm:next":
   version: 0.0.1-next.3
   resolution: "@dedot/codecs@npm:0.0.1-next.3"
@@ -1666,6 +1653,19 @@ __metadata:
     "@polkadot/util-crypto": ^12.6.2
     lodash.clonedeep: ^4.5.0
   checksum: eed9b2c5b08a57f5b7ac812af7845d15f85e50b7677456676452356a2c67b73591f630f0664c74c6eaf1d2120e5787c11ff9dc82ab7a53d6db4d74749307c1da
+  languageName: node
+  linkType: hard
+
+"@dedot/codecs@npm:0.0.1-next.9dacef43.1+9dacef4":
+  version: 0.0.1-next.9dacef43.1
+  resolution: "@dedot/codecs@npm:0.0.1-next.9dacef43.1"
+  dependencies:
+    "@dedot/shape": 0.0.1-next.9dacef43.1+9dacef4
+    "@dedot/utils": 0.0.1-next.9dacef43.1+9dacef4
+    "@polkadot/util": ^12.6.2
+    "@polkadot/util-crypto": ^12.6.2
+    lodash.clonedeep: ^4.5.0
+  checksum: c8a252bd9b148d0b8083813fc10d3fcbc0ea09736b43981c9c840cedc7ab41feb5e5b4c3a43dc3059f5b5ab9a96b3f9599f5510dbd651f638d4d2aa666b76d97
   languageName: node
   linkType: hard
 
@@ -1685,19 +1685,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dedot/shape@npm:0.0.1-alpha.22":
-  version: 0.0.1-alpha.22
-  resolution: "@dedot/shape@npm:0.0.1-alpha.22"
-  dependencies:
-    "@dedot/utils": 0.0.1-alpha.22
-    "@polkadot/util": ^12.6.2
-    "@polkadot/util-crypto": ^12.6.2
-    lodash.clonedeep: ^4.5.0
-    subshape: ^0.14.0
-  checksum: 9ebad08715d924c6fb8f4cc4465ab645cd988b24dc424c3f01219a71f2da84d2daea1ffeb9237454c85429dafefdd83d6043020cbeefcfedd63379079e0e60c3
-  languageName: node
-  linkType: hard
-
 "@dedot/shape@npm:0.0.1-next.3+b7d0d04":
   version: 0.0.1-next.3
   resolution: "@dedot/shape@npm:0.0.1-next.3"
@@ -1711,12 +1698,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dedot/specs@npm:0.0.1-alpha.22":
-  version: 0.0.1-alpha.22
-  resolution: "@dedot/specs@npm:0.0.1-alpha.22"
+"@dedot/shape@npm:0.0.1-next.9dacef43.1+9dacef4":
+  version: 0.0.1-next.9dacef43.1
+  resolution: "@dedot/shape@npm:0.0.1-next.9dacef43.1"
   dependencies:
-    "@dedot/types": 0.0.1-alpha.22
-  checksum: c4e751905740b20a57eacc6536c7efca79635036573dfa16b1adc7a1f4c5e379d1e834dd11a24218b25da5deb3ccbbeae1317ca37a4d83c48cf1d1271ea31c12
+    "@dedot/utils": 0.0.1-next.9dacef43.1+9dacef4
+    "@polkadot/util": ^12.6.2
+    "@polkadot/util-crypto": ^12.6.2
+    lodash.clonedeep: ^4.5.0
+    subshape: ^0.14.0
+  checksum: 8c5532ffa0315cfc20525e2b562f28a924510e098de834b5607892aaf445d4868ad0f9a861859be4a8648f0e48b667c945b3885dff1651238c0c75618a8d9d30
   languageName: node
   linkType: hard
 
@@ -1729,15 +1720,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dedot/types@npm:0.0.1-alpha.22":
-  version: 0.0.1-alpha.22
-  resolution: "@dedot/types@npm:0.0.1-alpha.22"
+"@dedot/specs@npm:0.0.1-next.9dacef43.1+9dacef4":
+  version: 0.0.1-next.9dacef43.1
+  resolution: "@dedot/specs@npm:0.0.1-next.9dacef43.1"
   dependencies:
-    "@dedot/codecs": 0.0.1-alpha.22
-    "@dedot/shape": 0.0.1-alpha.22
-    "@dedot/utils": 0.0.1-alpha.22
-    "@polkadot/util": ^12.6.2
-  checksum: b2eb9656009e27e034f94067a464c71ed61a86599210087038f8dceba8ea3e26e5b3862c183d185f951c7589a175267153863d2f006a8730c0c85046e6722470
+    "@dedot/types": 0.0.1-next.9dacef43.1+9dacef4
+  checksum: e4d7b9e218186987ee2a9b62e532d0a511c749922e00e39c3038c24df9c88b2c69a5f691b9c285a13d871dd53cd0480308e759aea12cd63195bfb87135a2ac5d
   languageName: node
   linkType: hard
 
@@ -1753,12 +1741,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dedot/utils@npm:0.0.1-alpha.22":
-  version: 0.0.1-alpha.22
-  resolution: "@dedot/utils@npm:0.0.1-alpha.22"
+"@dedot/types@npm:0.0.1-next.9dacef43.1+9dacef4":
+  version: 0.0.1-next.9dacef43.1
+  resolution: "@dedot/types@npm:0.0.1-next.9dacef43.1"
   dependencies:
+    "@dedot/codecs": 0.0.1-next.9dacef43.1+9dacef4
+    "@dedot/shape": 0.0.1-next.9dacef43.1+9dacef4
+    "@dedot/utils": 0.0.1-next.9dacef43.1+9dacef4
     "@polkadot/util": ^12.6.2
-  checksum: 0b145da7db7f71abd62f6098f6e398841bf0937302d85fcac5bfde21d5d432da6839d0e5280b6af63b1b5781b2c9d15d5853281af1062f3fb5179122337ea5d7
+  checksum: 111fec62de01d0f726e154fc812a5b3d8ca22825daada410e179b514229911364c9bae6b010873f995ef2da298aed5e6da5789d3cb5bae52917c7787aba2c986
   languageName: node
   linkType: hard
 
@@ -1768,6 +1759,15 @@ __metadata:
   dependencies:
     "@polkadot/util": ^12.6.2
   checksum: ae4b061e457d8952f5224076883fbc0c3c0a7bfde07bd6c1d41facae9b8fc2d812d45591e40df7092417ee92275f0f6de6f96138a7707b98c2cbaa71bdfcfe48
+  languageName: node
+  linkType: hard
+
+"@dedot/utils@npm:0.0.1-next.9dacef43.1+9dacef4":
+  version: 0.0.1-next.9dacef43.1
+  resolution: "@dedot/utils@npm:0.0.1-next.9dacef43.1"
+  dependencies:
+    "@polkadot/util": ^12.6.2
+  checksum: b875a52637ad71e16b5f5c91f330ed367a7d0be86d5f7ace2b66a33e64ee79d53fbb333df18846f2c211b5e58ec82ea24bcc947ba55b41265393325ba4081c43
   languageName: node
   linkType: hard
 
@@ -3941,20 +3941,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dedot@npm:^0.0.1-alpha.22":
-  version: 0.0.1-alpha.22
-  resolution: "dedot@npm:0.0.1-alpha.22"
+"dedot@npm:next":
+  version: 0.0.1-next.9dacef43.1
+  resolution: "dedot@npm:0.0.1-next.9dacef43.1"
   dependencies:
-    "@dedot/chaintypes": 0.0.1-alpha.22
-    "@dedot/codecs": 0.0.1-alpha.22
-    "@dedot/shape": 0.0.1-alpha.22
-    "@dedot/specs": 0.0.1-alpha.22
-    "@dedot/utils": 0.0.1-alpha.22
+    "@dedot/chaintypes": 0.0.1-next.9dacef43.1+9dacef4
+    "@dedot/codecs": 0.0.1-next.9dacef43.1+9dacef4
+    "@dedot/shape": 0.0.1-next.9dacef43.1+9dacef4
+    "@dedot/specs": 0.0.1-next.9dacef43.1+9dacef4
+    "@dedot/utils": 0.0.1-next.9dacef43.1+9dacef4
     "@polkadot/rpc-provider": ^10.11.2
     "@polkadot/util": ^12.6.2
     "@polkadot/util-crypto": ^12.6.2
     localforage: ^1.10.0
-  checksum: 101e202e751bef6e8ec8b58744f46b9e9308fea6399e0ac5385f4acd33eddb563db528e12837f5cc64e221c94187267f09e26d6478ff8cebf7e212cfcaf6b28f
+  checksum: 5e99877c3c107654f9db5e5751b4d63d1f667fcfca963629a24c8fabb3a0c738fb03db1c3c0610d98f612e9df363770bfa769751de9e932652675db3b4e5ca90
   languageName: node
   linkType: hard
 

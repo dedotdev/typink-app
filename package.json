@@ -22,7 +22,7 @@
     "@polkadot/react-identicon": "^3.3.1",
     "@polkadot/util": "^12.1.2",
     "@polkadot/util-crypto": "^12.6.2",
-    "dedot": "^0.0.1-alpha.22",
+    "dedot": "next",
     "framer-motion": "^10.12.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
