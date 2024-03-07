@@ -21,7 +21,7 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useBoolean } from 'react-use';
 import { InjectedAccount } from '@polkadot/extension-inject/types';
-import { validateAddress } from '@polkadot/util-crypto';
+import { decodeAddress } from '@dedot/utils';
 import { useApiContext } from '@/providers/ApiProvider';
 import { useWalletContext } from '@/providers/WalletProvider';
 import { shortenAddress } from '@/utils/string';
@@ -34,7 +34,7 @@ interface TransferBalanceButtonProps {
 
 const checkAddress = (addressToCheck: string) => {
   try {
-    return validateAddress(addressToCheck);
+    return !!decodeAddress(addressToCheck);
   } catch (e) {
     return false;
   }
