@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { useAsync, useToggle } from 'react-use';
-import { Dedot } from 'dedot';
+import { DedotClient, WsProvider } from 'dedot';
 
 type UseApi = {
   ready: boolean,
-  api?: Dedot
+  api?: DedotClient
 }
 
 export default function useApi(networkEndpoint?: string): UseApi {
   const [ready, setReady] = useToggle(false);
-  const [api, setApi] = useState<Dedot>();
+  const [api, setApi] = useState<DedotClient>();
 
   useAsync(async () => {
     if (!networkEndpoint) {
@@ -22,7 +22,7 @@ export default function useApi(networkEndpoint?: string): UseApi {
 
     setReady(false);
 
-    setApi(await Dedot.new({ endpoint: networkEndpoint, cacheMetadata: true }));
+    setApi(await DedotClient.new({ provider: new WsProvider(networkEndpoint), cacheMetadata: true }));
 
     setReady(true);
   }, [networkEndpoint]);

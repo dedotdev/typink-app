@@ -3,10 +3,10 @@ import { useLocalStorage } from 'react-use';
 import useApi from '@/hooks/useApi';
 import { NetworkInfo, Props } from '@/types';
 import { SUPPORTED_NETWORKS } from '@/utils/networks';
-import { Dedot } from 'dedot';
+import { DedotClient } from 'dedot';
 
 interface ApiContextProps {
-  api?: Dedot;
+  api?: DedotClient;
   apiReady: boolean;
   network: NetworkInfo;
   setNetwork: (one: NetworkInfo) => void;

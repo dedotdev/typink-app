@@ -12,7 +12,6 @@
     "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/react": "^2.6.1",
     "@coong/sdk": "^0.0.22",
-    "@dedot/cli": "^0.0.1-alpha.28",
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
@@ -20,7 +19,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@polkadot/react-identicon": "^3.3.1",
     "@polkadot/util": "^12.1.2",
-    "dedot": "0.0.1-next.551688a5.5",
+    "dedot": "0.0.1-alpha.36",
     "framer-motion": "^10.12.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -28,7 +27,7 @@
     "react-use": "^17.4.0"
   },
   "devDependencies": {
-    "@dedot/chaintypes": "0.0.1-next.551688a5.5",
+    "@dedot/chaintypes": "0.0.1-alpha.135",
     "@polkadot/extension-inject": "^0.46.2",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/react": "^18.0.26",

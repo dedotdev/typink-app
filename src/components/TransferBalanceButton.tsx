@@ -21,12 +21,12 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useBoolean } from 'react-use';
 import { InjectedAccount } from '@polkadot/extension-inject/types';
-import { decodeAddress } from '@dedot/utils';
 import { useApiContext } from '@/providers/ApiProvider';
 import { useWalletContext } from '@/providers/WalletProvider';
 import { shortenAddress } from '@/utils/string';
 import WebsiteWallet from '@/wallets/WebsiteWallet';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
+import { decodeAddress } from '@dedot/utils';
 
 interface TransferBalanceButtonProps {
   fromAccount: InjectedAccount;
@@ -95,15 +95,19 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
 
       const unsub = await api.tx.balances
         .transferKeepAlive(destinationAddress, BigInt(`${parseFloat(amountToSend) * Math.pow(10, network.decimals)}`))
-        .signAndSend(fromAccount.address, { signer: injectedApi?.signer }, async (result) => {
-          if (result.status.tag === 'InBlock') {
+        .signAndSend(fromAccount.address, { signer: injectedApi?.signer }, async ({ status }) => {
+          if (status.type === 'BestChainBlockIncluded' || status.type === 'Finalized') {
             toast.dismiss();
-            toast.success(<p>Transaction completed, status: {result.status.tag}</p>);
-            setLoading(false);
-            onClose();
-            await unsub();
+            toast.success(<p>Transaction completed, status: {status.type}</p>);
+
+            if (status.type === 'BestChainBlockIncluded') {
+              setLoading(false);
+              onClose();
+            } else {
+              unsub();
+            }
           } else {
-            toast.success(<p>Transaction status: {result.status.tag}</p>);
+            toast.success(<p>Transaction status: {status.type}</p>);
           }
         });
     } catch (e: any) {
@@ -142,9 +146,6 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
             <FormControl mt={4} isInvalid={!!destValidation}>
               <FormLabel htmlFor='toAddressInput'>Destination Address</FormLabel>
               <InputGroup size='lg'>
-                <InputLeftElement pointerEvents='none'>
-                  <Identicon value={destinationAddress} size={24} theme='polkadot' />
-                </InputLeftElement>
                 <Input
                   id='toAddressInput'
                   type='text'
