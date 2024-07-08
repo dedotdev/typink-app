@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAsync, useLocalStorage } from 'react-use';
-import { InjectedAccount } from '@polkadot/extension-inject/types';
+import { InjectedAccount } from '@/types';
 import { UpdatableInjected } from '@coong/sdk/types';
 import useWallets from '@/hooks/useWallets';
 import { Props } from '@/types';

@@ -1,7 +1,6 @@
 import { Box, Flex, Link, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
-import { Identicon } from '@polkadot/react-identicon';
 import { useEffect, useMemo, useState } from 'react';
-import { InjectedAccount } from '@polkadot/extension-inject/types';
+import { InjectedAccount } from '@/types';
 import AccountBalances from '@/components/AccountBalances';
 import CopyAddressButton from '@/components/CopyAddressButton';
 import SignRawMessageButton from '@/components/SignRawMessageButton';
@@ -51,7 +50,6 @@ export default function AccountSelection() {
           borderColor='gray.200'>
           <Flex align='center' justify='space-between' gap={4} p={3} textAlign='left' cursor='pointer'>
             <Flex align='center' gap={3}>
-              <Identicon value={address} size={36} theme='polkadot' />
               <Flex direction='column'>
                 <Text fontWeight='bold' fontSize='lg'>
                   {name}
@@ -69,7 +67,6 @@ export default function AccountSelection() {
               gap={2}
               key={one.address}
               onClick={() => setSelectedAccount(one)}>
-              <Identicon value={one.address} size={24} theme='polkadot' />
               <span>{one.name}</span>
             </MenuItem>
           ))}

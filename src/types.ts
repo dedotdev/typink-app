@@ -17,3 +17,12 @@ export interface NetworkInfo {
   decimals: number;
   subscanUrl: string;
 }
+
+export type KeypairType = 'ed25519' | 'sr25519' | 'ecdsa' | 'ethereum';
+
+export interface InjectedAccount {
+  address: string;
+  genesisHash?: string | null;
+  name?: string;
+  type?: KeypairType;
+}

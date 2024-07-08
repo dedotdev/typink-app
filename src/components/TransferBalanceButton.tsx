@@ -1,26 +1,8 @@
-import {
-  Button,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  InputRightAddon,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  useDisclosure,
-} from '@chakra-ui/react';
-import { Identicon } from '@polkadot/react-identicon';
+import { Button, FormControl, FormErrorMessage, FormLabel, Input, InputGroup, InputLeftElement, InputRightAddon, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useBoolean } from 'react-use';
-import { InjectedAccount } from '@polkadot/extension-inject/types';
+import { InjectedAccount } from '@/types';
 import { useApiContext } from '@/providers/ApiProvider';
 import { useWalletContext } from '@/providers/WalletProvider';
 import { shortenAddress } from '@/utils/string';
@@ -130,9 +112,6 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
             <FormControl>
               <FormLabel htmlFor='fromAddressInput'>From Account</FormLabel>
               <InputGroup size='lg'>
-                <InputLeftElement pointerEvents='none'>
-                  <Identicon value={fromAccount.address} size={24} theme='polkadot' />
-                </InputLeftElement>
                 <Input
                   id='fromAddressInput'
                   type='text'

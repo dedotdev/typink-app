@@ -15,10 +15,9 @@ import {
   Textarea,
   useDisclosure,
 } from '@chakra-ui/react';
-import { Identicon } from '@polkadot/react-identicon';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { InjectedAccount } from '@polkadot/extension-inject/types';
+import { InjectedAccount } from '@/types';
 import { useApiContext } from '@/providers/ApiProvider';
 import { useWalletContext } from '@/providers/WalletProvider';
 import { shortenAddress } from '@/utils/string';
@@ -67,9 +66,6 @@ export default function SignRawMessageButton({ fromAccount }: SignRawMessageButt
             <FormControl>
               <FormLabel htmlFor='fromAddressInput'>From Account</FormLabel>
               <InputGroup size='lg'>
-                <InputLeftElement pointerEvents='none'>
-                  <Identicon value={fromAccount.address} size={24} theme='polkadot' />
-                </InputLeftElement>
                 <Input
                   id='fromAddressInput'
                   type='text'

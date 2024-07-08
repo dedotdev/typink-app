@@ -1,7 +1,6 @@
 import { Flex, Skeleton, Stack, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useBoolean } from 'react-use';
-import { formatBalance } from '@polkadot/util';
 import { useApiContext } from '@/providers/ApiProvider';
 import { FrameSystemAccountInfo } from '@dedot/chaintypes/substrate';
 
@@ -57,11 +56,7 @@ export default function AccountBalances({ address }: AccountBalancesProps) {
           <Text>{label}:</Text>
           <Skeleton h={6} minW={10} isLoaded={apiReady && !loading}>
             <strong>
-              {formatBalance(amount, {
-                decimals: network.decimals,
-                withUnit: false,
-                forceUnit: network.symbol,
-              })}
+              {(parseFloat(amount.toString()) / Math.pow(10, network.decimals)).toString()}
               &nbsp;
               {network.symbol}
             </strong>
