@@ -6,7 +6,6 @@ import { InjectedAccount } from '@/types';
 import { useApiContext } from '@/providers/ApiProvider';
 import { useWalletContext } from '@/providers/WalletProvider';
 import { shortenAddress } from '@/utils/string';
-import WebsiteWallet from '@/wallets/WebsiteWallet';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { decodeAddress } from '@dedot/utils';
 
@@ -70,10 +69,6 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
 
     try {
       setLoading(true);
-
-      if (connectedWallet instanceof WebsiteWallet) {
-        await connectedWallet.sdk?.newWaitingWalletInstance();
-      }
 
       const unsub = await api.tx.balances
         .transferKeepAlive(destinationAddress, BigInt(`${parseFloat(amountToSend) * Math.pow(10, network.decimals)}`))

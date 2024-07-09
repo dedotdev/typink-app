@@ -12,7 +12,6 @@ import { ChevronDownIcon, ExternalLinkIcon, PlusSquareIcon } from '@chakra-ui/ic
 export default function AccountSelection() {
   const { accounts, injectedApi } = useWalletContext();
   const [selectedAccount, setSelectedAccount] = useState<InjectedAccount>();
-  const accountsUpdateAvailable = useMemo(() => !!injectedApi?.accounts?.update, [injectedApi]);
   const displayAddress = useDisplayAddress(selectedAccount?.address);
 
   useEffect(() => {
@@ -26,15 +25,6 @@ export default function AccountSelection() {
   if (!selectedAccount) {
     return <></>;
   }
-
-  const updateAccounts = async () => {
-    if (!accountsUpdateAvailable) {
-      return;
-    }
-
-    // @ts-ignore
-    await injectedApi.accounts.update();
-  };
 
   const { name, address } = selectedAccount;
 
@@ -70,12 +60,6 @@ export default function AccountSelection() {
               <span>{one.name}</span>
             </MenuItem>
           ))}
-          {accountsUpdateAvailable && (
-            <MenuItem gap={2} onClick={updateAccounts}>
-              <PlusSquareIcon fontSize={24} />
-              <span>Add/Remove Accounts</span>
-            </MenuItem>
-          )}
         </MenuList>
       </Menu>
 

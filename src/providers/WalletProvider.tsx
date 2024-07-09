@@ -2,14 +2,14 @@ import { createContext, useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAsync, useLocalStorage } from 'react-use';
 import { InjectedAccount } from '@/types';
-import { UpdatableInjected } from '@coong/sdk/types';
+import { Injected } from "@polkadot/extension-inject/types";
 import useWallets from '@/hooks/useWallets';
 import { Props } from '@/types';
 import Wallet from '@/wallets/Wallet';
 
 interface WalletContextProps {
   accounts: InjectedAccount[];
-  injectedApi?: UpdatableInjected;
+  injectedApi?: Injected;
   enableWallet: (id: string) => void;
   signOut: () => void;
   availableWallets: Wallet[];
@@ -31,7 +31,7 @@ export const useWalletContext = () => {
 export default function WalletProvider({ children }: Props) {
   const availableWallets = useWallets();
   const [accounts, setAccounts] = useState<InjectedAccount[]>([]);
-  const [injectedApi, setInjectedApi] = useState<UpdatableInjected>();
+  const [injectedApi, setInjectedApi] = useState<Injected>();
   const [connectedWalletId, setConnectedWalletId, removeConnectedWalletId] =
     useLocalStorage<string>('CONNECTED_WALLET');
   const [connectedWallet, setConnectedWallet] = useState<Wallet>();
@@ -82,14 +82,6 @@ export default function WalletProvider({ children }: Props) {
   };
 
   const signOut = () => {
-    if (connectedWallet) {
-      const walletApi = connectedWallet.injectedProvider;
-
-      if (walletApi?.disable) {
-        walletApi.disable();
-      }
-    }
-
     removeConnectedWalletId();
     setInjectedApi(undefined);
   };
