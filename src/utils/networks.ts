@@ -64,14 +64,4 @@ export const SUPPORTED_NETWORKS: Record<string, NetworkInfo> = {
     decimals: 12,
     subscanUrl: 'https://kusama.subscan.io',
   },
-  astar: {
-    id: 'astar',
-    name: 'Astar',
-    logo: `${LOGO_FOLDER}/astar-network.png`,
-    provider: 'wss://rpc.astar.network',
-    prefix: 5,
-    symbol: 'ASTR',
-    decimals: 18,
-    subscanUrl: 'https://astar.subscan.io',
-  },
 };
