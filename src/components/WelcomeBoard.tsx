@@ -1,20 +1,16 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Heading, Text } from '@chakra-ui/react';
 import WalletSelection from '@/components/dialog/WalletSelection';
 import React from "react";
 
 export default function WelcomeBoard() {
   return (
     <Box textAlign='center'>
-      <Text as='h1'
-            bgGradient='linear(to-l, #7928CA, #FF0080)'
-            bgClip='text'
-            fontSize='3xl'
-            fontWeight='bold'
-            fontFamily='monospace'
-            mt={8} mb={4}
-      >
-        try.dedot.dev
-      </Text>
+      <Box w={28} mx='auto' my={4}>
+        <img src='/dedot-logo-dark.png'/>
+      </Box>
+      <Heading mb={4} size='lg'>
+        Welcome to Dedot Demo Dapp
+      </Heading>
       <Text mb={4} fontSize='xl'>
         Connect to your wallet to getting started
       </Text>

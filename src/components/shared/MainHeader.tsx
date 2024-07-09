@@ -14,16 +14,12 @@ export default function MainHeader() {
         alignItems='center'
         gap={4}
         h={16}>
-        <Text
-          bgGradient='linear(to-l, #7928CA, #FF0080)'
-          bgClip='text'
-          fontSize='2xl'
-          fontWeight='bold'
-          fontFamily='monospace'
-        >
-          dedot
-        </Text>
-        <NetworkSelection />
+        <a href="/">
+          <Box w={10}>
+            <img src='/dedot-logo-dark.png'/>
+          </Box>
+        </a>
+        <NetworkSelection/>
       </Container>
     </Box>
   );
