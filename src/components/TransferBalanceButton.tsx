@@ -2,9 +2,9 @@ import { Button, FormControl, FormErrorMessage, FormLabel, Input, InputGroup, In
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useBoolean } from 'react-use';
-import { InjectedAccount } from '@/types';
 import { useApiContext } from '@/providers/ApiProvider';
 import { useWalletContext } from '@/providers/WalletProvider';
+import { InjectedAccount } from '@/types';
 import { shortenAddress } from '@/utils/string';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { decodeAddress } from '@dedot/utils';
@@ -67,27 +67,56 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
       return;
     }
 
-    try {
-      setLoading(true);
+    setLoading(true);
+    const toastId = toast.info(<p>Signing...</p>, { autoClose: false, isLoading: true });
 
+    try {
       const unsub = await api.tx.balances
         .transferKeepAlive(destinationAddress, BigInt(`${parseFloat(amountToSend) * Math.pow(10, network.decimals)}`))
         .signAndSend(fromAccount.address, { signer: injectedApi?.signer }, async ({ status }) => {
+          console.log(status);
+
           if (status.type === 'BestChainBlockIncluded' || status.type === 'Finalized') {
-            toast.dismiss();
-            toast.success(<p>Transaction completed, status: {status.type}</p>);
+            toast.update(toastId, {
+              render: <p>Tx status: <b>{status.type}</b></p>,
+              type: 'success',
+              isLoading: status.type !== 'Finalized'
+            });
 
             if (status.type === 'BestChainBlockIncluded') {
               setLoading(false);
               onClose();
             } else {
+              setTimeout(() => {
+                toast.dismiss(toastId);
+              }, 2000);
+
               unsub();
             }
+          } else if (status.type === 'Invalid') {
+            toast.update(toastId, {
+              render: <p>Tx status: <b>{status.type}</b></p>,
+              type: 'error',
+            });
+
+            setLoading(false);
+            onClose();
+
+            setTimeout(() => {
+              toast.dismiss(toastId);
+            }, 2000);
+
+            unsub();
           } else {
-            toast.success(<p>Transaction status: {status.type}</p>);
+            toast.update(toastId, {
+              render: <p>Tx status: <b>{status.type}</b></p>,
+              type: 'info',
+              isLoading: true
+            });
           }
         });
     } catch (e: any) {
+      toast.dismiss(toastId);
       toast.error(e.toString());
       setLoading(false);
     }

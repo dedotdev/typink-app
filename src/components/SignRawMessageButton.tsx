@@ -46,7 +46,7 @@ export default function SignRawMessageButton({ fromAccount }: SignRawMessageButt
         data: messageToSign,
       });
 
-      toast.success(`Signing completed, signature: ${result.signature}`);
+      toast.success( <p>Signing completed, signature: <b>{result.signature}</b></p>);
     } catch (e: any) {
       toast.error(e.toString());
     }
