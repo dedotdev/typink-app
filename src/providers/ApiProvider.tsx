@@ -29,9 +29,7 @@ export const useApiContext = () => {
 
 export default function ApiProvider({ children }: Props) {
   const [network, setNetwork] = useLocalStorage<NetworkInfo>('SELECTED_NETWORK', DEFAULT_NETWORK);
-  const { ready, api, legacy, jsonRpc } = useApi(network?.provider);
-
-  console.log(ready, api, legacy);
+  const { ready, api, legacy, jsonRpc } = useApi(network);
 
   return (
     <ApiContext.Provider value={{ api, legacy, jsonRpc, apiReady: ready, network: network!, setNetwork }}>

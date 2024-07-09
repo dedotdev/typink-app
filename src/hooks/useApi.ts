@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useAsync, useLocalStorage, useToggle } from 'react-use';
-import { JsonRpcApi } from '@/types';
-import { DedotClient, LegacyClient, WsProvider } from 'dedot';
+import { Connection, JsonRpcApi, NetworkInfo } from '@/types';
+import { newSmoldotChain } from '@/utils/smoldot.ts';
+import { DedotClient, JsonRpcProvider, LegacyClient, SmoldotProvider, WsProvider } from 'dedot';
 
 type UseApi = {
   ready: boolean;
@@ -10,16 +11,17 @@ type UseApi = {
   legacy?: LegacyClient;
 };
 
-export default function useApi(networkEndpoint?: string): UseApi {
-  const [jsonRpc, setJsonRpc] = useLocalStorage<JsonRpcApi>('SETTINGS/JSON_RPC_API', JsonRpcApi.NEW);
-  const [cacheMetadata, setCacheMetadata] = useLocalStorage<boolean>('SETTINGS/CACHE_METADATA',true);
+export default function useApi(network?: NetworkInfo): UseApi {
+  const [connectVia] = useLocalStorage<Connection>('SETTINGS/CONNECT_VIA', Connection.RPC_ENDPOINT);
+  const [jsonRpc] = useLocalStorage<JsonRpcApi>('SETTINGS/JSON_RPC_API', JsonRpcApi.NEW);
+  const [cacheMetadata] = useLocalStorage<boolean>('SETTINGS/CACHE_METADATA',true);
 
   const [ready, setReady] = useToggle(false);
   const [api, setApi] = useState<DedotClient>();
   const [legacy, setLegacy] = useState<LegacyClient>();
 
   useAsync(async () => {
-    if (!networkEndpoint) {
+    if (!network) {
       return;
     }
 
@@ -33,7 +35,18 @@ export default function useApi(networkEndpoint?: string): UseApi {
 
     setReady(false);
 
-    const provider = new WsProvider(networkEndpoint);
+    let provider: JsonRpcProvider;
+
+    if (connectVia === Connection.RPC_ENDPOINT) {
+      provider = new WsProvider(network.provider);
+    } else {
+      const response = await fetch(`specs/${network.chainSpecFileName}`);
+      const chainSpec = await response.text();
+      console.log(`${network.name} chain-spec loaded`, JSON.parse(chainSpec));
+      console.log(`Connect to ${network.name} via smoldot`)
+      const chain = await newSmoldotChain(chainSpec);
+      provider = new SmoldotProvider(chain);
+    }
 
     if (jsonRpc == JsonRpcApi.LEGACY) {
       setLegacy(await LegacyClient.new({ provider, cacheMetadata }));
@@ -44,7 +57,7 @@ export default function useApi(networkEndpoint?: string): UseApi {
     }
 
     setReady(true);
-  }, [jsonRpc, networkEndpoint]);
+  }, [jsonRpc, network?.provider]);
 
   return { ready, api, legacy, jsonRpc: jsonRpc! };
 }
