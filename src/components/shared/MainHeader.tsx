@@ -1,5 +1,6 @@
-import { Box, Container, Text } from '@chakra-ui/react';
+import { Box, Container, Flex } from '@chakra-ui/react';
 import React from 'react';
+import Settings from '@/components/dialog/Settings';
 import NetworkSelection from '@/components/shared/NetworkSelection';
 
 export default function MainHeader() {
@@ -14,12 +15,15 @@ export default function MainHeader() {
         alignItems='center'
         gap={4}
         h={16}>
-        <a href="/">
+        <a href='/'>
           <Box w={9}>
-            <img src='/dedot-dark-logo.png'/>
+            <img src='/dedot-dark-logo.png' />
           </Box>
         </a>
-        <NetworkSelection/>
+        <Flex gap={2}>
+          <Settings />
+          <NetworkSelection />
+        </Flex>
       </Container>
     </Box>
   );

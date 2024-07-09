@@ -18,7 +18,7 @@ export default function NetworkSelection() {
 
   return (
     <Menu autoSelect={false}>
-      <MenuButton as={Button}>
+      <MenuButton as={Button} variant='outline'>
         <Flex direction='row' align='center' gap={2}>
           <img src={network.logo} alt={network.name} width={22} />
           {!smallest && <span>{network.name}</span>}
