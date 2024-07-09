@@ -15,7 +15,7 @@ export default function WelcomeBoard() {
             fontWeight='bold'
             mb={4}
       >
-        Welcome to Dedot Demo Dapp
+        Welcome to <Text as='span' whiteSpace='nowrap'>Dedot Demo Dapp</Text>
       </Text>
       <Text mb={4} fontSize='xl'>
         Connect to your wallet to getting started
