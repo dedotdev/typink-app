@@ -47,7 +47,7 @@ export default function Settings() {
               <RadioGroup value={localConnectVia} onChange={(nextValue) => setLocalConnectVia(nextValue as Connection)}>
                 <Stack>
                   <Radio value={Connection.RPC_ENDPOINT}>RPC Endpoint</Radio>
-                  <Radio value={Connection.LIGHT_CLIENT}>Light client (Smoldot)</Radio>
+                  <Radio value={Connection.LIGHT_CLIENT}>Light Client (Smoldot)</Radio>
                 </Stack>
               </RadioGroup>
             </FormControl>
