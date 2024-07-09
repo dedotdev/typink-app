@@ -16,7 +16,7 @@ export default function MainHeader() {
         h={16}>
         <a href="/">
           <Box w={9}>
-            <img src='/dedot-logo-dark.png'/>
+            <img src='/dedot-dark-logo.png'/>
           </Box>
         </a>
         <NetworkSelection/>
