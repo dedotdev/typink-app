@@ -15,7 +15,7 @@ export default function MainHeader() {
         gap={4}
         h={16}>
         <a href="/">
-          <Box w={10}>
+          <Box w={9}>
             <img src='/dedot-logo-dark.png'/>
           </Box>
         </a>
