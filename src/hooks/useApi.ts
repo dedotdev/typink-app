@@ -43,7 +43,7 @@ export default function useApi(network?: NetworkInfo): UseApi {
       const response = await fetch(`specs/${network.chainSpecFileName}`);
       const chainSpec = await response.text();
       console.log(`${network.name} chain-spec loaded`, JSON.parse(chainSpec));
-      console.log(`Connect to ${network.name} via smoldot`)
+      console.log(`Connecting to ${network.name} via smoldot ...`)
       const chain = await newSmoldotChain(chainSpec);
       provider = new SmoldotProvider(chain);
     }
