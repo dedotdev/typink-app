@@ -1,41 +1,14 @@
-import {
-  Button,
-  Divider,
-  FormControl,
-  FormLabel,
-  IconButton,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Radio,
-  RadioGroup,
-  Stack,
-  Switch,
-  useDisclosure,
-} from '@chakra-ui/react';
+import { Button, Divider, FormControl, FormLabel, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Radio, RadioGroup, Stack, Switch, useDisclosure } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { SettingsIcon } from '@chakra-ui/icons';
 import { useBoolean, useEffectOnce, useLocalStorage } from "react-use";
-
-enum Connection {
-  RPC_ENDPOINT = 'rpc-endpoint',
-  LIGHT_CLIENT = 'light-client'
-}
-
-enum JsonRpcApi {
-  LEGACY = 'legacy',
-  NEW = 'new'
-}
+import { Connection, JsonRpcApi } from '@/types';
+import { SettingsIcon } from '@chakra-ui/icons';
 
 export default function Settings() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [connectVia, setConnectVia] = useLocalStorage<Connection>('SETTINGS/CONNECT_VIA', Connection.RPC_ENDPOINT);
   const [jsonRpc, setJsonRpc] = useLocalStorage<JsonRpcApi>('SETTINGS/JSON_RPC_API', JsonRpcApi.NEW);
-  const [cacheMetadata, setCacheMetadata] = useLocalStorage<boolean>('SETTINGS/CACHE_METADATA',true);
+  const [cacheMetadata, setCacheMetadata] = useLocalStorage<boolean>('SETTINGS/CACHE_METADATA', true);
 
   const [localConnectVia, setLocalConnectVia] = useState<Connection>();
   const [localJsonRpc, setLocalJsonRpc] = useState<JsonRpcApi>();
@@ -52,7 +25,7 @@ export default function Settings() {
   const doSave = () => {
     setConnectVia(localConnectVia);
     setJsonRpc(localJsonRpc);
-    setCacheMetadata(localCacheMetadata)
+    setCacheMetadata(localCacheMetadata);
 
     setLoading(true);
     setTimeout(() => {
@@ -93,7 +66,11 @@ export default function Settings() {
               <FormLabel htmlFor='cache-metadata' mb='0'>
                 Cache metadata?
               </FormLabel>
-              <Switch id='cache-metadata' isChecked={localCacheMetadata} onChange={(e) => setLocalCacheMetadata(e.target.checked)} />
+              <Switch
+                id='cache-metadata'
+                isChecked={localCacheMetadata}
+                onChange={(e) => setLocalCacheMetadata(e.target.checked)}
+              />
             </FormControl>
           </ModalBody>
           <ModalFooter gap={2}>

@@ -26,3 +26,13 @@ export interface InjectedAccount {
   name?: string;
   type?: KeypairType;
 }
+
+export enum Connection {
+  RPC_ENDPOINT = 'rpc-endpoint',
+  LIGHT_CLIENT = 'light-client'
+}
+
+export enum JsonRpcApi {
+  LEGACY = 'legacy',
+  NEW = 'new'
+}

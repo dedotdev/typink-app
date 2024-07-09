@@ -9,30 +9,29 @@ interface AccountBalancesProps {
 }
 
 export default function AccountBalances({ address }: AccountBalancesProps) {
-  const { api, network, apiReady } = useApiContext();
+  const { api, legacy, network, apiReady } = useApiContext();
   const [loading, setLoading] = useBoolean(true);
   const [balance, setBalance] = useState<FrameSystemAccountInfo>();
 
   useEffect(() => {
     let unsubscribe: any;
     (async () => {
-      if (!api) {
+      const client = api || legacy;
+      if (!client) {
         return;
       }
 
       setLoading(true);
-      unsubscribe = await api.query.system.account(address, (resp) => {
+      unsubscribe = await client.query.system.account(address, (resp) => {
         setBalance(resp);
         setLoading(false);
       });
-
-
     })();
 
     return () => {
       unsubscribe && unsubscribe();
     };
-  }, [api, address]);
+  }, [api, legacy, address]);
 
   const values = [
     {
