@@ -28,7 +28,7 @@ export default function WelcomeBoard() {
         </Text>
         <UnorderedList>
           <ListItem>
-            You can change the settings (<Settings size='xs' />) for more options when connecting to networks
+            You can change the settings (<Settings size='xs' />) for more options when connecting to networks.
           </ListItem>
           <ListItem>
             Due to network conditions, it might take longer than expected to connect to networks via light client.
@@ -49,7 +49,7 @@ export default function WelcomeBoard() {
             <Link href='https://github.com/CoongCrafts/coong-wallet' isExternal color='primary.500'>
               Coong Wallet
             </Link>
-            . Make sure to open it on a native browser app (Chrome, Safari or Firefox), in-app browser might not work as
+            . Make sure to open the dapp on a native browser app (Chrome, Safari or Firefox), in-app browser might not work as
             expected.
           </ListItem>
           <ListItem>
@@ -58,7 +58,7 @@ export default function WelcomeBoard() {
               allow insecure content
             </Link>{' '}
             on your browser for better connectivity to the network. E.g: some nodes are using insecure connection
-            (ws://).
+            (via ws://).
           </ListItem>
           <ListItem>
             <b>DISCLAIMER</b>: This is a demo dapp, please <b>do not</b> connect to or interact with wallets holding your real assets.
