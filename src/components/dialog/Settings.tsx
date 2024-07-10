@@ -1,10 +1,33 @@
-import { Button, Divider, FormControl, FormLabel, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Radio, RadioGroup, Stack, Switch, useDisclosure } from '@chakra-ui/react';
+import {
+  Button,
+  Divider,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  IconButton,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Radio,
+  RadioGroup,
+  Stack,
+  Switch,
+  useDisclosure
+} from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useBoolean, useEffectOnce, useLocalStorage } from "react-use";
 import { Connection, JsonRpcApi } from '@/types';
 import { SettingsIcon } from '@chakra-ui/icons';
 
-export default function Settings() {
+interface SettingsProps {
+  size?: string
+}
+
+export default function Settings({ size = 'md' }: SettingsProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [connectVia, setConnectVia] = useLocalStorage<Connection>('SETTINGS/CONNECT_VIA', Connection.RPC_ENDPOINT);
   const [jsonRpc, setJsonRpc] = useLocalStorage<JsonRpcApi>('SETTINGS/JSON_RPC_API', JsonRpcApi.NEW);
@@ -35,7 +58,7 @@ export default function Settings() {
 
   return (
     <>
-      <IconButton onClick={onOpen} aria-label='Settings' variant='outline' icon={<SettingsIcon />} />
+      <IconButton size={size} onClick={onOpen} aria-label='Settings' variant='outline' icon={<SettingsIcon />} />
       <Modal onClose={onClose} size='sm' isOpen={isOpen}>
         <ModalOverlay />
         <ModalContent>
