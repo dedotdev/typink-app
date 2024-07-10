@@ -60,6 +60,9 @@ export default function WelcomeBoard() {
             on your browser for better connectivity to the network. E.g: some nodes are using insecure connection
             (ws://).
           </ListItem>
+          <ListItem>
+            <b>DISCLAIMER</b>: This is a demo dapp, please <b>do not</b> connect to or interact with wallets holding your real assets.
+          </ListItem>
         </UnorderedList>
       </Box>
     </Box>
