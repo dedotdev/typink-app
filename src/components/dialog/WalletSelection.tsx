@@ -57,7 +57,7 @@ export default function WalletSelection({ buttonLabel = 'Connect Wallet', button
 
   return (
     <>
-      <Button size='lg' colorScheme='primary' variant='solid' onClick={onOpen} {...buttonProps}>
+      <Button size='md' colorScheme='primary' variant='solid' onClick={onOpen} {...buttonProps}>
         {buttonLabel}
       </Button>
       <Modal onClose={onClose} size='sm' isOpen={isOpen}>
