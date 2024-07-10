@@ -35,7 +35,7 @@ export default function WelcomeBoard() {
             Please be patient.
           </ListItem>
           <ListItem>
-            It's recommend to use the{' '}
+            It's recommended to use the{' '}
             <Link
               href='https://paritytech.github.io/json-rpc-interface-spec/introduction.html'
               isExternal
