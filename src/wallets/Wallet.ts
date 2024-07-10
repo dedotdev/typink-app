@@ -1,4 +1,4 @@
-import { InjectedWindow } from '@polkadot/extension-inject/types';
+import { InjectedWindow } from '@coong/sdk/types';
 
 export interface WalletOptions {
   id: string;

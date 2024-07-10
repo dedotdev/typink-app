@@ -24,6 +24,7 @@ import { InjectedAccount, JsonRpcApi } from '@/types';
 import { shortenAddress } from '@/utils/string';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { decodeAddress } from '@dedot/utils';
+import WebsiteWallet from "@/wallets/WebsiteWallet.ts";
 
 interface TransferBalanceButtonProps {
   fromAccount: InjectedAccount;
@@ -87,6 +88,10 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
     const toastId = toast.info(<p>Signing...</p>, { autoClose: false, isLoading: true });
 
     try {
+      if (connectedWallet instanceof WebsiteWallet) {
+        await connectedWallet.sdk?.newWaitingWalletInstance();
+      }
+
       const unsub = await api.tx.balances
         .transferKeepAlive(destinationAddress, BigInt(`${parseFloat(amountToSend) * Math.pow(10, network.decimals)}`))
         .signAndSend(fromAccount.address, { signer: injectedApi?.signer }, async ({ status }) => {
@@ -152,6 +157,10 @@ export default function TransferBalanceButton({ fromAccount }: TransferBalanceBu
     const toastId = toast.info(<p>Signing...</p>, { autoClose: false, isLoading: true });
 
     try {
+      if (connectedWallet instanceof WebsiteWallet) {
+        await connectedWallet.sdk?.newWaitingWalletInstance();
+      }
+
       const unsub = await legacy.tx.balances
         .transferKeepAlive(destinationAddress, BigInt(`${parseFloat(amountToSend) * Math.pow(10, network.decimals)}`))
         .signAndSend(fromAccount.address, { signer: injectedApi?.signer }, async ({ status }) => {

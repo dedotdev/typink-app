@@ -1525,16 +1525,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@coong/base@npm:^0.0.23":
+  version: 0.0.23
+  resolution: "@coong/base@npm:0.0.23"
+  dependencies:
+    "@coong/keyring": ^0.0.23
+    "@coong/utils": ^0.0.23
+    "@polkadot/networks": ^12.6.2
+    "@polkadot/types": ^12.1.1
+    "@polkadot/util": ^12.6.2
+    "@polkadot/util-crypto": ^12.6.2
+    rxjs: ^7.8.0
+  checksum: 09b328f6dfc86b82a17bdff77152afb964d44e57b5468c216cdc89e54046694b3a67deddd6ea81d30a2eef5281b1f7bd56e15946385f73e9a342d987eeb351f2
+  languageName: node
+  linkType: hard
+
 "@coong/dapp@workspace:.":
   version: 0.0.0-use.local
   resolution: "@coong/dapp@workspace:."
   dependencies:
     "@chakra-ui/icons": ^2.0.19
     "@chakra-ui/react": ^2.6.1
+    "@coong/sdk": ^0.0.23
     "@dedot/chaintypes": 0.0.1-alpha.149
     "@emotion/react": ^11.10.8
     "@emotion/styled": ^11.10.8
-    "@polkadot/extension-inject": ^0.48.2
     "@trivago/prettier-plugin-sort-imports": ^4.1.1
     "@types/react": ^18.0.26
     "@types/react-dom": ^18.0.9
@@ -1550,12 +1565,42 @@ __metadata:
     rollup-plugin-analyzer: ^4.0.0
     serve: ^14.2.1
     smoldot: ^2.0.29
-    typescript: ^5.2.2
+    typescript: 5.4.5
     vite: ^5.2.0
     vite-tsconfig-paths: ^4.0.3
     vitest: ^0.34.6
   languageName: unknown
   linkType: soft
+
+"@coong/keyring@npm:^0.0.23":
+  version: 0.0.23
+  resolution: "@coong/keyring@npm:0.0.23"
+  dependencies:
+    "@coong/utils": ^0.0.23
+    "@polkadot/ui-keyring": ^3.6.6
+    crypto-js: ^4.1.1
+  checksum: ce9fa3ad09c6a2af0f035ce5e6084d97bd319c330afe0cff9a5eb04ad69bc0692eaceeda9da97a7d85be27179dbc944df392ca913b1b796a2c6ff3d87c4dd1ba
+  languageName: node
+  linkType: hard
+
+"@coong/sdk@npm:^0.0.23":
+  version: 0.0.23
+  resolution: "@coong/sdk@npm:0.0.23"
+  dependencies:
+    "@coong/base": ^0.0.23
+    "@coong/utils": ^0.0.23
+    "@polkadot/extension-inject": ^0.48.2
+    rxjs: ^7.8.0
+  checksum: 030a66aed3b5d373ef3e24aa1fcc9d10cf4163bea8179cb2289d7890aa08d00d4dd26a3189dc32b554e5313b6e5ee0eb1f428c0ffbc450ff161191a54d288bc1
+  languageName: node
+  linkType: hard
+
+"@coong/utils@npm:^0.0.23":
+  version: 0.0.23
+  resolution: "@coong/utils@npm:0.0.23"
+  checksum: 316babcedaa5933a68526a1ce5bb12234ab08681def3b6cf906cd816a105de7dbdbd5c8ee290ef1becdb733e5699a13e4324c063813512f18dfc8b5797819c2b
+  languageName: node
+  linkType: hard
 
 "@dedot/api@npm:0.0.1-alpha.38":
   version: 0.0.1-alpha.38
@@ -2556,7 +2601,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot/types@npm:12.1.1, @polkadot/types@npm:^12.0.2":
+"@polkadot/types@npm:12.1.1, @polkadot/types@npm:^12.0.2, @polkadot/types@npm:^12.1.1":
   version: 12.1.1
   resolution: "@polkadot/types@npm:12.1.1"
   dependencies:
@@ -2569,6 +2614,42 @@ __metadata:
     rxjs: ^7.8.1
     tslib: ^2.6.2
   checksum: a84bb90cd7005350df14378d64ea936b23f4d4a6b4c7943436183a23b18bfe133ce18b738fb333a8e4736b7cf86c1ddcce0ea21cfc26014a22c3aadf031a401e
+  languageName: node
+  linkType: hard
+
+"@polkadot/ui-keyring@npm:^3.6.6":
+  version: 3.6.6
+  resolution: "@polkadot/ui-keyring@npm:3.6.6"
+  dependencies:
+    "@polkadot/keyring": ^12.6.2
+    "@polkadot/ui-settings": 3.6.6
+    "@polkadot/util": ^12.6.2
+    "@polkadot/util-crypto": ^12.6.2
+    mkdirp: ^3.0.1
+    rxjs: ^7.8.1
+    store: ^2.0.12
+    tslib: ^2.6.2
+  peerDependencies:
+    "@polkadot/keyring": "*"
+    "@polkadot/ui-settings": "*"
+    "@polkadot/util": "*"
+  checksum: fa09749554834921b642cee1ff20d0a6879154c040ce8ad9802c3dfe725f15ee8d7a9fd3264ab4130936660e24f1ae87606f04fa82ef47a385bc2a15a7f817ba
+  languageName: node
+  linkType: hard
+
+"@polkadot/ui-settings@npm:3.6.6":
+  version: 3.6.6
+  resolution: "@polkadot/ui-settings@npm:3.6.6"
+  dependencies:
+    "@polkadot/networks": ^12.6.2
+    "@polkadot/util": ^12.6.2
+    eventemitter3: ^5.0.1
+    store: ^2.0.12
+    tslib: ^2.6.2
+  peerDependencies:
+    "@polkadot/networks": "*"
+    "@polkadot/util": "*"
+  checksum: 27bb900e7a1d78745f5d3f65e298e4eb4aabbdef2768d45dc33f6d845f6b6c8a825b20e0ac80c3b728f87ccb2e3ec992252f975eb29c01710ef0e630c95786ab
   languageName: node
   linkType: hard
 
@@ -2902,9 +2983,9 @@ __metadata:
   linkType: hard
 
 "@substrate/connect-known-chains@npm:^1.1.4":
-  version: 1.1.8
-  resolution: "@substrate/connect-known-chains@npm:1.1.8"
-  checksum: 36499b890a6cdf7f7a273e19ff37cdb273a750f80d3cb339d2ac4e7d3e344524c3ed85cfffd5a8322a8ddd202633bc86d19deba9894a7b3a680ec938c91f2f32
+  version: 1.1.9
+  resolution: "@substrate/connect-known-chains@npm:1.1.9"
+  checksum: 26e2aaaf770993dbb826f03cb5175e0cc66383ad2a26898d3c4b6493cbd73b02d0c547dcbd1f808f8f0802cc2f84add11028cc565db638be449b0f00b60aa321
   languageName: node
   linkType: hard
 
@@ -3708,6 +3789,13 @@ __metadata:
     shebang-command: ^2.0.0
     which: ^2.0.1
   checksum: 671cc7c7288c3a8406f3c69a3ae2fc85555c04169e9d611def9a675635472614f1c0ed0ef80955d5b6d4e724f6ced67f0ad1bb006c2ea643488fcfef994d7f52
+  languageName: node
+  linkType: hard
+
+"crypto-js@npm:^4.1.1":
+  version: 4.2.0
+  resolution: "crypto-js@npm:4.2.0"
+  checksum: f051666dbc077c8324777f44fbd3aaea2986f198fe85092535130d17026c7c2ccf2d23ee5b29b36f7a4a07312db2fae23c9094b644cc35f7858b1b4fcaf27774
   languageName: node
   linkType: hard
 
@@ -4869,6 +4957,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mkdirp@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "mkdirp@npm:3.0.1"
+  bin:
+    mkdirp: dist/cjs/src/bin.js
+  checksum: 972deb188e8fb55547f1e58d66bd6b4a3623bf0c7137802582602d73e6480c1c2268dcbafbfb1be466e00cc7e56ac514d7fd9334b7cf33e3e2ab547c16f83a8d
+  languageName: node
+  linkType: hard
+
 "mlly@npm:^1.4.0, mlly@npm:^1.7.0":
   version: 1.7.1
   resolution: "mlly@npm:1.7.1"
@@ -5645,7 +5742,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:^7.8.1":
+"rxjs@npm:^7.8.0, rxjs@npm:^7.8.1":
   version: 7.8.1
   resolution: "rxjs@npm:7.8.1"
   dependencies:
@@ -5938,6 +6035,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"store@npm:^2.0.12":
+  version: 2.0.12
+  resolution: "store@npm:2.0.12"
+  checksum: 4e0fe69f71dc3c99af1b87e87dcb0c81fc979bd38abbcdf66d5705f1c44e6fd5e043056288efd695926c75419adc356873e6792d9b024085a8db51dbdda899ea
+  languageName: node
+  linkType: hard
+
 "string-width-cjs@npm:string-width@^4.2.0, string-width@npm:^4.1.0, string-width@npm:^4.2.0, string-width@npm:^4.2.3":
   version: 4.2.3
   resolution: "string-width@npm:4.2.3"
@@ -6152,23 +6256,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.2.2":
-  version: 5.5.3
-  resolution: "typescript@npm:5.5.3"
+"typescript@npm:5.4.5":
+  version: 5.4.5
+  resolution: "typescript@npm:5.4.5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 4b4f14313484d5c86064d04ba892544801fa551f5cf72719b540b498056fec7fc192d0bbdb2ba1448e759b1548769956da9e43e7c16781e8d8856787b0575004
+  checksum: 53c879c6fa1e3bcb194b274d4501ba1985894b2c2692fa079db03c5a5a7140587a1e04e1ba03184605d35f439b40192d9e138eb3279ca8eee313c081c8bcd9b0
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^5.2.2#~builtin<compat/typescript>":
-  version: 5.5.3
-  resolution: "typescript@patch:typescript@npm%3A5.5.3#~builtin<compat/typescript>::version=5.5.3&hash=1f5320"
+"typescript@patch:typescript@5.4.5#~builtin<compat/typescript>":
+  version: 5.4.5
+  resolution: "typescript@patch:typescript@npm%3A5.4.5#~builtin<compat/typescript>::version=5.4.5&hash=1f5320"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 6853be4607706cc1ad2f16047cf1cd72d39f79acd5f9716e1d23bc0e462c7f59be7458fe58a21665e7657a05433d7ab8419d093a5a4bd5f3a33f879b35d2769b
+  checksum: 2373c693f3b328f3b2387c3efafe6d257b057a142f9a79291854b14ff4d5367d3d730810aee981726b677ae0fd8329b23309da3b6aaab8263dbdccf1da07a3ba
   languageName: node
   linkType: hard
 
