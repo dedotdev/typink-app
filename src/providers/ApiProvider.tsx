@@ -15,7 +15,7 @@ interface ApiContextProps {
   setNetwork: (one: NetworkInfo) => void;
 }
 
-const DEFAULT_NETWORK = SUPPORTED_NETWORKS['polkadot'];
+const DEFAULT_NETWORK = SUPPORTED_NETWORKS['pop_network'];
 
 export const ApiContext = createContext<ApiContextProps>({
   apiReady: false,

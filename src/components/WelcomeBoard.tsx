@@ -13,7 +13,7 @@ export default function WelcomeBoard() {
         <Text as='h1' bgGradient='linear(to-l, #7928CA, #FF0080)' bgClip='text' fontSize='3xl' fontWeight='bold' mb={4}>
           Welcome to{' '}
           <Text as='span' whiteSpace='nowrap'>
-            Dedot Demo Dapp
+            Typink Demo App
           </Text>
         </Text>
         <Text mb={4} fontSize='xl'>

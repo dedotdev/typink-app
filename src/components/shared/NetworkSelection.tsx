@@ -20,7 +20,7 @@ export default function NetworkSelection() {
     <Menu autoSelect={false}>
       <MenuButton as={Button} variant='outline'>
         <Flex direction='row' align='center' gap={2}>
-          <img src={network.logo} alt={network.name} width={22} />
+          <img src={network.logo} alt={network.name} width={22} style={{ borderRadius: 4 }} />
           {!smallest && <span>{network.name}</span>}
 
           <Box ml={2}>
@@ -35,7 +35,7 @@ export default function NetworkSelection() {
             onClick={() => setNetwork(one)}
             backgroundColor={one.id === network.id ? 'gray.200' : ''}>
             <Flex direction='row' align='center' gap={2}>
-              <img src={one.logo} alt={one.name} width={18} />
+              <img src={one.logo} alt={one.name} width={18} style={{ borderRadius: 4 }}/>
               <span>{one.name}</span>
             </Flex>
           </MenuItem>
