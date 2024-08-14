@@ -14,7 +14,6 @@ type UseContractQueryReturnType<
   M extends keyof ContractQuery<T> = keyof ContractQuery<T>,
 > = {
   isLoading: boolean;
-  loaded: boolean;
   refresh: () => void;
 } & Partial<Awaited<ReturnType<T['query'][M]>>>;
 
