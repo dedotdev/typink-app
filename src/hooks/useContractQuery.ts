@@ -29,7 +29,6 @@ export default function useContractQuery<
 ): UseContractQueryReturnType<T, M> {
   const { defaultCaller } = useApiContext();
   const [isLoading, setIsLoading] = useBoolean(true);
-  const [loaded, setLoaded] = useBoolean(false);
   const [result, setResult] = useState<any>();
   const { refresh, refreshCounter } = useRefresher();
 
@@ -44,13 +43,11 @@ export default function useContractQuery<
       const result = await contract.query[fn](...args, callOptions);
       setResult(result);
       setIsLoading(false);
-      setLoaded(true);
     })();
   }, [contract, fn, args, refreshCounter]);
 
   return {
     isLoading,
-    loaded,
     refresh,
     ...(result || {}),
   } as any;
