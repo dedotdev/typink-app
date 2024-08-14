@@ -15,10 +15,12 @@ import PendingText from '@/components/shared/PendingText.tsx';
 import useContractQuery from '@/hooks/useContractQuery.ts';
 import useContractTx from '@/hooks/useContractTx.ts';
 import useGreeterContract from '@/hooks/useGreeterContract.ts';
+import { useWalletContext } from '@/providers/WalletProvider.tsx';
 import { shortenAddress } from '@/utils/string.ts';
 import { txToaster } from '@/utils/txToaster.tsx';
 
 export default function GreetBoard() {
+  const { selectedAccount } = useWalletContext();
   const contract = useGreeterContract();
   const [message, setMessage] = useState('');
   const setMessageTx = useContractTx(contract, 'setMessage');
@@ -34,6 +36,11 @@ export default function GreetBoard() {
 
   const handleUpdateGreeting = async () => {
     if (!contract || !message) return;
+
+    if (!selectedAccount) {
+      toast.info('Please connect to your wallet');
+      return;
+    }
 
     const toaster = txToaster('Signing transaction...');
 
