@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@dedot/chaintypes": "^0.6.0",
+    "@polkadot/extension-inject": "^0.51.1",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
