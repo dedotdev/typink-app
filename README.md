@@ -1,6 +1,8 @@
 # Typink Demo App
 
-Clone the repo & run `yarn install && yarn start` to start the application at `https://localhost:8080`
+The dapp is live at: https://typink.netlify.app
+
+To getting start, clone the repo & run `yarn install && yarn start` to start the application at `https://localhost:8080`
 
 Demostrate fully-typed react hooks to interact with ink! smart contract powered by Dedot!
 
