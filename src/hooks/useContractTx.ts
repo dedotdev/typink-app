@@ -1,8 +1,9 @@
-import { useMemo } from 'react';
-import { useApiContext } from '@/providers/ApiProvider.tsx';
+import { useMemo, useState } from 'react';
+import { useWalletContext } from '@/providers/WalletProvider.tsx';
 import { Args, Pop } from '@/types.ts';
 import { Contract, ContractCallOptions, ContractTxOptions, GenericContractApi } from 'dedot/contracts';
-import { deferred } from 'dedot/utils';
+import { ISubmittableResult } from 'dedot/types';
+import { assert, deferred } from 'dedot/utils';
 
 type OmitNever<T> = { [K in keyof T as T[K] extends never ? never : K]: T[K] };
 type UseContractTx<A extends GenericContractApi = GenericContractApi> = OmitNever<{
@@ -23,36 +24,50 @@ type UseContractTxReturnType<
   signAndSend(
     parameters: {
       txOptions?: ContractTxOptions;
-      // TODO status callback
+      callback?: (result: ISubmittableResult) => void;
+      // TODO status callback, signer option
     } & Args<Pop<Parameters<T['tx'][M]>>>,
-  ): void;
+  ): Promise<void>;
+  isInProgress: boolean;
 };
 
 export default function useContractTx<
   T extends GenericContractApi = GenericContractApi,
   M extends keyof UseContractTx<T> = keyof UseContractTx<T>,
 >(contract: Contract<T> | undefined, func: M): UseContractTxReturnType<T, M> {
-  const { defaultCaller } = useApiContext();
+  const [isInProgress, setIsInProgress] = useState(false);
+  const { selectedAccount } = useWalletContext();
 
   const signAndSend = useMemo(() => {
     return async (o: Parameters<UseContractTxReturnType<T>['signAndSend']>[0]) => {
-      if (!contract) return;
-      // @ts-ignore
-      const { args = [], txOptions } = o;
+      console.log('Hello World');
+      assert(contract, 'Contract not found');
+      assert(selectedAccount, 'Selected account not found');
 
-      // @ts-ignore
-      await contractTx({
-        contract,
-        func,
-        args,
-        caller: defaultCaller,
-        txOptions,
-      });
+      setIsInProgress(true);
+
+      try {
+        // @ts-ignore
+        const { args = [], txOptions, callback } = o;
+
+        // @ts-ignore
+        await contractTx({
+          contract,
+          func,
+          args,
+          caller: selectedAccount.address,
+          txOptions,
+          callback,
+        });
+      } finally {
+        setIsInProgress(false);
+      }
     };
-  }, [contract]);
+  }, [contract, selectedAccount]);
 
   return {
     signAndSend,
+    isInProgress,
   };
 }
 
@@ -65,27 +80,29 @@ export async function contractTx<
     caller: string; // | IKeyringPair
     func: M;
     txOptions?: Partial<ContractTxOptions>; // TODO customize SignerOptions
+    callback?: (result: ISubmittableResult) => void;
   } & Args<Pop<Parameters<T['tx'][M]>>>,
 ): Promise<void> {
-  const { contract, func, args = [], caller, txOptions = {} } = parameters;
-
   // assertions
 
-  // check if balance is sufficient
+  // TODO check if balance is sufficient
 
   const defer = deferred<void>();
 
   const signAndSend = async () => {
+    const { contract, func, args = [], caller, txOptions = {}, callback } = parameters;
+
     // TODO dry running
 
     const dryRunOptions: ContractCallOptions = { caller };
 
-    const {
-      data,
-      raw: { gasRequired },
-    } = await contract.query[func](...args, dryRunOptions);
+    const dryRun = await contract.query[func](...args, dryRunOptions);
+    console.log(dryRun);
 
     // TODO check if data is a Result with error
+    const {
+      raw: { gasRequired },
+    } = dryRun;
 
     const actualTxOptions: ContractTxOptions = {
       gasLimit: gasRequired,
@@ -93,10 +110,13 @@ export async function contractTx<
     };
 
     await contract.tx[func](...args, actualTxOptions).signAndSend(caller, (result) => {
-      console.log(result);
-      const { status } = result;
+      callback && callback(result);
 
-      if (status.type === 'Finalized') {
+      const {
+        status: { type },
+      } = result;
+
+      if (type === 'Finalized' || type === 'Invalid' || type === 'Drop') {
         defer.resolve();
       }
     });

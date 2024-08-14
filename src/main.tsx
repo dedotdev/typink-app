@@ -18,7 +18,7 @@ root.render(
           position='top-right'
           closeOnClick
           pauseOnHover
-          theme='colored'
+          theme='light'
           autoClose={5_000}
           hideProgressBar
           limit={2}
