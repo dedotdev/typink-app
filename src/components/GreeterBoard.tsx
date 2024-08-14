@@ -38,11 +38,23 @@ export default function GreetBoard() {
     try {
       await setMessageTx.signAndSend({
         args: [message],
-        callback: ({ status }) => {
+        callback: ({ status, events }) => {
+          console.log(status);
+
           toaster.updateTxStatus(status);
 
           if (status.type === 'BestChainBlockIncluded') {
             refresh();
+
+            const greetedEvent = contract.events.Greeted.find(events);
+            if (greetedEvent) {
+              const {
+                name,
+                data: { from, message },
+              } = greetedEvent;
+
+              console.log(`Found a ${name} event sent from: ${from?.address()}, message: ${message}  `);
+            }
           }
         },
       });
