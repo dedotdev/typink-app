@@ -29,11 +29,7 @@ export default function Psp22Board() {
     fn: 'psp22TotalSupply',
   });
 
-  const {
-    data: balanceOfAlice,
-    isLoading: loadingAliceBalance,
-    refresh,
-  } = useContractQuery({
+  const { data: balanceOfAlice, isLoading: loadingAliceBalance } = useContractQuery({
     contract,
     fn: 'psp22BalanceOf',
     args: [defaultCaller],
