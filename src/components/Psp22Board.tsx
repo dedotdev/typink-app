@@ -11,22 +11,22 @@ export default function Psp22Board() {
 
   const { data: tokenName, isLoading: loadingTokenName } = useContractQuery({
     contract,
-    func: 'psp22MetadataTokenName',
+    fn: 'psp22MetadataTokenName',
   });
 
   const { data: tokenSymbol, isLoading: loadingTokenSymbol } = useContractQuery({
     contract,
-    func: 'psp22MetadataTokenSymbol',
+    fn: 'psp22MetadataTokenSymbol',
   });
 
   const { data: tokenDecimal, isLoading: loadingTokenDecimal } = useContractQuery({
     contract,
-    func: 'psp22MetadataTokenDecimals',
+    fn: 'psp22MetadataTokenDecimals',
   });
 
   const { data: totalSupply, isLoading: loadingTotalSupply } = useContractQuery({
     contract,
-    func: 'psp22TotalSupply',
+    fn: 'psp22TotalSupply',
   });
 
   const {
@@ -35,7 +35,7 @@ export default function Psp22Board() {
     refresh,
   } = useContractQuery({
     contract,
-    func: 'psp22BalanceOf',
+    fn: 'psp22BalanceOf',
     args: [defaultCaller],
   });
 

@@ -34,7 +34,7 @@ type UseContractTxReturnType<
 export default function useContractTx<
   T extends GenericContractApi = GenericContractApi,
   M extends keyof UseContractTx<T> = keyof UseContractTx<T>,
->(contract: Contract<T> | undefined, func: M): UseContractTxReturnType<T, M> {
+>(contract: Contract<T> | undefined, fn: M): UseContractTxReturnType<T, M> {
   const [isInProgress, setIsInProgress] = useState(false);
   const { selectedAccount } = useWalletContext();
 
@@ -52,7 +52,7 @@ export default function useContractTx<
         // @ts-ignore
         await contractTx({
           contract,
-          func,
+          fn,
           args,
           caller: selectedAccount.address,
           txOptions,
@@ -77,7 +77,7 @@ export async function contractTx<
   parameters: {
     contract: Contract<T>;
     caller: string; // | IKeyringPair
-    func: M;
+    fn: M;
     txOptions?: Partial<ContractTxOptions>; // TODO customize SignerOptions
     callback?: (result: ISubmittableResult) => void;
   } & Args<Pop<Parameters<T['tx'][M]>>>,
@@ -89,13 +89,13 @@ export async function contractTx<
   const defer = deferred<void>();
 
   const signAndSend = async () => {
-    const { contract, func, args = [], caller, txOptions = {}, callback } = parameters;
+    const { contract, fn, args = [], caller, txOptions = {}, callback } = parameters;
 
     // TODO dry running
 
     const dryRunOptions: ContractCallOptions = { caller };
 
-    const dryRun = await contract.query[func](...args, dryRunOptions);
+    const dryRun = await contract.query[fn](...args, dryRunOptions);
     console.log('Dry run result:', dryRun);
 
     // TODO check if data is a Result with error
@@ -108,7 +108,7 @@ export async function contractTx<
       ...txOptions,
     };
 
-    await contract.tx[func](...args, actualTxOptions).signAndSend(caller, (result) => {
+    await contract.tx[fn](...args, actualTxOptions).signAndSend(caller, (result) => {
       callback && callback(result);
 
       const {

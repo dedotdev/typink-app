@@ -31,7 +31,7 @@ export default function GreetBoard() {
     refresh,
   } = useContractQuery({
     contract,
-    func: 'greet',
+    fn: 'greet',
   });
 
   const handleUpdateGreeting = async () => {

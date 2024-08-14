@@ -32,7 +32,7 @@ export default function useContractQuery<
 >(
   parameters: {
     contract: Contract<T> | undefined;
-    func: M;
+    fn: M;
   } & Args<Pop<Parameters<T['query'][M]>>>,
 ): UseContractQueryReturnType<T, M> {
   const { defaultCaller } = useApiContext();
@@ -41,20 +41,20 @@ export default function useContractQuery<
   const [result, setResult] = useState<any>();
   const { refresh, refreshCounter } = useRefresher();
 
-  const { contract, func, args = [] } = parameters;
+  const { contract, fn, args = [] } = parameters;
 
   useDeepCompareEffect(() => {
     (async () => {
-      if (!contract || !func || !args) return;
+      if (!contract || !fn || !args) return;
 
       const callOptions: ContractCallOptions = { caller: defaultCaller };
 
-      const result = await contract.query[func](...args, callOptions);
+      const result = await contract.query[fn](...args, callOptions);
       setResult(result);
       setIsLoading(false);
       setLoaded(true);
     })();
-  }, [contract, func, args, refreshCounter]);
+  }, [contract, fn, args, refreshCounter]);
 
   return {
     isLoading,
