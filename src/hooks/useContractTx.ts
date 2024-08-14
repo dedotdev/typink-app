@@ -40,7 +40,6 @@ export default function useContractTx<
 
   const signAndSend = useMemo(() => {
     return async (o: Parameters<UseContractTxReturnType<T>['signAndSend']>[0]) => {
-      console.log('Hello World');
       assert(contract, 'Contract not found');
       assert(selectedAccount, 'Selected account not found');
 
@@ -97,7 +96,7 @@ export async function contractTx<
     const dryRunOptions: ContractCallOptions = { caller };
 
     const dryRun = await contract.query[func](...args, dryRunOptions);
-    console.log(dryRun);
+    console.log('Dry run result:', dryRun);
 
     // TODO check if data is a Result with error
     const {

@@ -28,16 +28,6 @@ export interface InjectedAccount {
   type?: KeypairType;
 }
 
-export enum Connection {
-  RPC_ENDPOINT = 'rpc-endpoint',
-  LIGHT_CLIENT = 'light-client',
-}
-
-export enum JsonRpcApi {
-  LEGACY = 'legacy',
-  NEW = 'new',
-}
-
 export type Pop<T extends any[]> = T extends [...infer U, any] ? U : never;
 
 export type Args<T> = T extends [] ? { args?: [] | undefined } : { args: T };

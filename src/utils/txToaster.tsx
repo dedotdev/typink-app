@@ -13,18 +13,21 @@ export function txToaster(initialMessage: string = 'Transaction in progress...')
   const updateTxStatus = (status: TxStatus) => {
     let toastType: TypeOptions = 'default';
     let autoClose: boolean | number = false;
+    let toastMessage: string = 'Transaction In Progress...';
     if (status.type === 'Finalized') {
       toastType = 'success';
       autoClose = 5_000;
+      toastMessage = 'Transaction successful';
     } else if (status.type === 'Invalid' || status.type === 'Drop') {
       toastType = 'error';
       autoClose = 5_000;
+      toastMessage = 'Transaction failed';
     }
 
     const toastOptions: UpdateOptions = {
       render: (
         <div>
-          <p>Transaction In Progress...</p>
+          <p>{toastMessage}</p>
           <p style={{ fontSize: 12 }}>{status.type}</p>
         </div>
       ),

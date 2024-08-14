@@ -10,10 +10,12 @@ import {
   Text,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import PendingText from '@/components/shared/PendingText.tsx';
 import useContractQuery from '@/hooks/useContractQuery.ts';
 import useContractTx from '@/hooks/useContractTx.ts';
 import useGreeterContract from '@/hooks/useGreeterContract.ts';
+import { shortenAddress } from '@/utils/string.ts';
 import { txToaster } from '@/utils/txToaster.tsx';
 
 export default function GreetBoard() {
@@ -54,6 +56,20 @@ export default function GreetBoard() {
               } = greetedEvent;
 
               console.log(`Found a ${name} event sent from: ${from?.address()}, message: ${message}  `);
+
+              toast.info(
+                <div>
+                  <p>
+                    Found a <b>{name}</b> event
+                  </p>
+                  <p style={{ fontSize: 12 }}>
+                    Sent from: <b>{shortenAddress(from?.address())}</b>
+                  </p>
+                  <p style={{ fontSize: 12 }}>
+                    Greeting message: <b>{message}</b>
+                  </p>
+                </div>,
+              );
             }
           }
         },

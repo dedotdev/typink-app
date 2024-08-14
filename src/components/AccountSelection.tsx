@@ -1,12 +1,12 @@
-import { Box, Button, Flex, Link, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from '@chakra-ui/react';
 import { useEffect, useMemo } from 'react';
+import ConnectedWallet from '@/components/dialog/ConnectedWallet.tsx';
 import WalletSelection, { ButtonStyle } from '@/components/dialog/WalletSelection.tsx';
 import useBalances from '@/hooks/useBalance.ts';
 import useDisplayAddress from '@/hooks/useDisplayAddress';
 import { useApiContext } from '@/providers/ApiProvider.tsx';
 import { useWalletContext } from '@/providers/WalletProvider';
 import { formatBalance, shortenAddress } from '@/utils/string.ts';
-import WebsiteWallet from '@/wallets/WebsiteWallet.ts';
 import { PlusSquareIcon } from '@chakra-ui/icons';
 
 export default function AccountSelection() {
@@ -56,20 +56,7 @@ export default function AccountSelection() {
         </MenuButton>
 
         <MenuList>
-          <Flex align='center' gap={3} flex={1} justify='center' pb={2}>
-            <img src={connectedWallet?.logo} alt={connectedWallet?.name} width={24} />
-            {connectedWallet instanceof WebsiteWallet ? (
-              <Link href={connectedWallet.walletUrl} target='_blank'>
-                <Text fontWeight='600' fontSize='14'>
-                  {connectedWallet?.name} - v{connectedWallet?.version}
-                </Text>
-              </Link>
-            ) : (
-              <Text fontWeight='600' fontSize='14'>
-                {connectedWallet?.name} - v{connectedWallet?.version}
-              </Text>
-            )}
-          </Flex>
+          <ConnectedWallet />
 
           {accounts.map((one) => (
             <MenuItem

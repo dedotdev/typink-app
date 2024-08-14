@@ -12,7 +12,6 @@
   "dependencies": {
     "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/react": "^2.6.1",
-    "@coong/sdk": "^0.0.23",
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
     "dedot": "^0.4.1",
@@ -20,8 +19,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-toastify": "^9.1.1",
-    "react-use": "^17.4.0",
-    "smoldot": "^2.0.29"
+    "react-use": "^17.4.0"
   },
   "devDependencies": {
     "@dedot/chaintypes": "^0.6.0",
