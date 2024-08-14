@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import { useAsync } from 'react-use';
 import PendingText from '@/components/shared/PendingText.tsx';
 import useContractQuery from '@/hooks/useContractQuery.ts';
 import useContractTx from '@/hooks/useContractTx.ts';
@@ -55,38 +56,10 @@ export default function GreetBoard() {
     try {
       await setMessageTx.signAndSend({
         args: [message],
-        callback: ({ status, events }) => {
+        callback: ({ status }) => {
           console.log(status);
 
           toaster.updateTxStatus(status);
-
-          if (status.type === 'BestChainBlockIncluded') {
-            refresh();
-
-            const greetedEvent = contract.events.Greeted.find(events);
-            if (greetedEvent) {
-              const {
-                name,
-                data: { from, message },
-              } = greetedEvent;
-
-              console.log(`Found a ${name} event sent from: ${from?.address()}, message: ${message}  `);
-
-              toast.info(
-                <div>
-                  <p>
-                    Found a <b>{name}</b> event
-                  </p>
-                  <p style={{ fontSize: 12 }}>
-                    Sent from: <b>{shortenAddress(from?.address())}</b>
-                  </p>
-                  <p style={{ fontSize: 12 }}>
-                    Greeting message: <b>{message}</b>
-                  </p>
-                </div>,
-              );
-            }
-          }
         },
       });
     } catch (e: any) {
@@ -96,6 +69,44 @@ export default function GreetBoard() {
       setMessage('');
     }
   };
+
+  useAsync(async () => {
+    if (!api || !contract) return;
+
+    // Listen to Greeted event from system events
+    // & update the greeting message in real-time
+    //
+    // To verify this, try open 2 tabs of the app
+    // & update the greeting message in one tab,
+    // you will see the greeting message updated in the other tab
+    return await api.query.system.events((events) => {
+      const greetedEvent = contract.events.Greeted.find(events);
+      if (!greetedEvent) return;
+
+      refresh(); // re-fetch the greeting message
+
+      const {
+        name,
+        data: { from, message },
+      } = greetedEvent;
+
+      console.log(`Found a ${name} event sent from: ${from?.address()}, message: ${message}  `);
+
+      toast.info(
+        <div>
+          <p>
+            Found a <b>{name}</b> event
+          </p>
+          <p style={{ fontSize: 12 }}>
+            Sent from: <b>{shortenAddress(from?.address())}</b>
+          </p>
+          <p style={{ fontSize: 12 }}>
+            Greeting message: <b>{message}</b>
+          </p>
+        </div>,
+      );
+    });
+  }, [api, contract]);
 
   return (
     <Container my={8}>
@@ -118,7 +129,12 @@ export default function GreetBoard() {
           />
           <FormHelperText>Max 50 characters</FormHelperText>
         </FormControl>
-        <Button size='sm' mt={4} isDisabled={!message || setMessageTx.isInProgress} onClick={handleUpdateGreeting}>
+        <Button
+          size='sm'
+          mt={4}
+          isDisabled={!message}
+          isLoading={setMessageTx.isInProgress}
+          onClick={handleUpdateGreeting}>
           Update Greeting
         </Button>
       </form>
