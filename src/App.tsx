@@ -3,11 +3,8 @@ import GreetBoard from '@/components/GreeterBoard.tsx';
 import Psp22Board from '@/components/Psp22Board.tsx';
 import MainFooter from '@/components/shared/MainFooter';
 import MainHeader from '@/components/shared/MainHeader';
-import { useWalletContext } from '@/providers/WalletProvider';
 
 function App() {
-  const { injectedApi } = useWalletContext();
-
   return (
     <Flex direction='column' minHeight='100vh'>
       <MainHeader />

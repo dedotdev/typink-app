@@ -6,7 +6,7 @@ import { useApiContext } from '@/providers/ApiProvider.tsx';
 import { formatBalance } from '@/utils/string.ts';
 
 export default function Psp22Board() {
-  const { contract } = usePsp22Contract();
+  const contract = usePsp22Contract();
   const { defaultCaller } = useApiContext();
 
   const { data: tokenName, isLoading: loadingTokenName } = useContractQuery({

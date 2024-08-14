@@ -6,7 +6,5 @@ import useContract from '@/hooks/useContract.ts';
 export default function useGreeterContract() {
   const { contract } = useContract<GreeterContractApi>(meta as any, PSP22_CONTRACT_ADDRESS);
 
-  return {
-    contract,
-  };
+  return contract;
 }

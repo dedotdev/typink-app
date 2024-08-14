@@ -1,10 +1,9 @@
 import { createContext, useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAsync, useLocalStorage } from 'react-use';
-import { InjectedAccount } from '@/types';
 import { UpdatableInjected } from '@coong/sdk/types';
 import useWallets from '@/hooks/useWallets';
-import { Props } from '@/types';
+import { InjectedAccount, Props } from '@/types';
 import Wallet from '@/wallets/Wallet';
 
 interface WalletContextProps {
@@ -15,6 +14,8 @@ interface WalletContextProps {
   availableWallets: Wallet[];
   connectedWalletId?: string;
   connectedWallet?: Wallet;
+  selectedAccount?: InjectedAccount;
+  setSelectedAccount: (account: InjectedAccount) => void;
 }
 
 export const WalletContext = createContext<WalletContextProps>({
@@ -22,6 +23,7 @@ export const WalletContext = createContext<WalletContextProps>({
   enableWallet: () => {},
   signOut: () => {},
   availableWallets: [],
+  setSelectedAccount: () => {},
 });
 
 export const useWalletContext = () => {
@@ -35,6 +37,8 @@ export default function WalletProvider({ children }: Props) {
   const [connectedWalletId, setConnectedWalletId, removeConnectedWalletId] =
     useLocalStorage<string>('CONNECTED_WALLET');
   const [connectedWallet, setConnectedWallet] = useState<Wallet>();
+  const [selectedAccount, setSelectedAccount, removeSelectedAccount] =
+    useLocalStorage<InjectedAccount>('SELECTED_ACCOUNT');
 
   const getWallet = (id: string): Wallet => {
     const targetWallet: Wallet = availableWallets.find((one) => one.id === id)!;
@@ -92,6 +96,7 @@ export default function WalletProvider({ children }: Props) {
 
     removeConnectedWalletId();
     setInjectedApi(undefined);
+    removeSelectedAccount();
   };
 
   return (
@@ -104,6 +109,8 @@ export default function WalletProvider({ children }: Props) {
         availableWallets,
         connectedWalletId,
         connectedWallet,
+        selectedAccount,
+        setSelectedAccount,
       }}>
       {children}
     </WalletContext.Provider>

@@ -34,15 +34,15 @@ const A_WALLETS: Wallet[] = [
     installUrl: '',
   }),
   new ExtensionWallet({
-    name: 'Polkadot{.js}',
-    id: 'polkadot-js',
-    logo: '/polkadot-js-logo.svg',
-    installUrl: '',
-  }),
-  new ExtensionWallet({
     name: 'Talisman',
     id: 'talisman',
     logo: '/talisman-logo.svg',
+    installUrl: '',
+  }),
+  new ExtensionWallet({
+    name: 'Polkadot{.js}',
+    id: 'polkadot-js',
+    logo: '/polkadot-js-logo.svg',
     installUrl: '',
   }),
 ];

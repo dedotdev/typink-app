@@ -1,6 +1,7 @@
 import {
   Button,
   ChakraProps,
+  MenuItem,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -46,20 +47,38 @@ const WalletButton = ({ walletInfo, afterSelectWallet }: WalletButtonProps) => {
   );
 };
 
+export enum ButtonStyle {
+  BUTTON,
+  MENU_ITEM,
+}
+
 interface WalletSelectionProps {
+  buttonStyle?: ButtonStyle;
   buttonLabel?: string;
   buttonProps?: ChakraProps & ThemingProps<'Button'>;
 }
 
-export default function WalletSelection({ buttonLabel = 'Connect Wallet', buttonProps }: WalletSelectionProps) {
+export default function WalletSelection({
+  buttonStyle = ButtonStyle.BUTTON,
+  buttonLabel = 'Connect Wallet',
+  buttonProps,
+}: WalletSelectionProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { availableWallets } = useWalletContext();
 
   return (
     <>
-      <Button size='md' colorScheme='primary' variant='solid' onClick={onOpen} {...buttonProps}>
-        {buttonLabel}
-      </Button>
+      {buttonStyle === ButtonStyle.MENU_ITEM && (
+        <MenuItem onClick={onOpen} {...buttonProps}>
+          {buttonLabel}
+        </MenuItem>
+      )}
+      {buttonStyle === ButtonStyle.BUTTON && (
+        <Button size='md' variant='outline' onClick={onOpen} {...buttonProps}>
+          {buttonLabel}
+        </Button>
+      )}
+
       <Modal onClose={onClose} size='sm' isOpen={isOpen}>
         <ModalOverlay />
         <ModalContent>

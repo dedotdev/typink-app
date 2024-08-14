@@ -4,7 +4,7 @@ import useContractQuery from '@/hooks/useContractQuery.ts';
 import useGreeterContract from '@/hooks/useGreeterContract.ts';
 
 export default function GreetBoard() {
-  const { contract } = useGreeterContract();
+  const contract = useGreeterContract();
 
   const { data: greet, isLoading } = useContractQuery({
     contract,

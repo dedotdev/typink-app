@@ -6,7 +6,5 @@ import useContract from '@/hooks/useContract.ts';
 export default function usePsp22Contract() {
   const { contract } = useContract<Psp22ContractApi>(psp22Meta as any, PSP22_CONTRACT_ADDRESS);
 
-  return {
-    contract,
-  };
+  return contract;
 }
