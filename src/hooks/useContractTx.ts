@@ -1,20 +1,12 @@
 import { useMemo, useState } from 'react';
 import { useWalletContext } from '@/providers/WalletProvider.tsx';
-import { Args, Pop } from '@/types.ts';
+import { Args, OmitNever, Pop } from '@/types.ts';
 import { Contract, ContractCallOptions, ContractTxOptions, GenericContractApi } from 'dedot/contracts';
 import { ISubmittableResult } from 'dedot/types';
 import { assert, deferred } from 'dedot/utils';
 
-type OmitNever<T> = { [K in keyof T as T[K] extends never ? never : K]: T[K] };
 type UseContractTx<A extends GenericContractApi = GenericContractApi> = OmitNever<{
-  [K in keyof A['tx']]: K extends string
-    ? K extends `${infer Literal}`
-      ? {
-          message: Literal;
-          params: Parameters<A['tx'][K]>;
-        }
-      : never
-    : never;
+  [K in keyof A['tx']]: K extends string ? (K extends `${infer Literal}` ? Literal : never) : never;
 }>;
 
 type UseContractTxReturnType<

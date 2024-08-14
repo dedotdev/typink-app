@@ -1,4 +1,4 @@
-import { Box, Button, Container, Heading } from '@chakra-ui/react';
+import { Box, Container, Heading } from '@chakra-ui/react';
 import PendingText from '@/components/shared/PendingText.tsx';
 import useContractQuery from '@/hooks/useContractQuery.ts';
 import usePsp22Contract from '@/hooks/usePsp22Contract.ts';
@@ -39,11 +39,6 @@ export default function Psp22Board() {
     args: [defaultCaller],
   });
 
-  const handleReloadAliceBalance = () => {
-    console.log('Refreshing Alice balance...');
-    refresh();
-  };
-
   return (
     <Container my={8}>
       <Heading size='md'>PSP22 Contract</Heading>
@@ -78,9 +73,6 @@ export default function Psp22Board() {
             {formatBalance(balanceOfAlice)} {tokenSymbol}
           </PendingText>{' '}
         </Box>
-        <Button mt={4} size='sm' onClick={handleReloadAliceBalance}>
-          Reload Alice Balance
-        </Button>
       </Box>
     </Container>
   );

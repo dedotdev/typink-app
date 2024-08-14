@@ -2,19 +2,11 @@ import { useState } from 'react';
 import { useBoolean, useDeepCompareEffect } from 'react-use';
 import useRefresher from '@/hooks/useRefresher.ts';
 import { useApiContext } from '@/providers/ApiProvider.tsx';
-import { Args, Pop } from '@/types.ts';
+import { Args, OmitNever, Pop } from '@/types.ts';
 import { Contract, ContractCallOptions, GenericContractApi } from 'dedot/contracts';
 
-type OmitNever<T> = { [K in keyof T as T[K] extends never ? never : K]: T[K] };
 type ContractQuery<A extends GenericContractApi = GenericContractApi> = OmitNever<{
-  [K in keyof A['query']]: K extends string
-    ? K extends `${infer Literal}`
-      ? {
-          message: Literal;
-          params: Parameters<A['query'][K]>;
-        }
-      : never
-    : never;
+  [K in keyof A['query']]: K extends string ? (K extends `${infer Literal}` ? Literal : never) : never;
 }>;
 
 type UseContractQueryReturnType<
