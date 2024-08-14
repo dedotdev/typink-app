@@ -1,9 +1,7 @@
-# [try.dedot.dev](https://try.dedot.dev)!
+# Typink Demo App
 
 Clone the repo & run `yarn install && yarn start` to start the application at `https://localhost:8080`
 
-<p align="center">
-<img float="left" width="400" alt="Xnapper-2024-08-03-21 58 22" src="https://github.com/user-attachments/assets/a07066a0-eb8a-4f45-aa2b-2a03922c404c">
+Demostrate fully-typed react hooks to interact with ink! smart contract powered by Dedot!
 
-<img float="left" width="400" alt="Xnapper-2024-08-03-21 59 39" src="https://github.com/user-attachments/assets/35b95980-d605-4447-bc7a-12d969e32427">  
-</p>
+![typink-hooks](https://github.com/user-attachments/assets/7b914317-a09c-40bb-95e0-f01ae896dd17)
