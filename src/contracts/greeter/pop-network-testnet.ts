@@ -1,0 +1,2 @@
+export const ADDRESS = '5HJ2XLhBuoLkoJT5G2MfMWVpsybUtcqRGWe29Fo26JVvDCZG';
+export const BLOCK_NUMBER = 225937;

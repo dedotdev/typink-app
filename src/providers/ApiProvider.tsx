@@ -13,15 +13,18 @@ interface ApiContextProps {
   apiReady: boolean;
   network: NetworkInfo;
   setNetwork: (one: NetworkInfo) => void;
+  defaultCaller: string;
 }
 
 const DEFAULT_NETWORK = SUPPORTED_NETWORKS['pop_network'];
+const DEFAULT_CALLER = '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY'; // Alice
 
 export const ApiContext = createContext<ApiContextProps>({
   apiReady: false,
   jsonRpc: JsonRpcApi.NEW,
   network: DEFAULT_NETWORK,
   setNetwork: () => {},
+  defaultCaller: DEFAULT_CALLER
 });
 
 export const useApiContext = () => {
@@ -39,7 +42,7 @@ export default function ApiProvider({ children }: Props) {
   }, [injectedApi, api, legacy])
 
   return (
-    <ApiContext.Provider value={{ api, legacy, jsonRpc, apiReady: ready, network: network!, setNetwork }}>
+    <ApiContext.Provider value={{ api, legacy, jsonRpc, apiReady: ready, network: network!, setNetwork, defaultCaller: DEFAULT_CALLER }}>
       {children}
     </ApiContext.Provider>
   );

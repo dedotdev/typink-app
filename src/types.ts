@@ -16,7 +16,7 @@ export interface NetworkInfo {
   symbol: string;
   decimals: number;
   subscanUrl?: string;
-  chainSpecFileName?: string
+  chainSpecFileName?: string;
 }
 
 export type KeypairType = 'ed25519' | 'sr25519' | 'ecdsa' | 'ethereum';
@@ -30,10 +30,14 @@ export interface InjectedAccount {
 
 export enum Connection {
   RPC_ENDPOINT = 'rpc-endpoint',
-  LIGHT_CLIENT = 'light-client'
+  LIGHT_CLIENT = 'light-client',
 }
 
 export enum JsonRpcApi {
   LEGACY = 'legacy',
-  NEW = 'new'
+  NEW = 'new',
 }
+
+export type Pop<T extends any[]> = T extends [...infer U, any] ? U : never;
+
+export type Args<T> = T extends [] ? { args?: [] | undefined } : { args: T };
