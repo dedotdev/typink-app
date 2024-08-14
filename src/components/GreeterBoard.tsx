@@ -79,7 +79,7 @@ export default function GreetBoard() {
     // To verify this, try open 2 tabs of the app
     // & update the greeting message in one tab,
     // you will see the greeting message updated in the other tab
-    return await api.query.system.events((events) => {
+    const unsub = await api.query.system.events((events) => {
       const greetedEvent = contract.events.Greeted.find(events);
       if (!greetedEvent) return;
 
@@ -106,6 +106,10 @@ export default function GreetBoard() {
         </div>,
       );
     });
+
+    return () => {
+      unsub();
+    };
   }, [api, contract]);
 
   return (
