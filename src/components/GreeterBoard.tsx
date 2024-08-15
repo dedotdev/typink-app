@@ -1,14 +1,4 @@
-import {
-  Button,
-  Container,
-  Flex,
-  FormControl,
-  FormHelperText,
-  FormLabel,
-  Heading,
-  Input,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Button, Flex, FormControl, FormHelperText, FormLabel, Heading, Input, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAsync } from 'react-use';
@@ -113,7 +103,7 @@ export default function GreetBoard() {
   }, [api, contract]);
 
   return (
-    <Container my={8}>
+    <Box>
       <Heading size='md'>Greeter Contract</Heading>
       <Flex my={4} gap={2}>
         <Text>Greeting Message:</Text>
@@ -142,6 +132,6 @@ export default function GreetBoard() {
           Update Greeting
         </Button>
       </form>
-    </Container>
+    </Box>
   );
 }

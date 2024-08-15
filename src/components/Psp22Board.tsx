@@ -1,4 +1,4 @@
-import { Box, Container, Heading } from '@chakra-ui/react';
+import { Box, Heading } from '@chakra-ui/react';
 import PendingText from '@/components/shared/PendingText.tsx';
 import useContractQuery from '@/hooks/useContractQuery.ts';
 import usePsp22Contract from '@/hooks/usePsp22Contract.ts';
@@ -36,7 +36,7 @@ export default function Psp22Board() {
   });
 
   return (
-    <Container my={8}>
+    <Box>
       <Heading size='md'>PSP22 Contract</Heading>
       <Box mt={4}>
         <Box mb={2}>
@@ -70,6 +70,6 @@ export default function Psp22Board() {
           </PendingText>{' '}
         </Box>
       </Box>
-    </Container>
+    </Box>
   );
 }
