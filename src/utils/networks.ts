@@ -9,6 +9,7 @@ export const SUPPORTED_NETWORKS: Record<string, NetworkInfo> = {
     prefix: 42,
     symbol: 'PAS',
     decimals: 10,
+    faucetUrl: 'https://onboard.popnetwork.xyz',
   },
   // alephzero_testnet: {
   //   id: 'alephzero_testnet',

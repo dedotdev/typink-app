@@ -17,6 +17,7 @@ export interface NetworkInfo {
   decimals: number;
   subscanUrl?: string;
   chainSpecFileName?: string;
+  faucetUrl?: string;
 }
 
 export type KeypairType = 'ed25519' | 'sr25519' | 'ecdsa' | 'ethereum';
