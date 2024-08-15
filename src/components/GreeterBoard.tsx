@@ -1,7 +1,6 @@
 import { Box, Button, Flex, FormControl, FormHelperText, FormLabel, Heading, Input, Text } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useAsync } from 'react-use';
 import PendingText from '@/components/shared/PendingText.tsx';
 import useContractQuery from '@/hooks/useContractQuery.ts';
 import useContractTx from '@/hooks/useContractTx.ts';
@@ -10,6 +9,7 @@ import { useApiContext } from '@/providers/ApiProvider.tsx';
 import { useWalletContext } from '@/providers/WalletProvider.tsx';
 import { shortenAddress } from '@/utils/string.ts';
 import { txToaster } from '@/utils/txToaster.tsx';
+import { Unsub } from 'dedot/types';
 
 export default function GreetBoard() {
   const { api } = useApiContext();
@@ -60,45 +60,56 @@ export default function GreetBoard() {
     }
   };
 
-  useAsync(async () => {
+  useEffect(() => {
     if (!api || !contract) return;
 
-    // Listen to Greeted event from system events
-    // & update the greeting message in real-time
-    //
-    // To verify this, try open 2 tabs of the app
-    // & update the greeting message in one tab,
-    // you will see the greeting message updated in the other tab
-    const unsub = await api.query.system.events((events) => {
-      const greetedEvent = contract.events.Greeted.find(events);
-      if (!greetedEvent) return;
+    let done = false;
+    let unsub: Unsub;
 
-      refresh(); // re-fetch the greeting message
+    (async () => {
+      // Listen to Greeted event from system events
+      // & update the greeting message in real-time
+      //
+      // To verify this, try open 2 tabs of the app
+      // & update the greeting message in one tab,
+      // you will see the greeting message updated in the other tab
+      unsub = await api.query.system.events((events) => {
+        if (done) {
+          unsub();
+          return;
+        }
 
-      const {
-        name,
-        data: { from, message },
-      } = greetedEvent;
+        const greetedEvent = contract.events.Greeted.find(events);
+        if (!greetedEvent) return;
 
-      console.log(`Found a ${name} event sent from: ${from?.address()}, message: ${message}  `);
+        refresh(); // re-fetch the greeting message
 
-      toast.info(
-        <div>
-          <p>
-            Found a <b>{name}</b> event
-          </p>
-          <p style={{ fontSize: 12 }}>
-            Sent from: <b>{shortenAddress(from?.address())}</b>
-          </p>
-          <p style={{ fontSize: 12 }}>
-            Greeting message: <b>{message}</b>
-          </p>
-        </div>,
-      );
-    });
+        const {
+          name,
+          data: { from, message },
+        } = greetedEvent;
+
+        console.log(`Found a ${name} event sent from: ${from?.address()}, message: ${message}  `);
+
+        toast.info(
+          <div>
+            <p>
+              Found a <b>{name}</b> event
+            </p>
+            <p style={{ fontSize: 12 }}>
+              Sent from: <b>{shortenAddress(from?.address())}</b>
+            </p>
+            <p style={{ fontSize: 12 }}>
+              Greeting message: <b>{message}</b>
+            </p>
+          </div>,
+        );
+      });
+    })();
 
     return () => {
-      unsub();
+      unsub && unsub();
+      done = true;
     };
   }, [api, contract]);
 
