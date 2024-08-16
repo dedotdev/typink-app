@@ -1,22 +1,22 @@
 import { Box, Button, Flex, FormControl, FormHelperText, FormLabel, Heading, Input, Text } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 import PendingText from '@/components/shared/PendingText.tsx';
+import useBalance from '@/hooks/useBalance.ts';
 import useContractQuery from '@/hooks/useContractQuery.ts';
 import useContractTx from '@/hooks/useContractTx.ts';
 import useGreeterContract from '@/hooks/useGreeterContract.ts';
-import { useApiContext } from '@/providers/ApiProvider.tsx';
+import useWatchContractEvent from '@/hooks/useWatchContractEvent.ts';
 import { useWalletContext } from '@/providers/WalletProvider.tsx';
 import { shortenAddress } from '@/utils/string.ts';
 import { txToaster } from '@/utils/txToaster.tsx';
-import { Unsub } from 'dedot/types';
 
 export default function GreetBoard() {
-  const { api } = useApiContext();
   const { selectedAccount } = useWalletContext();
   const contract = useGreeterContract();
   const [message, setMessage] = useState('');
   const setMessageTx = useContractTx(contract, 'setMessage');
+  const balance = useBalance(selectedAccount?.address);
 
   const {
     data: greet,
@@ -35,8 +35,7 @@ export default function GreetBoard() {
       return;
     }
 
-    const balance = await api!.query.system.account(selectedAccount.address);
-    if (balance.data.free === 0n) {
+    if (balance === 0n) {
       toast.error('Balance insufficient to make transaction.');
       return;
     }
@@ -60,30 +59,20 @@ export default function GreetBoard() {
     }
   };
 
-  useEffect(() => {
-    if (!api || !contract) return;
+  // Listen to Greeted event from system events
+  // & update the greeting message in real-time
+  //
+  // To verify this, try open 2 tabs of the app
+  // & update the greeting message in one tab,
+  // you will see the greeting message updated in the other tab
+  useWatchContractEvent(
+    contract,
+    'Greeted',
+    useCallback((events) => {
+      // re-fetch the greeting message
+      refresh();
 
-    let done = false;
-    let unsub: Unsub;
-
-    (async () => {
-      // Listen to Greeted event from system events
-      // & update the greeting message in real-time
-      //
-      // To verify this, try open 2 tabs of the app
-      // & update the greeting message in one tab,
-      // you will see the greeting message updated in the other tab
-      unsub = await api.query.system.events((events) => {
-        if (done) {
-          unsub();
-          return;
-        }
-
-        const greetedEvent = contract.events.Greeted.find(events);
-        if (!greetedEvent) return;
-
-        refresh(); // re-fetch the greeting message
-
+      events.forEach((greetedEvent) => {
         const {
           name,
           data: { from, message },
@@ -105,13 +94,8 @@ export default function GreetBoard() {
           </div>,
         );
       });
-    })();
-
-    return () => {
-      unsub && unsub();
-      done = true;
-    };
-  }, [api, contract]);
+    }, []),
+  );
 
   return (
     <Box>

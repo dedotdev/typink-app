@@ -2,7 +2,7 @@ import { Box, Button, Flex, Menu, MenuButton, MenuDivider, MenuItem, MenuList, T
 import { useEffect, useMemo } from 'react';
 import ConnectedWallet from '@/components/dialog/ConnectedWallet.tsx';
 import WalletSelection, { ButtonStyle } from '@/components/dialog/WalletSelection.tsx';
-import useBalances from '@/hooks/useBalance.ts';
+import useBalances from '@/hooks/useBalances.ts';
 import useDisplayAddress from '@/hooks/useDisplayAddress';
 import { useApiContext } from '@/providers/ApiProvider.tsx';
 import { useWalletContext } from '@/providers/WalletProvider';

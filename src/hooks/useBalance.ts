@@ -1,35 +1,11 @@
-import { useState } from 'react';
-import { useAsync } from 'react-use';
-import { useApiContext } from '@/providers/ApiProvider.tsx';
+import { useMemo } from 'react';
+import useBalances from '@/hooks/useBalances.ts';
 
-export interface Balances {
-  [address: string]: {
-    free: bigint;
-    reserved: bigint;
-    frozen: bigint;
-  };
-}
+export default function useBalance(address?: string) {
+  const accounts = useMemo(() => (address ? [address] : []), [address]);
+  const balances = useBalances(accounts);
 
-export default function useBalances(accounts: string[]) {
-  const [balances, setBalances] = useState<Balances>({});
-  const { api } = useApiContext();
+  if (accounts.length === 0) return undefined;
 
-  useAsync(async () => {
-    if (!api) {
-      setBalances({});
-
-      return;
-    }
-
-    return await api.query.system.account.multi(accounts, (balances) => {
-      setBalances(
-        balances.reduce((balances, accountInfo, currentIndex) => {
-          balances[accounts[currentIndex]] = accountInfo.data;
-          return balances;
-        }, {} as Balances),
-      );
-    });
-  }, [api, accounts]);
-
-  return balances;
+  return balances[accounts[0]]?.free;
 }
