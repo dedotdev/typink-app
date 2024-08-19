@@ -11,7 +11,7 @@ function App() {
       <MainHeader />
       <Box maxWidth='container.md' mx='auto' my={4} px={4} flex={1} w='full'>
         <BalanceInsufficientAlert />
-        <Tabs isLazy>
+        <Tabs>
           <TabList>
             <Tab>Greeter Contract</Tab>
             <Tab>PSP22 Contract</Tab>
