@@ -1,14 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useWalletContext } from '@/providers/WalletProvider.tsx';
 import { Args, OmitNever, Pop } from '@/types.ts';
-import {
-  Contract,
-  ContractCallOptions,
-  ContractTxOptions,
-  GenericContractApi,
-  isContractDispatchError,
-  isContractLangError,
-} from 'dedot/contracts';
+import { Contract, ContractCallOptions, ContractTxOptions, GenericContractApi } from 'dedot/contracts';
 import { ISubmittableResult } from 'dedot/types';
 import { assert, deferred } from 'dedot/utils';
 
@@ -88,48 +81,36 @@ export async function contractTx<
   const defer = deferred<void>();
 
   const signAndSend = async () => {
-    try {
-      const { contract, fn, args = [], caller, txOptions = {}, callback } = parameters;
+    const { contract, fn, args = [], caller, txOptions = {}, callback } = parameters;
 
-      // TODO dry running
+    // TODO dry running
 
-      const dryRunOptions: ContractCallOptions = { caller };
+    const dryRunOptions: ContractCallOptions = { caller };
 
-      const dryRun = await contract.query[fn](...args, dryRunOptions);
-      console.log('Dry run result:', dryRun);
+    const dryRun = await contract.query[fn](...args, dryRunOptions);
+    console.log('Dry run result:', dryRun);
 
-      // TODO check if data is a Result with error
+    // TODO check if data is a Result with error
+    const {
+      raw: { gasRequired },
+    } = dryRun;
+
+    const actualTxOptions: ContractTxOptions = {
+      gasLimit: gasRequired,
+      ...txOptions,
+    };
+
+    await contract.tx[fn](...args, actualTxOptions).signAndSend(caller, (result) => {
+      callback && callback(result);
+
       const {
-        raw: { gasRequired },
-      } = dryRun;
+        status: { type },
+      } = result;
 
-      const actualTxOptions: ContractTxOptions = {
-        gasLimit: gasRequired,
-        ...txOptions,
-      };
-
-      await contract.tx[fn](...args, actualTxOptions).signAndSend(caller, (result) => {
-        callback && callback(result);
-
-        const {
-          status: { type },
-        } = result;
-
-        if (type === 'Finalized' || type === 'Invalid' || type === 'Drop') {
-          defer.resolve();
-        }
-      });
-    } catch (e: any) {
-      if (isContractDispatchError(e)) {
-        throw new Error(`Dispatch error: ${JSON.stringify(e.dispatchError)}`);
+      if (type === 'Finalized' || type === 'Invalid' || type === 'Drop') {
+        defer.resolve();
       }
-
-      if (isContractLangError(e)) {
-        throw new Error(`Lang error: ${JSON.stringify(e.langError)}`);
-      }
-
-      throw e;
-    }
+    });
   };
 
   signAndSend().catch(defer.reject);

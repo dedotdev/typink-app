@@ -52,6 +52,7 @@ export default function GreetBoard() {
         },
       });
     } catch (e: any) {
+      console.error(e, e.message);
       toaster.onError(e);
     } finally {
       refresh();
