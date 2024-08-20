@@ -1,15 +1,16 @@
 import { createContext, useContext, useEffect } from 'react';
 import { useLocalStorage } from 'react-use';
-import useApi from '@/hooks/useApi';
+import useClient from '@/hooks/useClient.ts';
 import { useWalletContext } from '@/providers/WalletProvider.tsx';
 import { NetworkInfo, Props } from '@/types';
 import { SUPPORTED_NETWORKS } from '@/utils/networks';
-import { DedotClient, LegacyClient } from 'dedot';
+import { ISubstrateClient } from 'dedot';
+import { SubstrateApi } from 'dedot/chaintypes';
+import { RpcVersion } from 'dedot/types';
 
-interface ApiContextProps {
-  api?: DedotClient;
-  legacy?: LegacyClient;
-  apiReady: boolean;
+interface ClientContextProps {
+  client?: ISubstrateClient<SubstrateApi[RpcVersion]>;
+  ready: boolean;
   network: NetworkInfo;
   setNetwork: (one: NetworkInfo) => void;
   defaultCaller: string;
@@ -18,31 +19,29 @@ interface ApiContextProps {
 const DEFAULT_NETWORK = SUPPORTED_NETWORKS['pop_network'];
 const DEFAULT_CALLER = '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY'; // Alice
 
-export const ApiContext = createContext<ApiContextProps>({
-  apiReady: false,
+export const ClientContext = createContext<ClientContextProps>({
+  ready: false,
   network: DEFAULT_NETWORK,
   setNetwork: () => {},
   defaultCaller: DEFAULT_CALLER,
 });
 
-export const useApiContext = () => {
-  return useContext(ApiContext);
+export const useClientContext = () => {
+  return useContext(ClientContext);
 };
 
-export default function ApiProvider({ children }: Props) {
+export default function ClientProvider({ children }: Props) {
   const { injectedApi } = useWalletContext();
   const [network, setNetwork] = useLocalStorage<NetworkInfo>('SELECTED_NETWORK', DEFAULT_NETWORK);
-  const { ready, api, legacy } = useApi(network);
+  const { ready, client } = useClient(network);
 
   useEffect(() => {
-    api?.setSigner(injectedApi?.signer);
-    legacy?.setSigner(injectedApi?.signer);
-  }, [injectedApi, api, legacy]);
+    client?.setSigner(injectedApi?.signer);
+  }, [injectedApi, client]);
 
   return (
-    <ApiContext.Provider
-      value={{ api, legacy, apiReady: ready, network: network!, setNetwork, defaultCaller: DEFAULT_CALLER }}>
+    <ClientContext.Provider value={{ client, ready, network: network!, setNetwork, defaultCaller: DEFAULT_CALLER }}>
       {children}
-    </ApiContext.Provider>
+    </ClientContext.Provider>
   );
 }

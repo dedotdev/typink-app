@@ -1,13 +1,13 @@
 import { Alert, AlertDescription, AlertIcon, AlertTitle, Box, Link } from '@chakra-ui/react';
 import useBalance from '@/hooks/useBalance.ts';
-import { useApiContext } from '@/providers/ApiProvider.tsx';
+import { useClientContext } from '@/providers/ClientProvider.tsx';
 import { useWalletContext } from '@/providers/WalletProvider.tsx';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 const DEFAULT_FAUCET_URL = 'https://github.com/use-ink/contracts-ui/blob/master/FAUCETS.md';
 
 export default function BalanceInsufficientAlert() {
-  const { network } = useApiContext();
+  const { network } = useClientContext();
   const { selectedAccount } = useWalletContext();
 
   const balance = useBalance(selectedAccount?.address);

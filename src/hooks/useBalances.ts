@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAsync } from 'react-use';
-import { useApiContext } from '@/providers/ApiProvider.tsx';
+import { useClientContext } from '@/providers/ClientProvider.tsx';
 
 export interface Balances {
   [address: string]: {
@@ -12,16 +12,16 @@ export interface Balances {
 
 export default function useBalances(accounts: string[]) {
   const [balances, setBalances] = useState<Balances>({});
-  const { api } = useApiContext();
+  const { client } = useClientContext();
 
   useAsync(async () => {
-    if (!api) {
+    if (!client) {
       setBalances({});
 
       return;
     }
 
-    return await api.query.system.account.multi(accounts, (balances) => {
+    return await client.query.system.account.multi(accounts, (balances) => {
       setBalances(
         balances.reduce((balances, accountInfo, currentIndex) => {
           balances[accounts[currentIndex]] = accountInfo.data;
@@ -29,7 +29,7 @@ export default function useBalances(accounts: string[]) {
         }, {} as Balances),
       );
     });
-  }, [api, accounts]);
+  }, [client, accounts]);
 
   return balances;
 }

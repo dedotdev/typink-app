@@ -2,12 +2,12 @@ import { Box, Heading } from '@chakra-ui/react';
 import PendingText from '@/components/shared/PendingText.tsx';
 import useContractQuery from '@/hooks/useContractQuery.ts';
 import usePsp22Contract from '@/hooks/usePsp22Contract.ts';
-import { useApiContext } from '@/providers/ApiProvider.tsx';
+import { useClientContext } from '@/providers/ClientProvider.tsx';
 import { formatBalance } from '@/utils/string.ts';
 
 export default function Psp22Board() {
   const contract = usePsp22Contract();
-  const { defaultCaller } = useApiContext();
+  const { defaultCaller } = useClientContext();
 
   const { data: tokenName, isLoading: loadingTokenName } = useContractQuery({
     contract,

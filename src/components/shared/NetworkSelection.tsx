@@ -1,11 +1,11 @@
 import { Box, Button, Flex, Menu, MenuButton, MenuItem, MenuList, Spinner, useMediaQuery } from '@chakra-ui/react';
-import { useApiContext } from '@/providers/ApiProvider';
+import { useClientContext } from '@/providers/ClientProvider.tsx';
 import { SUPPORTED_NETWORKS } from '@/utils/networks';
 
 function NetworkStatusIndicator() {
-  const { apiReady } = useApiContext();
+  const { ready } = useClientContext();
 
-  if (apiReady) {
+  if (ready) {
     return <Box borderRadius='50%' width={3} height={3} backgroundColor='green.500' />;
   } else {
     return <Spinner size='xs' />;
@@ -13,7 +13,7 @@ function NetworkStatusIndicator() {
 }
 
 export default function NetworkSelection() {
-  const { network, setNetwork } = useApiContext();
+  const { network, setNetwork } = useClientContext();
   const [smallest] = useMediaQuery('(max-width: 325px)');
 
   return (
@@ -35,7 +35,7 @@ export default function NetworkSelection() {
             onClick={() => setNetwork(one)}
             backgroundColor={one.id === network.id ? 'gray.200' : ''}>
             <Flex direction='row' align='center' gap={2}>
-              <img src={one.logo} alt={one.name} width={18} style={{ borderRadius: 4 }}/>
+              <img src={one.logo} alt={one.name} width={18} style={{ borderRadius: 4 }} />
               <span>{one.name}</span>
             </Flex>
           </MenuItem>

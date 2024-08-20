@@ -2,48 +2,44 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAsync, useLocalStorage, useToggle } from 'react-use';
 import { NetworkInfo } from '@/types';
-import { DedotClient, JsonRpcProvider, LegacyClient, WsProvider } from 'dedot';
+import { DedotClient, ISubstrateClient, JsonRpcProvider, LegacyClient, WsProvider } from 'dedot';
+import { SubstrateApi } from 'dedot/chaintypes';
+import { RpcVersion } from 'dedot/types';
 
 type UseApi = {
   ready: boolean;
-  api?: DedotClient;
-  legacy?: LegacyClient;
+  client?: ISubstrateClient<SubstrateApi[RpcVersion]>;
 };
 
-export default function useApi(network?: NetworkInfo): UseApi {
+export default function useClient(network?: NetworkInfo): UseApi {
   const [cacheMetadata] = useLocalStorage<boolean>('SETTINGS/CACHE_METADATA', true);
 
   const [ready, setReady] = useToggle(false);
-  const [api, setApi] = useState<DedotClient>();
-  const [legacy, setLegacy] = useState<LegacyClient>();
+  const [client, setClient] = useState<ISubstrateClient<SubstrateApi[RpcVersion]>>();
 
   useAsync(async () => {
     if (!network) {
       return;
     }
 
-    if (api) {
-      await api.disconnect();
-    }
-
-    if (legacy) {
-      await legacy.disconnect();
+    if (client) {
+      await client.disconnect();
     }
 
     setReady(false);
-
-    let provider: JsonRpcProvider;
 
     // TODO might be not a good idea to put the toast here,
     //  but it's okay for now for demo purposes!
     const toastId = toast.info(`Connecting to ${network.name}`, { autoClose: false, isLoading: true });
 
-    provider = new WsProvider(network.provider);
+    const provider: JsonRpcProvider = new WsProvider(network.provider);
 
-    setApi(await DedotClient.new({ provider, cacheMetadata }));
-    setLegacy(undefined);
-    // setLegacy(await LegacyClient.new({ provider, cacheMetadata }));
-    // setApi(undefined);
+    // Using LegacyClient for now in development mode
+    if (network.provider === 'ws://127.0.0.1:9944') {
+      setClient(await LegacyClient.new({ provider, cacheMetadata }));
+    } else {
+      setClient(await DedotClient.new({ provider, cacheMetadata }));
+    }
 
     setReady(true);
 
@@ -55,5 +51,5 @@ export default function useApi(network?: NetworkInfo): UseApi {
     });
   }, [network?.provider]);
 
-  return { ready, api, legacy };
+  return { ready, client };
 }

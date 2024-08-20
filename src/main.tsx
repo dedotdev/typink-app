@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import App from '@/App';
-import ApiProvider from '@/providers/ApiProvider';
+import ClientProvider from '@/providers/ClientProvider.tsx';
 import WalletProvider from '@/providers/WalletProvider';
 import { theme } from '@/theme';
 
@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <ChakraProvider theme={theme}>
     <WalletProvider>
-      <ApiProvider>
+      <ClientProvider>
         <App />
         <ToastContainer
           position='top-right'
@@ -23,7 +23,7 @@ root.render(
           hideProgressBar
           limit={2}
         />
-      </ApiProvider>
+      </ClientProvider>
     </WalletProvider>
   </ChakraProvider>,
 );

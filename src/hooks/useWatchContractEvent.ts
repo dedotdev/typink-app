@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useApiContext } from '@/providers/ApiProvider.tsx';
+import { useClientContext } from '@/providers/ClientProvider.tsx';
 import { OmitNever } from '@/types.ts';
 import { Contract, GenericContractApi } from 'dedot/contracts';
 import { Unsub } from 'dedot/types';
@@ -17,17 +17,17 @@ export default function useWatchContractEvent<
   // remember to use `useCallback` for this callback :)
   onNewEvent: (events: ReturnType<T['events'][M]['filter']>) => void,
 ): void {
-  const { api } = useApiContext();
+  const { client } = useClientContext();
 
   useEffect(() => {
-    if (!api || !contract) return;
+    if (!client || !contract) return;
 
     // handle unsubscribing when component unmounts
     let done = false;
     let unsub: Unsub | undefined;
 
     (async () => {
-      unsub = await api.query.system.events((events) => {
+      unsub = await client.query.system.events((events) => {
         if (done) {
           unsub && unsub();
           return;
@@ -45,5 +45,5 @@ export default function useWatchContractEvent<
       unsub && unsub();
       done = true;
     };
-  }, [api, contract, onNewEvent]);
+  }, [client, contract, onNewEvent]);
 }
