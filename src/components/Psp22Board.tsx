@@ -62,7 +62,7 @@ export default function Psp22Board() {
         <Box mb={2}>
           Total Supply:{' '}
           <PendingText fontWeight='600' isLoading={loadingTotalSupply}>
-            {formatBalance(totalSupply)} {tokenSymbol}
+            {formatBalance(totalSupply, tokenDecimal)} {tokenSymbol}
           </PendingText>
         </Box>
         <Box mb={2}>
