@@ -35,7 +35,7 @@ export interface ClientProviderProps extends Props {
 
 export default function ClientProvider({ children, defaultNetworkId = DEFAULT_NETWORK }: ClientProviderProps) {
   const { injectedApi } = useWalletContext();
-  const [networkId, setNetworkId] = useLocalStorage<string>('SELECTED_NETWORK', defaultNetworkId);
+  const [networkId, setNetworkId] = useLocalStorage<string>('SELECTED_NETWORK_ID', defaultNetworkId);
   const network = useMemo(() => SUPPORTED_NETWORKS[networkId!], [networkId]);
 
   const { ready, client } = useClient(network);
