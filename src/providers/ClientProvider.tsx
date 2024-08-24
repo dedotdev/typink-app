@@ -1,38 +1,43 @@
-import { createContext, useContext, useEffect } from 'react';
+import { createContext, useContext, useEffect, useMemo } from 'react';
 import { useLocalStorage } from 'react-use';
 import useClient from '@/hooks/useClient.ts';
 import { useWalletContext } from '@/providers/WalletProvider.tsx';
 import { NetworkInfo, Props } from '@/types';
-import { SUPPORTED_NETWORKS } from '@/utils/networks';
+import { NetworkId, SUPPORTED_NETWORKS } from '@/utils/networks';
 import { ISubstrateClient } from 'dedot';
 import { SubstrateApi } from 'dedot/chaintypes';
 import { RpcVersion } from 'dedot/types';
 
-interface ClientContextProps {
+export interface ClientContextProps {
   client?: ISubstrateClient<SubstrateApi[RpcVersion]>;
   ready: boolean;
   network: NetworkInfo;
-  setNetwork: (one: NetworkInfo) => void;
-  defaultCaller: string;
+  networkId: NetworkId;
+  setNetworkId: (one: NetworkId) => void;
 }
 
-const DEFAULT_NETWORK = SUPPORTED_NETWORKS['pop_network'];
-const DEFAULT_CALLER = '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY'; // Alice
+const DEFAULT_NETWORK = NetworkId.POP_TESTNET;
 
 export const ClientContext = createContext<ClientContextProps>({
   ready: false,
-  network: DEFAULT_NETWORK,
-  setNetwork: () => {},
-  defaultCaller: DEFAULT_CALLER,
+  network: SUPPORTED_NETWORKS[NetworkId.POP_TESTNET],
+  networkId: NetworkId.POP_TESTNET,
+  setNetworkId: () => {},
 });
 
 export const useClientContext = () => {
   return useContext(ClientContext);
 };
 
-export default function ClientProvider({ children }: Props) {
+export interface ClientProviderProps extends Props {
+  defaultNetworkId?: NetworkId;
+}
+
+export default function ClientProvider({ children, defaultNetworkId = DEFAULT_NETWORK }: ClientProviderProps) {
   const { injectedApi } = useWalletContext();
-  const [network, setNetwork] = useLocalStorage<NetworkInfo>('SELECTED_NETWORK', DEFAULT_NETWORK);
+  const [networkId, setNetworkId] = useLocalStorage<string>('SELECTED_NETWORK', defaultNetworkId);
+  const network = useMemo(() => SUPPORTED_NETWORKS[networkId!], [networkId]);
+
   const { ready, client } = useClient(network);
 
   useEffect(() => {
@@ -40,7 +45,15 @@ export default function ClientProvider({ children }: Props) {
   }, [injectedApi, client]);
 
   return (
-    <ClientContext.Provider value={{ client, ready, network: network!, setNetwork, defaultCaller: DEFAULT_CALLER }}>
+    <ClientContext.Provider
+      key={networkId}
+      value={{
+        client,
+        ready,
+        network,
+        networkId: networkId as NetworkId,
+        setNetworkId,
+      }}>
       {children}
     </ClientContext.Provider>
   );

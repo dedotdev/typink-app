@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAsync } from 'react-use';
-import { useClientContext } from '@/providers/ClientProvider.tsx';
+import { useTypink } from '@/providers/TypinkProvider.tsx';
 
 export interface Balances {
   [address: string]: {
@@ -12,7 +12,7 @@ export interface Balances {
 
 export default function useBalances(accounts: string[]) {
   const [balances, setBalances] = useState<Balances>({});
-  const { client } = useClientContext();
+  const { client } = useTypink();
 
   useAsync(async () => {
     if (!client) {

@@ -1,9 +1,9 @@
 import { Box, Button, Flex, Menu, MenuButton, MenuItem, MenuList, Spinner, useMediaQuery } from '@chakra-ui/react';
-import { useClientContext } from '@/providers/ClientProvider.tsx';
-import { SUPPORTED_NETWORKS } from '@/utils/networks';
+import { useTypink } from '@/providers/TypinkProvider.tsx';
+import { NetworkId, SUPPORTED_NETWORKS } from '@/utils/networks';
 
 function NetworkStatusIndicator() {
-  const { ready } = useClientContext();
+  const { ready } = useTypink();
 
   if (ready) {
     return <Box borderRadius='50%' width={3} height={3} backgroundColor='green.500' />;
@@ -13,7 +13,7 @@ function NetworkStatusIndicator() {
 }
 
 export default function NetworkSelection() {
-  const { network, setNetwork } = useClientContext();
+  const { network, setNetworkId } = useTypink();
   const [smallest] = useMediaQuery('(max-width: 325px)');
 
   return (
@@ -32,7 +32,7 @@ export default function NetworkSelection() {
         {Object.values(SUPPORTED_NETWORKS).map((one) => (
           <MenuItem
             key={one.id}
-            onClick={() => setNetwork(one)}
+            onClick={() => setNetworkId(one.id as NetworkId)}
             backgroundColor={one.id === network.id ? 'gray.200' : ''}>
             <Flex direction='row' align='center' gap={2}>
               <img src={one.logo} alt={one.name} width={18} style={{ borderRadius: 4 }} />

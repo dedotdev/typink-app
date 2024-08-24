@@ -1,9 +1,9 @@
 import { Flex, Text } from '@chakra-ui/react';
 import React from 'react';
-import { useWalletContext } from '@/providers/WalletProvider.tsx';
+import { useTypink } from '@/providers/TypinkProvider.tsx';
 
 export default function ConnectedWallet() {
-  const { connectedWallet } = useWalletContext();
+  const { connectedWallet } = useTypink();
 
   return (
     <Flex align='center' gap={3} flex={1} justify='center' pb={2}>

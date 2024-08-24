@@ -1,13 +1,15 @@
 import { Box, Heading } from '@chakra-ui/react';
 import PendingText from '@/components/shared/PendingText.tsx';
+import { ContractId } from '@/contracts/deployments.ts';
+import { Psp22ContractApi } from '@/contracts/types/psp22';
+import useContract from '@/hooks/useContract.ts';
 import useContractQuery from '@/hooks/useContractQuery.ts';
-import usePsp22Contract from '@/hooks/usePsp22Contract.ts';
-import { useClientContext } from '@/providers/ClientProvider.tsx';
+import { useTypink } from '@/providers/TypinkProvider.tsx';
 import { formatBalance } from '@/utils/string.ts';
 
 export default function Psp22Board() {
-  const contract = usePsp22Contract();
-  const { defaultCaller } = useClientContext();
+  const { contract } = useContract<Psp22ContractApi>(ContractId.PSP22);
+  const { defaultCaller } = useTypink();
 
   const { data: tokenName, isLoading: loadingTokenName } = useContractQuery({
     contract,

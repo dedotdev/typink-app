@@ -4,13 +4,12 @@ import ConnectedWallet from '@/components/dialog/ConnectedWallet.tsx';
 import WalletSelection, { ButtonStyle } from '@/components/dialog/WalletSelection.tsx';
 import useBalances from '@/hooks/useBalances.ts';
 import useDisplayAddress from '@/hooks/useDisplayAddress';
-import { useClientContext } from '@/providers/ClientProvider.tsx';
-import { useWalletContext } from '@/providers/WalletProvider';
+import { useTypink } from '@/providers/TypinkProvider.tsx';
 import { formatBalance, shortenAddress } from '@/utils/string.ts';
 
 export default function AccountSelection() {
-  const { accounts, selectedAccount, setSelectedAccount, signOut, connectedWallet } = useWalletContext();
-  const { network } = useClientContext();
+  const { accounts, selectedAccount, setSelectedAccount, signOut } = useTypink();
+  const { network } = useTypink();
   const addresses = useMemo(() => accounts.map((a) => a.address), [accounts]);
   const balances = useBalances(addresses);
 

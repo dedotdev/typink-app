@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useBoolean, useDeepCompareEffect } from 'react-use';
 import useRefresher from '@/hooks/useRefresher.ts';
-import { useClientContext } from '@/providers/ClientProvider.tsx';
+import { useTypink } from '@/providers/TypinkProvider.tsx';
 import { Args, OmitNever, Pop } from '@/types.ts';
 import { Contract, ContractCallOptions, GenericContractApi } from 'dedot/contracts';
 
@@ -26,7 +26,7 @@ export default function useContractQuery<
     fn: M;
   } & Args<Pop<Parameters<T['query'][M]>>>,
 ): UseContractQueryReturnType<T, M> {
-  const { defaultCaller } = useClientContext();
+  const { defaultCaller } = useTypink();
   const [isLoading, setIsLoading] = useBoolean(true);
   const [result, setResult] = useState<any>();
   const { refresh, refreshCounter } = useRefresher();

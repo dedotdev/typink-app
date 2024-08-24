@@ -6,7 +6,7 @@ import useWallets from '@/hooks/useWallets';
 import { InjectedAccount, Props } from '@/types';
 import Wallet from '@/wallets/Wallet';
 
-interface WalletContextProps {
+export interface WalletContextProps {
   accounts: InjectedAccount[];
   injectedApi?: Injected;
   enableWallet: (id: string) => void;

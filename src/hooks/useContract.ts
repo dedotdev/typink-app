@@ -1,17 +1,16 @@
 import { useState } from 'react';
 import { useAsync } from 'react-use';
-import { useClientContext } from '@/providers/ClientProvider.tsx';
-import { Contract, ContractMetadata, GenericContractApi } from 'dedot/contracts';
+import { ContractId } from '@/contracts/deployments.ts';
+import { useTypink } from '@/providers/TypinkProvider.tsx';
+import { Contract, GenericContractApi } from 'dedot/contracts';
 
-export default function useContract<T extends GenericContractApi = GenericContractApi>(
-  metadata?: string | ContractMetadata,
-  address?: string,
-) {
-  const { client } = useClientContext();
+export default function useContract<T extends GenericContractApi = GenericContractApi>(contractId: ContractId) {
+  const { deployments } = useTypink();
+  const { client, network } = useTypink();
   const [contract, setContract] = useState<Contract<T>>();
 
   useAsync(async () => {
-    if (!client || !metadata || !address) {
+    if (!client || !network) {
       if (contract) {
         setContract(undefined);
       }
@@ -19,8 +18,14 @@ export default function useContract<T extends GenericContractApi = GenericContra
       return;
     }
 
-    setContract(new Contract<T>(client, metadata as any, address));
-  }, [client, metadata, address]);
+    const deployment = deployments.find((d) => d.id === contractId && d.network === network.id);
+    if (!deployment) {
+      console.error(`Contract deployment with id: ${contractId} not found on network: ${network.id}`);
+      return;
+    }
+
+    setContract(new Contract<T>(client, deployment.metadata, deployment.address));
+  }, [client, network]);
 
   return {
     contract,

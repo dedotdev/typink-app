@@ -11,7 +11,7 @@ import {
   Stack,
   useDisclosure,
 } from '@chakra-ui/react';
-import { useWalletContext } from '@/providers/WalletProvider';
+import { useTypink } from '@/providers/TypinkProvider.tsx';
 import Wallet from '@/wallets/Wallet';
 import { ThemingProps } from '@chakra-ui/system';
 
@@ -22,7 +22,7 @@ interface WalletButtonProps {
 
 const WalletButton = ({ walletInfo, afterSelectWallet }: WalletButtonProps) => {
   const { name, id, logo, ready, installed } = walletInfo;
-  const { enableWallet } = useWalletContext();
+  const { enableWallet } = useTypink();
 
   const connectWallet = () => {
     enableWallet(id);
@@ -64,7 +64,7 @@ export default function WalletSelection({
   buttonProps,
 }: WalletSelectionProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { availableWallets } = useWalletContext();
+  const { availableWallets } = useTypink();
 
   return (
     <>

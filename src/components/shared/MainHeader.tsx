@@ -2,10 +2,10 @@ import { Box, Container, Flex } from '@chakra-ui/react';
 import React from 'react';
 import AccountSelection from '@/components/AccountSelection.tsx';
 import WalletSelection from '@/components/dialog/WalletSelection.tsx';
-import { useWalletContext } from '@/providers/WalletProvider.tsx';
+import { useTypink } from '@/providers/TypinkProvider.tsx';
 
 export default function MainHeader() {
-  const { injectedApi } = useWalletContext();
+  const { injectedApi } = useTypink();
 
   return (
     <Box borderBottom={1} borderStyle='solid' borderColor='gray.200'>

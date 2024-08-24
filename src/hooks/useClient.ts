@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAsync, useLocalStorage, useToggle } from 'react-use';
-import { NetworkInfo } from '@/types';
+import { JsonRpcApi, NetworkInfo } from '@/types';
 import { DedotClient, ISubstrateClient, JsonRpcProvider, LegacyClient, WsProvider } from 'dedot';
 import { SubstrateApi } from 'dedot/chaintypes';
 import { RpcVersion } from 'dedot/types';
@@ -35,7 +35,7 @@ export default function useClient(network?: NetworkInfo): UseApi {
     const provider: JsonRpcProvider = new WsProvider(network.provider);
 
     // Using LegacyClient for now in development mode
-    if (network.provider === 'ws://127.0.0.1:9944') {
+    if (network.jsonRpcApi === JsonRpcApi.LEGACY) {
       setClient(await LegacyClient.new({ provider, cacheMetadata }));
     } else {
       setClient(await DedotClient.new({ provider, cacheMetadata }));

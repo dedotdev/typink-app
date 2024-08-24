@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useClientContext } from '@/providers/ClientProvider.tsx';
+import { useTypink } from '@/providers/TypinkProvider.tsx';
 import { OmitNever } from '@/types.ts';
 import { Contract, GenericContractApi } from 'dedot/contracts';
 import { Unsub } from 'dedot/types';
@@ -17,7 +17,7 @@ export default function useWatchContractEvent<
   // remember to use `useCallback` for this callback :)
   onNewEvent: (events: ReturnType<T['events'][M]['filter']>) => void,
 ): void {
-  const { client } = useClientContext();
+  const { client } = useTypink();
 
   useEffect(() => {
     if (!client || !contract) return;

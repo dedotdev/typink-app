@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { useWalletContext } from '@/providers/WalletProvider.tsx';
+import { useTypink } from '@/providers/TypinkProvider.tsx';
 import { Args, OmitNever, Pop } from '@/types.ts';
 import { Contract, ContractCallOptions, ContractTxOptions, GenericContractApi } from 'dedot/contracts';
 import { ISubmittableResult } from 'dedot/types';
@@ -28,7 +28,7 @@ export default function useContractTx<
   M extends keyof UseContractTx<T> = keyof UseContractTx<T>,
 >(contract: Contract<T> | undefined, fn: M): UseContractTxReturnType<T, M> {
   const [isInProgress, setIsInProgress] = useState(false);
-  const { selectedAccount } = useWalletContext();
+  const { selectedAccount } = useTypink();
 
   const signAndSend = useMemo(() => {
     return async (o: Parameters<UseContractTxReturnType<T>['signAndSend']>[0]) => {

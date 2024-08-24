@@ -2,18 +2,20 @@ import { Box, Button, Flex, FormControl, FormHelperText, FormLabel, Heading, Inp
 import React, { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 import PendingText from '@/components/shared/PendingText.tsx';
+import { ContractId } from '@/contracts/deployments.ts';
+import { GreeterContractApi } from '@/contracts/types/greeter';
 import useBalance from '@/hooks/useBalance.ts';
+import useContract from '@/hooks/useContract.ts';
 import useContractQuery from '@/hooks/useContractQuery.ts';
 import useContractTx from '@/hooks/useContractTx.ts';
-import useGreeterContract from '@/hooks/useGreeterContract.ts';
 import useWatchContractEvent from '@/hooks/useWatchContractEvent.ts';
-import { useWalletContext } from '@/providers/WalletProvider.tsx';
+import { useTypink } from '@/providers/TypinkProvider.tsx';
 import { shortenAddress } from '@/utils/string.ts';
 import { txToaster } from '@/utils/txToaster.tsx';
 
 export default function GreetBoard() {
-  const { selectedAccount } = useWalletContext();
-  const contract = useGreeterContract();
+  const { selectedAccount } = useTypink();
+  const { contract } = useContract<GreeterContractApi>(ContractId.GREETER);
   const [message, setMessage] = useState('');
   const setMessageTx = useContractTx(contract, 'setMessage');
   const balance = useBalance(selectedAccount?.address);
