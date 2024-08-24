@@ -182,4 +182,19 @@ export interface ContractQuery<ChainApi extends GenericSubstrateApi> extends Gen
     ChainApi,
     (options: ContractCallOptions) => Promise<GenericContractCallResult<number, ContractCallResult<ChainApi>>>
   >;
+
+  /**
+   *
+   * @param {bigint} value
+   * @param {ContractCallOptions} options
+   *
+   * @selector 0xfc3c75d4
+   **/
+  psp22MintableMint: GenericContractQueryCall<
+    ChainApi,
+    (
+      value: bigint,
+      options: ContractCallOptions,
+    ) => Promise<GenericContractCallResult<Result<[], Psp22ErrorsPsp22Error>, ContractCallResult<ChainApi>>>
+  >;
 }

@@ -12,8 +12,15 @@ import { ContractEvents } from './events';
 
 export * from './types';
 
+/**
+ * @name: GreeterContractApi
+ * @contractName: greeter
+ * @contractVersion: 0.0.1
+ * @authors: Scio Labs <hello@scio.xyz>
+ * @language: ink! 5.0.0
+ **/
 export interface GreeterContractApi<
-  Rv extends RpcVersion = RpcV2,
+  Rv extends RpcVersion = RpcVersion,
   ChainApi extends VersionedGenericSubstrateApi = SubstrateApi,
 > extends GenericContractApi<Rv, ChainApi> {
   query: ContractQuery<ChainApi[Rv]>;

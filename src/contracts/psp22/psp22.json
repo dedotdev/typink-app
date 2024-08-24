@@ -1,8 +1,8 @@
 {
   "source": {
-    "hash": "0x318be7192d28d73f7d1f54d88a44307c8a7f82ef81511f35f7da08c9b2e292d7",
+    "hash": "0x05f9156a944d8f3d09a15ab06d20d1afe53683da3c5deeb1a200bb2cc2309842",
     "language": "ink! 5.0.0",
-    "compiler": "rustc 1.78.0",
+    "compiler": "rustc 1.76.0",
     "build_info": {
       "build_mode": "Release",
       "cargo_contract_version": "4.0.0-alpha",
@@ -555,6 +555,32 @@
           "type": 25
         },
         "selector": "0x7271b782"
+      },
+      {
+        "args": [
+          {
+            "label": "value",
+            "type": {
+              "displayName": [
+                "u128"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "default": false,
+        "docs": [],
+        "label": "PSP22Mintable::mint",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 21
+        },
+        "selector": "0xfc3c75d4"
       }
     ]
   },

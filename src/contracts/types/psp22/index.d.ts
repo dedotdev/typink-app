@@ -12,8 +12,15 @@ import { ContractEvents } from './events';
 
 export * from './types';
 
+/**
+ * @name: Psp22ContractApi
+ * @contractName: psp22
+ * @contractVersion: 2.0.0
+ * @authors: Cardinal
+ * @language: ink! 5.0.0
+ **/
 export interface Psp22ContractApi<
-  Rv extends RpcVersion = RpcV2,
+  Rv extends RpcVersion = RpcVersion,
   ChainApi extends VersionedGenericSubstrateApi = SubstrateApi,
 > extends GenericContractApi<Rv, ChainApi> {
   query: ContractQuery<ChainApi[Rv]>;

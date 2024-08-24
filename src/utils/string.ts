@@ -16,8 +16,7 @@ export const shortenAddress = (address?: string): string => {
 };
 
 export const formatBalance = (balance: bigint | undefined, decimal: number = 10): string => {
-  if (!balance) return '';
+  if (typeof balance !== 'bigint') return '';
 
   return (parseFloat(balance.toString()) / Math.pow(10, decimal)).toString();
 };
-

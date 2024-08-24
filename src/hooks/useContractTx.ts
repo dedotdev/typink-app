@@ -1,7 +1,13 @@
 import { useMemo, useState } from 'react';
 import { useTypink } from '@/providers/TypinkProvider.tsx';
 import { Args, OmitNever, Pop } from '@/types.ts';
-import { Contract, ContractCallOptions, ContractTxOptions, GenericContractApi } from 'dedot/contracts';
+import {
+  Contract,
+  ContractCallOptions,
+  ContractTxOptions,
+  GenericContractApi,
+  isContractDispatchError,
+} from 'dedot/contracts';
 import { ISubmittableResult } from 'dedot/types';
 import { assert, deferred } from 'dedot/utils';
 
@@ -83,34 +89,45 @@ export async function contractTx<
   const signAndSend = async () => {
     const { contract, fn, args = [], caller, txOptions = {}, callback } = parameters;
 
-    // TODO dry running
+    try {
+      // TODO dry running
 
-    const dryRunOptions: ContractCallOptions = { caller };
+      const dryRunOptions: ContractCallOptions = { caller };
 
-    const dryRun = await contract.query[fn](...args, dryRunOptions);
-    console.log('Dry run result:', dryRun);
+      const dryRun = await contract.query[fn](...args, dryRunOptions);
+      console.log('Dry run result:', dryRun);
 
-    // TODO check if data is a Result with error
-    const {
-      raw: { gasRequired },
-    } = dryRun;
-
-    const actualTxOptions: ContractTxOptions = {
-      gasLimit: gasRequired,
-      ...txOptions,
-    };
-
-    await contract.tx[fn](...args, actualTxOptions).signAndSend(caller, (result) => {
-      callback && callback(result);
-
+      // TODO check if data is a Result with error
       const {
-        status: { type },
-      } = result;
+        raw: { gasRequired },
+      } = dryRun;
 
-      if (type === 'Finalized' || type === 'Invalid' || type === 'Drop') {
-        defer.resolve();
+      const actualTxOptions: ContractTxOptions = {
+        gasLimit: gasRequired,
+        ...txOptions,
+      };
+
+      await contract.tx[fn](...args, actualTxOptions).signAndSend(caller, (result) => {
+        callback && callback(result);
+
+        const {
+          status: { type },
+        } = result;
+
+        if (type === 'Finalized' || type === 'Invalid' || type === 'Drop') {
+          defer.resolve();
+        }
+      });
+    } catch (e: any) {
+      if (isContractDispatchError(e) && e.dispatchError.type === 'Module') {
+        const moduleError = contract.client.registry.findErrorMeta(e.dispatchError);
+        if (moduleError) {
+          e.message = moduleError.docs.join('');
+        }
       }
-    });
+
+      throw e;
+    }
   };
 
   signAndSend().catch(defer.reject);

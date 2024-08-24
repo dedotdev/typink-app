@@ -7,7 +7,7 @@ export type TxToaster = {
   onError: (e: Error) => void;
 };
 
-export function txToaster(initialMessage: string = 'Transaction in progress...'): TxToaster {
+export function txToaster(initialMessage: string = 'Signing transaction...'): TxToaster {
   const toastId = toast.info(initialMessage, { autoClose: false, isLoading: true });
 
   const updateTxStatus = (status: TxStatus) => {

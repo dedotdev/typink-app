@@ -34,7 +34,7 @@ export const psp22Deployments: ContractDeployment[] = [
     id: ContractId.PSP22,
     metadata: psp22Metadata as any,
     network: NetworkId.ALEPHZERO_TESTNET,
-    address: '5GMe428h2u7u8GyLYB2aiuSJkpKaUR7YHrDp8Rd6Gggxbjs1',
+    address: '5G5moUCkx5E2TD3CcRWvweg7rpCLngRmwukuKdaohvfBBmXr',
   },
 ];
 
