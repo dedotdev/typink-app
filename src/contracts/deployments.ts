@@ -30,6 +30,12 @@ export const psp22Deployments: ContractDeployment[] = [
     network: NetworkId.POP_TESTNET,
     address: '5GSGWox1ZxUkHBAEbm6NPAHLKD28VoQefTRBYTQuydLrxaKJ',
   },
+  {
+    id: ContractId.PSP22,
+    metadata: psp22Metadata as any,
+    network: NetworkId.ALEPHZERO_TESTNET,
+    address: '5GMe428h2u7u8GyLYB2aiuSJkpKaUR7YHrDp8Rd6Gggxbjs1',
+  },
 ];
 
 export const deployments = [...greeterDeployments, ...psp22Deployments];
