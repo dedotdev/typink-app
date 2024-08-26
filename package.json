@@ -1,41 +1,24 @@
 {
-  "name": "typink-demo",
+  "name": "typink-dapp",
   "private": true,
   "version": "0.0.1",
+  "workspaces": [
+    "contracts",
+    "typink",
+    "ui"
+  ],
   "scripts": {
-    "start": "vite --port 8080",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "prettify": "npx prettier --write \"src/{**/*,*}.{js,ts,jsx,tsx,json}\"",
-    "typink": "dedot typink -m ./src/contracts/psp22/psp22.contract -o ./src/contracts/types && dedot typink -m ./src/contracts/greeter/greeter.contract -o ./src/contracts/types"
-  },
-  "dependencies": {
-    "@chakra-ui/icons": "^2.0.19",
-    "@chakra-ui/react": "^2.6.1",
-    "@emotion/react": "^11.10.8",
-    "@emotion/styled": "^11.10.8",
-    "dedot": "^0.5.0",
-    "framer-motion": "^10.12.8",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-toastify": "^9.1.1",
-    "react-use": "^17.4.0"
+    "start": "yarn workspace ui start",
+    "build": "yarn workspace ui build",
+    "typink": "yarn workspace contracts typink",
+    "prettify": "npx prettier --write \"@/{**/*,*}.{js,ts,jsx,tsx,json}\""
   },
   "devDependencies": {
-    "@dedot/chaintypes": "^0.10.0",
-    "@polkadot/extension-inject": "^0.51.1",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
-    "@types/react": "^18.0.26",
-    "@types/react-dom": "^18.0.9",
-    "@vitejs/plugin-react": "^3.0.0",
     "prettier": "^2.8.8",
     "prettier-plugin-organize-imports": "^3.2.2",
-    "rollup-plugin-analyzer": "^4.0.0",
     "serve": "^14.2.1",
-    "typescript": "5.4.5",
-    "vite": "^5.2.0",
-    "vite-tsconfig-paths": "^4.0.3",
-    "vitest": "^0.34.6"
+    "typescript": "5.4.5"
   },
   "packageManager": "yarn@4.4.0"
 }
