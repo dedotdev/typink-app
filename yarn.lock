@@ -3515,6 +3515,7 @@ __metadata:
   resolution: "contracts@workspace:contracts"
   dependencies:
     dedot: "npm:^0.5.0"
+    typink: "workspace:*"
   languageName: unknown
   linkType: soft
 
